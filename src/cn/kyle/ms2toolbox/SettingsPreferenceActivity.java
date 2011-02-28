@@ -597,8 +597,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			.setChecked(getPrefFlagFile(Pref.pKeyboardBacklight).exists());
 		
 		//设置
+		boolean CameraClickDisable = Module.getCameraClickDisable();
+		L.debug("CameraClickDisable="+CameraClickDisable);
 		((CheckBoxPreference)findPreference(Pref.pCameraClick.toString()))
-			.setChecked(Module.getCameraClickDisable());
+			.setChecked(CameraClickDisable);
 		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pVideoRecord.toString()))

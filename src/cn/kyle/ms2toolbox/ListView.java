@@ -81,7 +81,7 @@ public class ListView extends Activity {
 										L.debug("waiting ");
 										Thread.sleep(12*1000);
 										L.debug("kill bootanimation");
-										C.runSuCommandReturnBoolean("busybox kill `ps | busybox grep bootanimation | busybox cut -c 10-15` ");
+										C.runSuCommandReturnBoolean("busybox kill `busybox ps | busybox grep bootanimation | busybox cut -c 1-5` ");
 										if (!path.equals("/tmp"))
 											applyBootAnimation(previewTempPath,false);
 									} catch (InterruptedException e) {
