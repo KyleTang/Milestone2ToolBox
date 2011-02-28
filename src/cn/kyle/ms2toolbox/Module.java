@@ -205,6 +205,46 @@ public class Module {
 				+" > /sys/devices/platform/i2c_omap.3/i2c-3/3-0053/leds/torch-flash/flash_light ;");
 	}
 
+	public static int getFlashLightCurrentValue(){
+		return Integer.parseInt(
+				getPrefFlagValue(
+						new File("/sys/devices/platform/i2c_omap.3/i2c-3/3-0053/leds/torch-flash/flash_light"),"0"));
+	}
+	
+	public static boolean setCameraClickDisable(boolean set){
+		return setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
+	}
+	
+	public static boolean getCameraClickDisable(){
+		return getFileDisable(new File("/system/media/audio/ui/camera_click.ogg"));
+	}
+	
+	public static boolean setVideoRecordDisable(boolean set){
+		return setFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"),set);
+	}
+	
+	public static boolean getVideoRecordDisable(){
+		return getFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"));
+	}
+	
+	public static boolean setFileDisable(File f ,boolean disable) {
+		File fdisable = new File(f.getAbsoluteFile()+".disable");
+		if ((!f.exists())&&(!fdisable.exists())) return false;
+		if (f.exists()&&disable){
+			return C.runSuCommandReturnBoolean("chmod 666 "+f.getAbsolutePath()+" ; "+
+					"mv "+f.getAbsolutePath()+" "+fdisable.getAbsolutePath()+ " ; ");
+		}
+		if (fdisable.exists()&&!disable){
+			return C.runSuCommandReturnBoolean("chmod 666 "+fdisable.getAbsolutePath()+" ; "+
+					"mv "+fdisable.getAbsolutePath()+" "+f.getAbsolutePath()+ " ; ");
+		}
+		return true;
+	}
+	
+	public static boolean getFileDisable(File f ){
+		return !f.exists();
+	}
+	
 	public static boolean setPrefFlag(boolean checked, File flag) {
 		if (checked) {
 			try {

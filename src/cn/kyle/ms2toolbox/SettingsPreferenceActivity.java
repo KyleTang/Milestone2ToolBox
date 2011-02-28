@@ -312,6 +312,25 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				myToast("设置失败");
 			}
 		}
+		
+		if (key.equals(Pref.pCameraClick.toString())){
+			if (Module.setCameraClickDisable(((CheckBoxPreference)preference).isChecked())){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(true);
+				myToast("设置失败, 声音文件已经不存在！");
+			}
+		}
+		
+		if (key.equals(Pref.pVideoRecord.toString())){
+			if (Module.setVideoRecordDisable(((CheckBoxPreference)preference).isChecked())){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(true);
+				myToast("设置失败, 声音文件已经不存在！");
+			}
+		}
+		
 		if (key.equals(Pref.pWifiAutoClose.toString())){
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pWifiAutoClose))){
 				myToast("设置成功");
@@ -327,6 +346,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				findPreference(Pref.pFlashLightLevel.toString());
 			//int level = pFlashLightLevel.getSharedPreferences().getInt(Pref.pFlashLightLevel.toString(), 80);
 			int level = Integer.parseInt(pFlashLightLevel.getSharedPreferences().getString(Pref.pFlashLightLevel.toString(), "80"))	;
+			final int time = Integer.parseInt(pFlashLightLevel.getSharedPreferences().getString(Pref.pFlashLightTime.toString(), "120"));
 			final Preference pref = preference;
 			if (Module.setFlashLight(set?level:0)){
 				myToast("设置成功");
@@ -334,7 +354,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 					new Thread(){
 						public void run(){
 							try {
-								Thread.sleep(1000*120);
+								Thread.sleep(1000*time);
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
@@ -410,7 +430,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		handler.post(new Runnable(){
 			public void run(){
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("手电筒自动关闭");
+				//myToast("手电筒自动关闭");
 			}
 		});
 		
@@ -575,6 +595,14 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pKeyboardBacklight.toString()))
 			.setChecked(getPrefFlagFile(Pref.pKeyboardBacklight).exists());
+		
+		//设置
+		((CheckBoxPreference)findPreference(Pref.pCameraClick.toString()))
+			.setChecked(Module.getCameraClickDisable());
+		
+		//设置
+		((CheckBoxPreference)findPreference(Pref.pVideoRecord.toString()))
+			.setChecked(Module.getVideoRecordDisable());
 		
 		//设置wifi自动关闭状态
 		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))

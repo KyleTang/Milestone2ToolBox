@@ -16,8 +16,13 @@ public enum Pref {
 	pVoiceKey,
 	pButtonBacklight,
 	pKeyboardBacklight,
+	
+	pCameraClick,
+	pVideoRecord,
+	
 	pFlashLight,
 	pFlashLightLevel,
+	pFlashLightTime,
 	pWifiAutoClose,
 	pWifiAutoCloseMin,
 	

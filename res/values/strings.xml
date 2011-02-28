@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">里程碑2工具箱</string>
+    <string name="flashlight">手电筒</string>
 
 </resources>

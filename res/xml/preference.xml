@@ -42,6 +42,14 @@
 			android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
 			android:defaultValue="false" />
 	</PreferenceCategory>
+	<PreferenceCategory android:title="提示音管理">
+		<CheckBoxPreference android:key="pCameraClick" android:title="禁用相机拍照提示音"
+			android:summaryOn="无声拍照" android:summaryOff="启用提示音"
+			android:defaultValue="false" />
+		<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音"
+			android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
+			android:defaultValue="false" />
+	</PreferenceCategory>
 	<PreferenceCategory android:title="Wi-Fi自动管理">
 		<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
 			android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"
@@ -52,11 +60,14 @@
 	</PreferenceCategory>
 	<PreferenceCategory android:title="手电筒">
 		<CheckBoxPreference android:key="pFlashLight" android:title="打开手电筒 "
-			android:summaryOn="闪光灯持续高亮2分钟后会自动关闭（避免长时间使用）" android:summaryOff="闪光灯持续高亮2分钟后会自动关闭（避免长时间使用）"
+			android:summaryOn="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）" android:summaryOff="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）"
 			android:defaultValue="false" />
 		<ListPreference android:key="pFlashLightLevel" android:title="设置手电筒亮度级别"
 			android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择亮度级别"
 			android:entries="@array/pFlashLightLevel" android:entryValues="@array/pFlashLightLevelValue"/>
+		<ListPreference android:key="pFlashLightTime" android:title="设置最长点亮时间"
+			android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择最长点亮时间"
+			android:entries="@array/pFlashLightTime" android:entryValues="@array/pFlashLightTimeValue"/>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="高级工具">
 		<Preference android:key="pSd2romHack" android:title="Sd2Rom Hack工具"
