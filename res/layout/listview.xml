@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content" >
+	
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/tvTip"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"/>
+
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/llList"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+    
+</RadioGroup>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/llList"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp">
+    <Button android:id="@+id/btnPreview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    />
+    <Button android:id="@+id/btnApply"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    />
+    <Button android:id="@+id/btnCancel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    />
+</LinearLayout>
+</LinearLayout>
+</ScrollView>

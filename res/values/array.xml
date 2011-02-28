@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="pModel">
+	<item>还原为默认</item>
+    <item>MotoA953</item>
+    <item>A953</item>
+    <item>ME722</item>
+</string-array>
+<string-array name="pModelValue">
+	<item>default</item>
+    <item>MotoA953</item>
+    <item>A953</item>
+    <item>ME722</item>
+</string-array>
+
+<string-array name="pMultiMedia">
+    <item>旧版引擎 opencore</item>
+    <item>新版引擎 stagefright</item>
+</string-array>
+<string-array name="pMultiMediaValue">
+    <item>opencore</item>
+    <item>stagefright</item>
+</string-array>
+
+<string-array name="pFlashLightLevel">
+	<item>10%</item>
+    <item>30%</item>
+    <item>50%</item>
+    <item>80%(默认)</item>
+    <item>100%</item>
+</string-array>
+<string-array name="pFlashLightLevelValue">
+	<item>10</item>
+    <item>30</item>
+    <item>50</item>
+    <item>80</item>
+    <item>100</item>
+</string-array>
+
+<string-array name="pWifiAutoCloseMin">
+	<item>1</item>
+    <item>3(推荐)</item>
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+</string-array>
+<string-array name="pWifiAutoCloseMinValue">
+	<item>1</item>
+    <item>3</item>
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+</string-array>
+</resources>
