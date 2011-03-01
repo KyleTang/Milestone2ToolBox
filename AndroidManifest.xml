@@ -15,11 +15,21 @@
 			<intent-filter>  
 	    		<action android:name="android.intent.action.BOOT_COMPLETED"/>  
 	    		<action android:name="android.net.wifi.STATE_CHANGE"/> 
+	    		<action android:name="android.intent.action.PHONE_STATE"/> 
 				<category android:name="android.intent.category.HOME" />  
 			</intent-filter>   
 		</receiver> 
 		<activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/flashlight" 
 			android:icon="@drawable/flashlight" android:name=".FlashLight">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/lockscreen" 
+			android:icon="@drawable/lockscreen" android:name=".LockScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

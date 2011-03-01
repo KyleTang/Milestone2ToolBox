@@ -12,71 +12,95 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiManager;
+import android.os.Vibrator;
 import android.widget.Toast;
 
 public class MyReceiver extends BroadcastReceiver{
 
 	private Toast myToast = null;
-	private static final String strRes = "android.permission.ACCESS_WIFI_STATE";
+	private static String pre_state = "";
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		final File flagSingle = new File(context.getFilesDir(),"wifi.flag");
+		
 		String action = intent.getAction();
 		L.debug("Receiver Action: "+action);
-		if ("android.net.wifi.STATE_CHANGE".equals(action)){
-			if (!getPrefFlagFile(context,Pref.pWifiAutoClose).exists()){
+		if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)){
+			//"android.net.wifi.STATE_CHANGE"
+			wifiAutoClose(context,intent);
+		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
+			setBacklight(context,intent);
+		}else if ("android.intent.action.PHONE_STATE".equals(action)){
+			callOffVibrate(context,intent);
+		}
+	}
+	
+	public void callOffVibrate(Context context, Intent intent) {
+		if (getPrefFlagFile(context,Pref.pCallOffVibrate).exists()){
+			String str = intent.getStringExtra("state");
+			if ((pre_state.equals("OFFHOOK")) && (str.equals("IDLE"))){
+		    	int time = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOffVibrateTime), "0"));
+		        Vibrator localVibrator = (Vibrator)context.getSystemService("vibrator");
+		        localVibrator.vibrate(time);
+		    }
+		    pre_state = str;
+		}
+	}
+	
+	public void setBacklight(Context context, Intent intent){
+		if (getPrefFlagFile(context,Pref.pButtonBacklight).exists()){
+			Module.setButtonBacklightClosed(true);
+		}
+		if (getPrefFlagFile(context,Pref.pKeyboardBacklight).exists()){
+			Module.setKeyboardBacklightClosed(true);			
+		}
+	}
+	
+	public void wifiAutoClose(Context context, Intent intent){
+		if (!getPrefFlagFile(context,Pref.pWifiAutoClose).exists()){
+			return ;
+		}
+		final WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		final File flagSingle = new File(context.getFilesDir(),"wifi.flag");
+		if (wm.getConnectionInfo().getSupplicantState() != SupplicantState.COMPLETED){
+			L.debug("Receiver wifi: not connected");
+			if (!wm.isWifiEnabled()) {
+				L.debug("wifi is closed !");
 				return ;
 			}
-			final WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-			if (wm.getConnectionInfo().getSupplicantState() != SupplicantState.COMPLETED){
-				L.debug("Receiver wifi: not connected");
-				if (!wm.isWifiEnabled()) {
-					L.debug("wifi is closed !");
-					return ;
-				}
-				if (flagSingle.exists())
-					return ;
-				try {
-					flagSingle.getParentFile().mkdirs();
-					flagSingle.createNewFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				final File min = getPrefFlagFile(context,Pref.pWifiAutoCloseMin);
-				new Thread(){
-					public void run(){
-						int n = Integer.parseInt(Module.getPrefFlagValue(min, "3"));; /*分钟*/
-						for (int i=0;i<12*n;i++){
-							try {
-								Thread.sleep(5*1000);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-							L.debug("Receiver: wifi - check state ?  "+wm.getConnectionInfo().getSupplicantState()+
-									" "+((i+1)*5)+"/"+(n*60));
-							if (wm.getConnectionInfo().getSupplicantState() == SupplicantState.COMPLETED ){
-								flagSingle.delete();
-								return;
-							}
-						}
-						wm.setWifiEnabled(false);
-						flagSingle.delete();
-					}
-				}.start();
-			}else{
-				L.debug("Receiver wifi: connected");
-				flagSingle.delete();
-			}
-		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
-			//
-			if (getPrefFlagFile(context,Pref.pButtonBacklight).exists()){
-				Module.setButtonBacklightClosed(true);
-			}
-			if (getPrefFlagFile(context,Pref.pKeyboardBacklight).exists()){
-				Module.setKeyboardBacklightClosed(true);			
-			}
 			
+			if (flagSingle.exists())
+				return ;
+			try {
+				flagSingle.getParentFile().mkdirs();
+				flagSingle.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			final File min = getPrefFlagFile(context,Pref.pWifiAutoCloseMin);
+			new Thread(){
+				public void run(){
+					int n = Integer.parseInt(Module.getPrefFlagValue(min, "3"));; /*分钟*/
+					for (int i=0;i<12*n;i++){
+						try {
+							Thread.sleep(5*1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						L.debug("Receiver: wifi - check state ?  "+wm.getConnectionInfo().getSupplicantState()+
+								" "+((i+1)*5)+"/"+(n*60));
+						if (wm.getConnectionInfo().getSupplicantState() == SupplicantState.COMPLETED ){
+							flagSingle.delete();
+							return;
+						}
+					}
+					wm.setWifiEnabled(false);
+					flagSingle.delete();
+				}
+			}.start();
+		}else{
+			L.debug("Receiver wifi: connected");
+			flagSingle.delete();
 		}
 	}
 	

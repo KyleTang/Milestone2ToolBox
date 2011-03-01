@@ -50,6 +50,14 @@
 			android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
 			android:defaultValue="false" />
 	</PreferenceCategory>
+	<PreferenceCategory android:title="挂断震动">
+		<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
+			android:summaryOn="启用" android:summaryOff="禁用"
+			android:defaultValue="false" />
+		<ListPreference android:key="pCallOffVibrateTime" android:title="震动持续时间"
+			android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+			android:entries="@array/pCallOffVibrateTime" android:entryValues="@array/pCallOffVibrateTimeValue"/>
+	</PreferenceCategory>
 	<PreferenceCategory android:title="Wi-Fi自动管理">
 		<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
 			android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"

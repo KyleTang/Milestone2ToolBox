@@ -171,6 +171,23 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			
 		});
 		
+		ListPreference pCallOffVibrateTime = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pCallOffVibrateTime.toString());
+		pCallOffVibrateTime.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			public boolean onPreferenceChange(Preference preference,
+					Object newValue) {
+				File flag = getPrefFlagFile(Pref.pCallOffVibrateTime);
+				if (!flag.exists()){
+					flag.getParentFile().mkdirs();
+					try {
+						flag.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				return Module.setPrefFlagValue(flag, (String)newValue);
+			}
+			
+		});
 //		不好用，废弃
 //		SharedPreferences sp = this.getPreferenceManager().getDefaultSharedPreferences(this);
 //		sp.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener(){
@@ -333,6 +350,15 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		
 		if (key.equals(Pref.pWifiAutoClose.toString())){
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pWifiAutoClose))){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast("设置失败");
+			}
+		}
+		
+		if (key.equals(Pref.pCallOffVibrate.toString())){
+			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOffVibrate))){
 				myToast("设置成功");
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
@@ -609,6 +635,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//设置wifi自动关闭状态
 		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))
 			.setChecked(getPrefFlagFile(Pref.pWifiAutoClose).exists());
+		
+		//设置
+		((CheckBoxPreference)findPreference(Pref.pCallOffVibrate.toString()))
+			.setChecked(getPrefFlagFile(Pref.pCallOffVibrate).exists());
 	}
 
 	public void refreshItem(String key){
