@@ -22,7 +22,6 @@ public class MyReceiver extends BroadcastReceiver{
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		
 		String action = intent.getAction();
 		L.debug("Receiver Action: "+action);
 		if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)){
@@ -32,6 +31,8 @@ public class MyReceiver extends BroadcastReceiver{
 			setBacklight(context,intent);
 		}else if ("android.intent.action.PHONE_STATE".equals(action)){
 			callOffVibrate(context,intent);
+		}else if ("android.intent.action.SEARCH".equals(action)){
+			//
 		}
 	}
 	
@@ -40,8 +41,8 @@ public class MyReceiver extends BroadcastReceiver{
 			String str = intent.getStringExtra("state");
 			if ((pre_state.equals("OFFHOOK")) && (str.equals("IDLE"))){
 		    	int time = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOffVibrateTime), "0"));
-		        Vibrator localVibrator = (Vibrator)context.getSystemService("vibrator");
-		        localVibrator.vibrate(time);
+		        Vibrator vibrator = (Vibrator)context.getSystemService("vibrator");
+		        vibrator.vibrate(time);
 		    }
 		    pre_state = str;
 		}
