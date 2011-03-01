@@ -31,7 +31,7 @@ public class LockScreen extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		C.runSuCommandReturnBoolean("sendevent /dev/input/event2 1 107 1 ; sendevent /dev/input/event2 1 107 0 ;");
+		Module.pressPowerButton();
 		this.finish();
 	}
 }

@@ -30,6 +30,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -236,6 +237,12 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
 			Preference preference) {
 		String key = preference.getKey();
+		if (key.equals(Pref.pTitle.toString())){
+//			L.debug("test-");
+//			Vibrator vibrator = (Vibrator)this.getSystemService("vibrator");
+//	        vibrator.vibrate(300);
+		}
+		
 		//myToast("clickKey="+key);
 		if (key.equals(Pref.pBpsw.toString())){
 			Intent i = new Intent();

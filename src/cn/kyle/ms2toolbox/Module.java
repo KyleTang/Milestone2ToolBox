@@ -318,4 +318,32 @@ public class Module {
 		}
 		return defaultValue;
 	}
+	
+	public static void pressImeSwitch(){
+		String cmd = 
+			//shift press down
+			"sendevent /dev/input/event2 1 107 1 ; " + 
+			//space press down
+			"sendevent /dev/input/event2 1 107 1 ; " +
+			//space press up
+			"sendevent /dev/input/event2 1 107 0 ; " +
+			//shift press up
+			"sendevent /dev/input/event2 1 107 0 ; " ;
+		C.runSuCommandReturnBoolean(cmd);	
+	}
+	
+	
+	public static void pressPowerButton(){
+		/**
+		 * sendevent /dev/input/event2 1 107 1
+		 * sendevent /dev/input/event2 1 107 0 
+		 * 
+		 * sendevent [device] [type] [code] [value]
+		 * device: /dev/input/event2 maybe physical button
+		 * type: 1 maybe physical button
+		 * code: key code 
+		 * value: 1 press down ,0 press up 
+		 */
+		C.runSuCommandReturnBoolean("sendevent /dev/input/event2 1 107 1 ; sendevent /dev/input/event2 1 107 0 ;");
+	}
 }
