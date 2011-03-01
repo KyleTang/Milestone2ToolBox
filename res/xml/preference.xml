@@ -50,7 +50,7 @@
 			android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
 			android:defaultValue="false" />
 	</PreferenceCategory>
-	<PreferenceCategory android:title="挂断震动">
+	<PreferenceCategory android:title="通话挂断震动">
 		<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
 			android:summaryOn="启用" android:summaryOff="禁用"
 			android:defaultValue="false" />
