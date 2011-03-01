@@ -44,7 +44,7 @@
 	</PreferenceCategory>
 	<PreferenceCategory android:title="提示音管理">
 		<CheckBoxPreference android:key="pCameraClick" android:title="禁用相机拍照提示音"
-			android:summaryOn="无声拍照" android:summaryOff="启用提示音"
+			android:summaryOn="消除拍照的咔嚓声（对焦的咚咚声仍存在）" android:summaryOff="消除拍照的咔嚓声（对焦的咚咚声仍存在）"
 			android:defaultValue="false" />
 		<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音"
 			android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
