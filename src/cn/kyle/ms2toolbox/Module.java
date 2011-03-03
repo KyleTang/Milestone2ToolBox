@@ -212,56 +212,64 @@ public class Module {
 	}
 	
 	public static boolean setCameraClickDisable(boolean set){
-		if (set){
-			setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
-			setFileDisable(new File("/system/media/audio/notifications/camera_click.ogg"),set);
-			return true;
-		}else{
-			boolean a = setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
-			boolean b = setFileDisable(new File("/system/media/audio/notifications/camera_click.ogg"),set);
-			if (a||b){
-				return true;
-			}else{
-				return false;
-			}
-		}
+//		if (set){
+//			setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
+//			setFileDisable(new File("/system/media/audio/notifications/camera_click.ogg"),set);
+//			return true;
+//		}else{
+//			boolean a = setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
+//			boolean b = setFileDisable(new File("/system/media/audio/notifications/camera_click.ogg"),set);
+//			if (a||b){
+//				return true;
+//			}else{
+//				return false;
+//			}
+//		}
+		return setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
 	}
 	
 	public static boolean getCameraClickDisable(){
-		return getFileDisable(new File("/system/media/audio/ui/camera_click.ogg"))
-			&& getFileDisable(new File("/system/media/audio/notifications/camera_click.ogg"));
+//		return getFileDisable(new File("/system/media/audio/ui/camera_click.ogg"))
+//			&& getFileDisable(new File("/system/media/audio/notifications/camera_click.ogg"));
+		return getFileDisable(new File("/system/media/audio/ui/camera_click.ogg"));
 	}
 	
 	public static boolean setVideoRecordDisable(boolean set){
-		if (set){
-			setFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"),set);
-			setFileDisable(new File("/system/media/audio/notifications/VideoRecord.ogg"),set);
-			return true;
-		}else{
-			boolean a = setFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"),set);
-			boolean b = setFileDisable(new File("/system/media/audio/notifications/VideoRecord.ogg"),set);
-			if (a||b){
-				return true;
-			}else{
-				return false;
-			}
-		}
+//		if (set){
+//			setFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"),set);
+//			setFileDisable(new File("/system/media/audio/notifications/VideoRecord.ogg"),set);
+//			return true;
+//		}else{
+//			boolean a = setFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"),set);
+//			boolean b = setFileDisable(new File("/system/media/audio/notifications/VideoRecord.ogg"),set);
+//			if (a||b){
+//				return true;
+//			}else{
+//				return false;
+//			}
+//		}
+		return setFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"),set);
 	}
 	
 	public static boolean getVideoRecordDisable(){
-		return getFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"))
-			&& getFileDisable(new File("/system/media/audio/notifications/VideoRecord.ogg"));
+//		return getFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"))
+//			&& getFileDisable(new File("/system/media/audio/notifications/VideoRecord.ogg"));
+		return getFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"));
 	}
 	
 	public static boolean setFileDisable(File f ,boolean disable) {
 		File fdisable = new File(f.getAbsoluteFile()+".disable");
 		if ((!f.exists())&&(!fdisable.exists())) return false;
 		if (f.exists()&&disable){
-			return C.runSuCommandReturnBoolean("chmod 666 "+f.getAbsolutePath()+" ; "+
+			return C.runSuCommandReturnBoolean(
+					C.CmdMountSystemRW + " ; "+
+					"chmod 666 "+f.getAbsolutePath()+" ; "+
 					"mv "+f.getAbsolutePath()+" "+fdisable.getAbsolutePath()+ " ; ");
 		}
 		if (fdisable.exists()&&!disable){
-			return C.runSuCommandReturnBoolean("chmod 666 "+fdisable.getAbsolutePath()+" ; "+
+			return C.runSuCommandReturnBoolean(
+					C.CmdMountSystemRW + " ; "+
+					"chmod 666 "+fdisable.getAbsolutePath()+" ; "+
 					"mv "+fdisable.getAbsolutePath()+" "+f.getAbsolutePath()+ " ; ");
 		}
 		return true;
