@@ -71,6 +71,8 @@
 				android:summary="当Wi-Fi连接断开后，自动关闭等候时间" android:dialogTitle="请选择延迟时间（分钟）"
 				android:entries="@array/pWifiAutoCloseMin" android:entryValues="@array/pWifiAutoCloseMinValue"/>
 		</PreferenceScreen>
+		<Preference android:key="pMinFreeMem" android:title="最小内存管理"
+				android:summary="解决了MinFreeManager开机应用不生效的问题" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="附加工具">
 		<PreferenceScreen android:title="手电筒功能">

@@ -1,6 +1,9 @@
 package cn.kyle.ms2toolbox;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import cn.kyle.util.C;
@@ -29,6 +32,7 @@ public class MyReceiver extends BroadcastReceiver{
 			wifiAutoClose(context,intent);
 		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
 			setBacklight(context,intent);
+			setMinFreeMem(context,intent);
 		}else if ("android.intent.action.PHONE_STATE".equals(action)){
 			callOffVibrate(context,intent);
 		}else if ("android.intent.action.SEARCH".equals(action)){
@@ -36,7 +40,29 @@ public class MyReceiver extends BroadcastReceiver{
 		}
 	}
 	
-	public void callOffVibrate(Context context, Intent intent) {
+	private void setMinFreeMem(Context context, Intent intent) {
+		if (getPrefFlagFile(context,Pref.pMinFreeMem).exists()){
+			String value = "";
+			BufferedReader br;
+			try {
+				String file = context.getFilesDir().getAbsoluteFile()+"/minfree_lastapply";
+				L.debug("file="+file);
+				br = new BufferedReader(new FileReader(file));
+				value = br.readLine();
+				br.close();
+			} catch (FileNotFoundException e) {
+				value = MinFreeMem.defaultValue;
+				e.printStackTrace();
+			} catch (IOException e) {
+				value = MinFreeMem.defaultValue;
+				e.printStackTrace();
+			}
+			C.runSuCommandReturnBoolean("echo "+ value + " > /sys/module/lowmemorykiller/parameters/minfree ; ");
+		}
+		
+	}
+
+	private void callOffVibrate(Context context, Intent intent) {
 		if (getPrefFlagFile(context,Pref.pCallOffVibrate).exists()){
 			String str = intent.getStringExtra("state");
 			if ((pre_state.equals("OFFHOOK")) && (str.equals("IDLE"))){
@@ -48,7 +74,7 @@ public class MyReceiver extends BroadcastReceiver{
 		}
 	}
 	
-	public void setBacklight(Context context, Intent intent){
+	private void setBacklight(Context context, Intent intent){
 		if (getPrefFlagFile(context,Pref.pButtonBacklight).exists()){
 			Module.setButtonBacklightClosed(true);
 		}
@@ -57,7 +83,7 @@ public class MyReceiver extends BroadcastReceiver{
 		}
 	}
 	
-	public void wifiAutoClose(Context context, Intent intent){
+	private void wifiAutoClose(Context context, Intent intent){
 		if (!getPrefFlagFile(context,Pref.pWifiAutoClose).exists()){
 			return ;
 		}
@@ -105,7 +131,7 @@ public class MyReceiver extends BroadcastReceiver{
 		}
 	}
 	
-	public File getPrefFlagFile(Context c ,Pref p){
+	private File getPrefFlagFile(Context c ,Pref p){
 		return new File(c.getFilesDir(),p.toString()+".flag");
 	}
 	

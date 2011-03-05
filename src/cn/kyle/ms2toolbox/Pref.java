@@ -35,6 +35,8 @@ public enum Pref {
 	pRebootToRecovery,
 	pRebootToBootloader,
 	
+	pMinFreeMem,
+	
 	pMilestoneOverclock,
 	pSetCpu,
 	pQuadrantAdvanced

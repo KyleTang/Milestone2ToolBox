@@ -403,7 +403,11 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				myToast("设置失败");
 			}
 		}
-		
+		//
+		if (key.equals(Pref.pMinFreeMem.toString())){
+			Intent i = new Intent(this,MinFreeMem.class);
+			startActivity(i);
+		}
 		//
 		if (key.equals(Pref.pSd2romHack.toString())){
 			Intent i = new Intent();

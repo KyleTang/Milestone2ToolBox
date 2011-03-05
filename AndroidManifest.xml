@@ -11,6 +11,7 @@
         </activity>
         <activity android:name=".ListView"/>
         <activity android:name=".FontView" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".MinFreeMem"/>
         <receiver android:name=".MyReceiver">  
 			<intent-filter>  
 	    		<action android:name="android.intent.action.BOOT_COMPLETED"/>  
