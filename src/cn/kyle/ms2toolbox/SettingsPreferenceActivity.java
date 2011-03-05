@@ -237,6 +237,8 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
 			Preference preference) {
 		String key = preference.getKey();
+		if (key==null) return false;
+		L.debug("key="+key);
 		if (key.equals(Pref.pTitle.toString())){
 //			L.debug("test-");
 //			Vibrator vibrator = (Vibrator)this.getSystemService("vibrator");

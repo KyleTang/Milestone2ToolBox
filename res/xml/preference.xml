@@ -19,81 +19,89 @@
 		<ListPreference android:key="pMultiMedia" android:title="更改默认多媒体引擎(*)"
 			android:summary="推荐新版引擎  stagefright" android:dialogTitle="请选择多媒体引擎"
 			android:entries="@array/pMultiMedia" android:entryValues="@array/pMultiMediaValue"/>
+		<PreferenceScreen android:title="更多设置">
+			<PreferenceCategory android:title="按键管理">
+				<CheckBoxPreference android:key="pCameraKey" android:title="相机键点亮屏幕(*)"
+					android:summaryOn="允许相机键点亮屏幕" android:summaryOff="禁用相机键点亮屏幕"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pVoiceKey" android:title="语音键/中英切换键(*) "
+					android:summaryOn="(仅摩托输入法)当前为中英文切换键 " android:summaryOff="(仅摩托输入法)当前为语音键"
+					android:defaultValue="false" />
+				<!-- 
+				<CheckBoxPreference android:key="pVolUpKey" android:title="音量增大键点亮屏幕"
+					android:summaryOn="允许音量增大键点亮屏幕" android:summaryOff="禁用音量增大键点亮屏幕"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pVolDownKey" android:title="音量减少键点亮屏幕"
+					android:summaryOn="允许音量减少键点亮屏幕" android:summaryOff="禁用音量减少键点亮屏幕"
+					android:defaultValue="false" />
+				 -->
+			</PreferenceCategory>
+			<PreferenceCategory android:title="背景灯管理">
+				<CheckBoxPreference android:key="pButtonBacklight" android:title="关闭屏幕底部LED灯 "
+					android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pKeyboardBacklight" android:title="关闭侧滑键盘灯 "
+					android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
+					android:defaultValue="false" />
+			</PreferenceCategory>
+			<PreferenceCategory android:title="消除提示音">
+				<CheckBoxPreference android:key="pCameraClick" android:title="禁用相机拍照提示音"
+					android:summaryOn="消除拍照的咔嚓声（对焦的咚咚声仍存在）" android:summaryOff="消除拍照的咔嚓声（对焦的咚咚声仍存在）"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音"
+					android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
+					android:defaultValue="false" />
+			</PreferenceCategory>
+		</PreferenceScreen>
 	</PreferenceCategory>
-	<PreferenceCategory android:title="控制设置">
-		<CheckBoxPreference android:key="pCameraKey" android:title="相机键点亮屏幕(*)"
-			android:summaryOn="允许相机键点亮屏幕" android:summaryOff="禁用相机键点亮屏幕"
-			android:defaultValue="false" />
-		<!-- 
-		<CheckBoxPreference android:key="pVolUpKey" android:title="音量增大键点亮屏幕"
-			android:summaryOn="允许音量增大键点亮屏幕" android:summaryOff="禁用音量增大键点亮屏幕"
-			android:defaultValue="false" />
-		<CheckBoxPreference android:key="pVolDownKey" android:title="音量减少键点亮屏幕"
-			android:summaryOn="允许音量减少键点亮屏幕" android:summaryOff="禁用音量减少键点亮屏幕"
-			android:defaultValue="false" />
-		 -->
-		<CheckBoxPreference android:key="pVoiceKey" android:title="语音键/中英切换键(*) "
-			android:summaryOn="(仅摩托输入法)当前为中英文切换键 " android:summaryOff="(仅摩托输入法)当前为语音键"
-			android:defaultValue="false" />
-		<CheckBoxPreference android:key="pButtonBacklight" android:title="关闭屏幕底部LED灯 "
-			android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
-			android:defaultValue="false" />
-		<CheckBoxPreference android:key="pKeyboardBacklight" android:title="关闭侧滑键盘灯 "
-			android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
-			android:defaultValue="false" />
+	<PreferenceCategory android:title="增强功能">
+		<PreferenceScreen android:title="通话挂断震动">
+			<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
+				android:summaryOn="启用" android:summaryOff="禁用"
+				android:defaultValue="false" />
+			<ListPreference android:key="pCallOffVibrateTime" android:title="震动持续时间"
+				android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+				android:entries="@array/pCallOffVibrateTime" android:entryValues="@array/pCallOffVibrateTimeValue"/>
+		</PreferenceScreen>
+		<PreferenceScreen android:title="Wi-Fi自动关闭">
+			<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
+				android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"
+				android:defaultValue="false" />
+			<ListPreference android:key="pWifiAutoCloseMin" android:title="设置延迟时间（分钟）"
+				android:summary="当Wi-Fi连接断开后，自动关闭等候时间" android:dialogTitle="请选择延迟时间（分钟）"
+				android:entries="@array/pWifiAutoCloseMin" android:entryValues="@array/pWifiAutoCloseMinValue"/>
+		</PreferenceScreen>
 	</PreferenceCategory>
-	<PreferenceCategory android:title="提示音管理">
-		<CheckBoxPreference android:key="pCameraClick" android:title="禁用相机拍照提示音"
-			android:summaryOn="消除拍照的咔嚓声（对焦的咚咚声仍存在）" android:summaryOff="消除拍照的咔嚓声（对焦的咚咚声仍存在）"
-			android:defaultValue="false" />
-		<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音"
-			android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
-			android:defaultValue="false" />
-	</PreferenceCategory>
-	<PreferenceCategory android:title="通话挂断震动">
-		<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
-			android:summaryOn="启用" android:summaryOff="禁用"
-			android:defaultValue="false" />
-		<ListPreference android:key="pCallOffVibrateTime" android:title="震动持续时间"
-			android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
-			android:entries="@array/pCallOffVibrateTime" android:entryValues="@array/pCallOffVibrateTimeValue"/>
-	</PreferenceCategory>
-	<PreferenceCategory android:title="Wi-Fi自动管理">
-		<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
-			android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"
-			android:defaultValue="false" />
-		<ListPreference android:key="pWifiAutoCloseMin" android:title="设置延迟时间（分钟）"
-			android:summary="当Wi-Fi连接断开后，自动关闭等候时间" android:dialogTitle="请选择延迟时间（分钟）"
-			android:entries="@array/pWifiAutoCloseMin" android:entryValues="@array/pWifiAutoCloseMinValue"/>
-	</PreferenceCategory>
-	<PreferenceCategory android:title="手电筒">
-		<CheckBoxPreference android:key="pFlashLight" android:title="打开手电筒 "
-			android:summaryOn="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）" android:summaryOff="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）"
-			android:defaultValue="false" />
-		<ListPreference android:key="pFlashLightLevel" android:title="设置手电筒亮度级别"
-			android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择亮度级别"
-			android:entries="@array/pFlashLightLevel" android:entryValues="@array/pFlashLightLevelValue"/>
-		<ListPreference android:key="pFlashLightTime" android:title="设置最长点亮时间"
-			android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择最长点亮时间"
-			android:entries="@array/pFlashLightTime" android:entryValues="@array/pFlashLightTimeValue"/>
+	<PreferenceCategory android:title="附加工具">
+		<PreferenceScreen android:title="手电筒功能">
+			<CheckBoxPreference android:key="pFlashLight" android:title="打开手电筒 "
+				android:summaryOn="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）" android:summaryOff="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）"
+				android:defaultValue="false" />
+			<ListPreference android:key="pFlashLightLevel" android:title="设置手电筒亮度级别"
+				android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择亮度级别"
+				android:entries="@array/pFlashLightLevel" android:entryValues="@array/pFlashLightLevelValue"/>
+			<ListPreference android:key="pFlashLightTime" android:title="设置最长点亮时间"
+				android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择最长点亮时间"
+				android:entries="@array/pFlashLightTime" android:entryValues="@array/pFlashLightTimeValue"/>
+		</PreferenceScreen>
+		<PreferenceScreen android:title="电源功能">
+			<Preference android:key="pReboot" android:title="快速重启手机"
+				android:summary="" android:defaultValue="" />
+			<Preference android:key="pRebootToRecovery" android:title="重启到恢复模式"
+				android:summary="" android:defaultValue="" />
+			
+			<!--
+			<Preference android:key="pRebootToBootloader" android:title="重启到bootloader模式"
+				android:summary="" android:defaultValue="" />
+			<Preference android:key="pBusyBox" android:title="安装busybox"
+				android:summary="" android:defaultValue="" />
+			-->
+		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="高级工具">
 		<Preference android:key="pSd2romHack" android:title="Sd2Rom Hack工具"
 			android:summary="将SD卡数据移动到手机内部存储ROM" android:defaultValue="" />
 		<!--
-		<Preference android:key="pBusyBox" android:title="安装busybox"
-			android:summary="" android:defaultValue="" />
-		-->
-	</PreferenceCategory>
-	<PreferenceCategory android:title="快捷">
-		<Preference android:key="pReboot" android:title="快速重启手机"
-			android:summary="" android:defaultValue="" />
-		<Preference android:key="pRebootToRecovery" android:title="重启到恢复模式"
-			android:summary="" android:defaultValue="" />
-		
-		<!--
-		<Preference android:key="pRebootToBootloader" android:title="重启到bootloader模式"
-			android:summary="" android:defaultValue="" />
 		<Preference android:key="pBusyBox" android:title="安装busybox"
 			android:summary="" android:defaultValue="" />
 		-->
