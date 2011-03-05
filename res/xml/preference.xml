@@ -63,7 +63,8 @@
 				android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
 				android:entries="@array/pCallOffVibrateTime" android:entryValues="@array/pCallOffVibrateTimeValue"/>
 		</PreferenceScreen>
-		<PreferenceScreen android:title="Wi-Fi自动关闭">
+		<PreferenceScreen android:title="Wi-Fi自动关闭"
+			android:summary="断开几分钟后自动关闭，以节约电能" >
 			<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
 				android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"
 				android:defaultValue="false" />
