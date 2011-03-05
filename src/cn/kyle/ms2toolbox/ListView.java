@@ -80,7 +80,12 @@ public class ListView extends Activity {
 									try {
 										L.debug("waiting ");
 										Thread.sleep(12*1000);
-										L.debug("kill bootanimation");
+										L.debug("kill bootanimation, 1st");
+										C.runSuCommandReturnBoolean("busybox kill `busybox ps | busybox grep bootanimation | busybox cut -c 1-5` ");
+										if (!path.equals("/tmp"))
+											applyBootAnimation(previewTempPath,false);
+										Thread.sleep(20*1000);
+										L.debug("kill bootanimation, 2nd");
 										C.runSuCommandReturnBoolean("busybox kill `busybox ps | busybox grep bootanimation | busybox cut -c 1-5` ");
 										if (!path.equals("/tmp"))
 											applyBootAnimation(previewTempPath,false);
@@ -199,19 +204,14 @@ public class ListView extends Activity {
 				myToast("不存在\n" +
 						"/sdcard/ms2toolbox/fonts");
 				ListView.this.finish();
-				
 			}
 		}
-		
 		//
 	}
 	
-	
 	public void applyBootAnimation(String path, boolean preview){
-		boolean pathIsDefault = false;
 		if (path.equals(defaultPath)) {
 			path = defaultFile;
-			pathIsDefault = true;
 		}else if (path.equals(previewTempPath)){
 			path = tempFile;
 		}else {
@@ -232,11 +232,7 @@ public class ListView extends Activity {
 		//复制文件
 		sb.append(" busybox cp -f "+ path+ " /system/media/bootanimation.zip ; ");
 		sb.append(" chmod 644 /system/media/bootanimation.zip ; ");
-
-		//恢复默认后，删除默认文件
-		if (pathIsDefault){
-			sb.append(" busybox rm -rf "+defaultFile+" ;");
-		}
+		
 		C.runSuCommandReturnBoolean(sb.toString());
 	}
 	
