@@ -49,6 +49,12 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 //	public String update_url = "http://124.207.182.168:9080/downapk/ms2toolbox.apk";
 //	public String update_apk = "/mnt/sdcard/tmp_ms2toolbox.apk";
 	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		this.finish();
+	}
+
 	public String bpsw_url = "http://124.207.182.168:9080/downapk/BPSW-Switcher.apk";
 	public String bpsw_apk = "/mnt/sdcard/BPSW-Switcher.apk";
 	

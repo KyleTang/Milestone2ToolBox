@@ -3,12 +3,7 @@
     package="cn.kyle.ms2toolbox" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="7"/>
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:label="@string/app_name" android:name=".SettingsPreferenceActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+        
         <activity android:name=".ListView"/>
         <activity android:name=".FontView" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".MinFreeMem"/>
@@ -27,7 +22,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <!--<category android:name="android.intent.category.DEFAULT" /> -->
             </intent-filter>
         </activity>
         <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/lockscreen" 
@@ -36,7 +31,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <!--<category android:name="android.intent.category.DEFAULT" /> -->
             </intent-filter>
         </activity>
         <activity android:theme="@android:style/Theme.Dialog" android:label="@string/power" 
@@ -45,7 +40,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
+                 <!-- <category android:name="android.intent.category.DEFAULT" /> -->
             </intent-filter>
         </activity>
         <!-- 
@@ -56,6 +51,13 @@
 			</intent-filter>
 		</service>
 		 -->
+		<activity android:label="@string/app_name" android:name=".SettingsPreferenceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
