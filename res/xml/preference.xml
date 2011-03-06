@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<Preference android:key="pTitle" android:title="加星号的为重启后生效"
 		android:summary="版本：1.0.0    作者：Kyle Tang" android:defaultValue="" />
-	<PreferenceCategory android:title="系统调整">
+	<PreferenceCategory android:title="系统调整 (加星号的为重启后生效)">
 		<Preference android:key="pBpsw" android:title="基带切换工具(*)"
 			android:summary="如果手机的信号不好，可以切换试试" android:defaultValue="" />
 		<Preference android:key="pBootAnimation" android:title="更改启动动画(*)"
@@ -20,7 +20,7 @@
 			android:summary="推荐新版引擎  stagefright" android:dialogTitle="请选择多媒体引擎"
 			android:entries="@array/pMultiMedia" android:entryValues="@array/pMultiMediaValue"/>
 		<PreferenceScreen android:title="更多设置">
-			<PreferenceCategory android:title="按键管理">
+			<PreferenceCategory android:title="按键管理（重启后生效）">
 				<CheckBoxPreference android:key="pCameraKey" android:title="相机键点亮屏幕(*)"
 					android:summaryOn="允许相机键点亮屏幕" android:summaryOff="禁用相机键点亮屏幕"
 					android:defaultValue="false" />
@@ -44,11 +44,11 @@
 					android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
 					android:defaultValue="false" />
 			</PreferenceCategory>
-			<PreferenceCategory android:title="消除提示音">
-				<CheckBoxPreference android:key="pCameraClick" android:title="禁用相机拍照提示音"
+			<PreferenceCategory android:title="消除提示音（有时候，重启后才生效）">
+				<CheckBoxPreference android:key="pCameraClick" android:title="禁用相机拍照提示音(*)"
 					android:summaryOn="消除拍照的咔嚓声（对焦的咚咚声仍存在）" android:summaryOff="消除拍照的咔嚓声（对焦的咚咚声仍存在）"
 					android:defaultValue="false" />
-				<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音"
+				<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音(*)"
 					android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
 					android:defaultValue="false" />
 			</PreferenceCategory>
