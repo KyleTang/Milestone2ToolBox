@@ -55,7 +55,7 @@
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="增强功能">
-		<PreferenceScreen android:title="通话挂断震动">
+		<PreferenceScreen android:title="通话结束后震动">
 			<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
 				android:summaryOn="启用" android:summaryOff="禁用"
 				android:defaultValue="false" />

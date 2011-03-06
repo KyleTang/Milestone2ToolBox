@@ -22,6 +22,12 @@ public class MyReceiver extends BroadcastReceiver{
 
 	private Toast myToast = null;
 	private static String pre_state = "";
+	private static String ExtraPhoneState = "state";
+	private static String ExtraPhoneNumber = "android.intent.extra.PHONE_NUMBER";
+	private static String PhoneStateCalling = "CALLING";
+	private static String PhoneStateRinging = "RINGING";
+	private static String PhoneStateOffhook = "OFFHOOK";
+	private static String PhoneStateIdle = "IDLE";
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -33,7 +39,11 @@ public class MyReceiver extends BroadcastReceiver{
 		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
 			setBacklight(context,intent);
 			setMinFreeMem(context,intent);
+		}else if ("android.intent.action.NEW_OUTGOING_CALL".equals(action)){
+			L.debug("PHONE_NUMBER:"+intent.getStringExtra(ExtraPhoneNumber));
+			pre_state = PhoneStateCalling;
 		}else if ("android.intent.action.PHONE_STATE".equals(action)){
+			L.debug("PhoneState:"+intent.getStringExtra("state"));
 			callOffVibrate(context,intent);
 		}else if ("android.intent.action.SEARCH".equals(action)){
 			//
@@ -64,8 +74,9 @@ public class MyReceiver extends BroadcastReceiver{
 
 	private void callOffVibrate(Context context, Intent intent) {
 		if (getPrefFlagFile(context,Pref.pCallOffVibrate).exists()){
-			String str = intent.getStringExtra("state");
-			if ((pre_state.equals("OFFHOOK")) && (str.equals("IDLE"))){
+			String str = intent.getStringExtra(ExtraPhoneState);
+			//if ((pre_state.equals(PhoneStateCalling)) && (str.equals(PhoneStateOffhook))){
+			if ((pre_state.equals(PhoneStateOffhook)) && (str.equals(PhoneStateIdle))){
 		    	int time = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOffVibrateTime), "0"));
 		        Vibrator vibrator = (Vibrator)context.getSystemService("vibrator");
 		        vibrator.vibrate(time);
