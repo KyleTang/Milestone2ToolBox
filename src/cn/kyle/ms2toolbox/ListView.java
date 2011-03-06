@@ -233,6 +233,9 @@ public class ListView extends Activity {
 		sb.append(" busybox cp -f "+ path+ " /system/media/bootanimation.zip ; ");
 		sb.append(" chmod 644 /system/media/bootanimation.zip ; ");
 		
+		if(!preview){
+			sb.append(" busybox rm -f "+tempFile+" ; ");
+		}
 		C.runSuCommandReturnBoolean(sb.toString());
 	}
 	
