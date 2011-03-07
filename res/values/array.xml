@@ -22,6 +22,17 @@
     <item>stagefright</item>
 </string-array>
 
+<string-array name="pCallOnVibrateTime">
+	<item>100</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+<string-array name="pCallOnVibrateTimeValue">
+	<item>100</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+
 <string-array name="pCallOffVibrateTime">
 	<item>100</item>
 	<item>300</item>

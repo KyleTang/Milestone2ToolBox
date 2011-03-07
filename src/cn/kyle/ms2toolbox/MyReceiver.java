@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import cn.kyle.util.C;
 import cn.kyle.util.L;
@@ -42,6 +44,7 @@ public class MyReceiver extends BroadcastReceiver{
 		}else if ("android.intent.action.NEW_OUTGOING_CALL".equals(action)){
 			L.debug("PHONE_NUMBER:"+intent.getStringExtra(ExtraPhoneNumber));
 			pre_state = PhoneStateCalling;
+			callOnVibrate(context,intent);
 		}else if ("android.intent.action.PHONE_STATE".equals(action)){
 			L.debug("PhoneState:"+intent.getStringExtra("state"));
 			callOffVibrate(context,intent);
@@ -72,6 +75,84 @@ public class MyReceiver extends BroadcastReceiver{
 		
 	}
 
+	/**
+	 * 通话接通震动
+	 * @param context
+	 * @param intent
+	 */
+	private void callOnVibrate(final Context context, Intent intent) {
+		File f = getPrefFlagFile(context,Pref.pCallOnVibrate);
+		if (!f.exists())
+			return ;
+		final int time = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOnVibrateTime), "0"));
+		final Vibrator vibrator = (Vibrator)context.getSystemService("vibrator");
+		new Thread(){
+			public void run(){
+				Process process;
+				try {
+					process = Runtime.getRuntime().exec("logcat -b radio ");
+					final InputStream localErrorStream = process.getErrorStream();
+					new Thread(){
+						public void run(){
+							BufferedReader br = new BufferedReader(new InputStreamReader(localErrorStream));
+							String line = null;
+							try {
+								while((line=br.readLine())!=null){
+									//L.debug("Error: "+line);
+								}
+								br.close();
+								localErrorStream.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}.start();
+					InputStream localInputStream = process.getInputStream();
+					BufferedReader br = new BufferedReader(new InputStreamReader(localInputStream));
+					String line = null;
+					boolean bCalling = false;
+					while((line=br.readLine())!=null){
+						//L.debug("line= "+line);
+						if ((!line.contains("GET_CURRENT_CALLS")) || (!line.contains("ACTIVE")))
+					          continue;
+						vibrator.vibrate(time);
+						//if (line.indexOf("GET_CURRENT_CALLS")<0) continue;
+						//L.debug(">> "+line);
+//						if (!bCalling){
+//							if (line.indexOf("ALERTING")>0){
+//								bCalling = true;
+//							}
+//						}else{
+//							if (line.indexOf("ACTIVE")>0||
+//								line.indexOf("onDisconnect")>0 ){
+//								//ACTIVE接通,
+//								//onDisconnect断开（
+//								//cause=LOCAL主动挂断
+//								//cause=BUSY被挂断，
+//								//cause=ERROR_UNSPECIFIED无人接听
+//								//cause=NORMAL通话结束）
+//								//震动并退出循环
+//						        vibrator.vibrate(time);
+//								//break;
+//							}
+//						}
+					}
+					process.destroy();
+					br.close();
+					localInputStream.close();
+					// kill `ps | busybox grep app_108 | cut -c10-14`
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}.start();
+	}
+	
+	/**
+	 * 通话挂断震动
+	 * @param context
+	 * @param intent
+	 */
 	private void callOffVibrate(Context context, Intent intent) {
 		if (getPrefFlagFile(context,Pref.pCallOffVibrate).exists()){
 			String str = intent.getStringExtra(ExtraPhoneState);

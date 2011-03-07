@@ -178,6 +178,24 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			
 		});
 		
+		ListPreference pCallOnVibrateTime = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pCallOnVibrateTime.toString());
+		pCallOnVibrateTime.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			public boolean onPreferenceChange(Preference preference,
+					Object newValue) {
+				File flag = getPrefFlagFile(Pref.pCallOnVibrateTime);
+				if (!flag.exists()){
+					flag.getParentFile().mkdirs();
+					try {
+						flag.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				return Module.setPrefFlagValue(flag, (String)newValue);
+			}
+			
+		});
+		
 		ListPreference pCallOffVibrateTime = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pCallOffVibrateTime.toString());
 		pCallOffVibrateTime.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
 			public boolean onPreferenceChange(Preference preference,
@@ -365,6 +383,15 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		
 		if (key.equals(Pref.pWifiAutoClose.toString())){
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pWifiAutoClose))){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast("设置失败");
+			}
+		}
+		
+		if (key.equals(Pref.pCallOnVibrate.toString())){
+			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOnVibrate))){
 				myToast("设置成功");
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
@@ -654,6 +681,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//设置wifi自动关闭状态
 		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))
 			.setChecked(getPrefFlagFile(Pref.pWifiAutoClose).exists());
+		
+		//设置
+		((CheckBoxPreference)findPreference(Pref.pCallOnVibrate.toString()))
+			.setChecked(getPrefFlagFile(Pref.pCallOnVibrate).exists());
 		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pCallOffVibrate.toString()))

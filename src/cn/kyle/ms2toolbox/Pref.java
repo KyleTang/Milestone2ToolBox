@@ -20,6 +20,8 @@ public enum Pref {
 	pCameraClick,
 	pVideoRecord,
 	
+	pCallOnVibrate,
+	pCallOnVibrateTime,
 	pCallOffVibrate,
 	pCallOffVibrateTime,
 	

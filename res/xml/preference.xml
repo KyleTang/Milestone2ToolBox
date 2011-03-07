@@ -55,6 +55,14 @@
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="增强功能">
+		<PreferenceScreen android:title="拨号接通后震动">
+			<CheckBoxPreference android:key="pCallOnVibrate" android:title="拨号接通后震动提醒"
+				android:summaryOn="启用" android:summaryOff="禁用"
+				android:defaultValue="false" />
+			<ListPreference android:key="pCallOnVibrateTime" android:title="震动持续时间"
+				android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+				android:entries="@array/pCallOnVibrateTime" android:entryValues="@array/pCallOnVibrateTimeValue"/>
+		</PreferenceScreen>
 		<PreferenceScreen android:title="通话结束后震动">
 			<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
 				android:summaryOn="启用" android:summaryOff="禁用"
