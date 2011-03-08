@@ -213,6 +213,24 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 			
 		});
+		
+		ListPreference pCallOn45SecVibrateTime = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pCallOn45SecVibrateTime.toString());
+		pCallOn45SecVibrateTime.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			public boolean onPreferenceChange(Preference preference,
+					Object newValue) {
+				File flag = getPrefFlagFile(Pref.pCallOn45SecVibrateTime);
+				if (!flag.exists()){
+					flag.getParentFile().mkdirs();
+					try {
+						flag.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				return Module.setPrefFlagValue(flag, (String)newValue);
+			}
+			
+		});
 //		不好用，废弃
 //		SharedPreferences sp = this.getPreferenceManager().getDefaultSharedPreferences(this);
 //		sp.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener(){
@@ -401,6 +419,15 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		
 		if (key.equals(Pref.pCallOffVibrate.toString())){
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOffVibrate))){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast("设置失败");
+			}
+		}
+		
+		if (key.equals(Pref.pCallOn45SecVibrate.toString())){
+			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOn45SecVibrate))){
 				myToast("设置成功");
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
@@ -689,6 +716,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pCallOffVibrate.toString()))
 			.setChecked(getPrefFlagFile(Pref.pCallOffVibrate).exists());
+		
+		//设置
+		((CheckBoxPreference)findPreference(Pref.pCallOn45SecVibrate.toString()))
+			.setChecked(getPrefFlagFile(Pref.pCallOn45SecVibrate).exists());
 	}
 
 	public void refreshItem(String key){

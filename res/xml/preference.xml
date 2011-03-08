@@ -55,21 +55,31 @@
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="增强功能">
-		<PreferenceScreen android:title="拨号接通后震动">
-			<CheckBoxPreference android:key="pCallOnVibrate" android:title="拨号接通后震动提醒"
-				android:summaryOn="启用" android:summaryOff="禁用"
-				android:defaultValue="false" />
-			<ListPreference android:key="pCallOnVibrateTime" android:title="震动持续时间"
-				android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
-				android:entries="@array/pCallOnVibrateTime" android:entryValues="@array/pCallOnVibrateTimeValue"/>
-		</PreferenceScreen>
-		<PreferenceScreen android:title="通话结束后震动">
-			<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
-				android:summaryOn="启用" android:summaryOff="禁用"
-				android:defaultValue="false" />
-			<ListPreference android:key="pCallOffVibrateTime" android:title="震动持续时间"
-				android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
-				android:entries="@array/pCallOffVibrateTime" android:entryValues="@array/pCallOffVibrateTimeValue"/>
+		<PreferenceScreen android:title="通话震动提醒">
+			<PreferenceCategory android:title="拨号接通后震动">
+				<CheckBoxPreference android:key="pCallOnVibrate" android:title="拨号接通后震动提醒"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pCallOnVibrateTime" android:title="震动持续时间"
+					android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+					android:entries="@array/pCallOnVibrateTime" android:entryValues="@array/pCallOnVibrateTimeValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="通话结束后震动">
+				<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pCallOffVibrateTime" android:title="震动持续时间"
+					android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+					android:entries="@array/pCallOffVibrateTime" android:entryValues="@array/pCallOffVibrateTimeValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="45秒震动">
+				<CheckBoxPreference android:key="pCallOn45SecVibrate" android:title="通话中45秒震动提醒"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pCallOn45SecVibrateTime" android:title="震动持续时间"
+					android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+					android:entries="@array/pCallOn45SecVibrateTime" android:entryValues="@array/pCallOn45SecVibrateTimeValue"/>
+			</PreferenceCategory>
 		</PreferenceScreen>
 		<PreferenceScreen android:title="Wi-Fi自动关闭"
 			android:summary="断开几分钟后自动关闭，以节约电能" >

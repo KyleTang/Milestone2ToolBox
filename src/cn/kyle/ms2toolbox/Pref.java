@@ -24,6 +24,8 @@ public enum Pref {
 	pCallOnVibrateTime,
 	pCallOffVibrate,
 	pCallOffVibrateTime,
+	pCallOn45SecVibrate,
+	pCallOn45SecVibrateTime,
 	
 	pFlashLight,
 	pFlashLightLevel,

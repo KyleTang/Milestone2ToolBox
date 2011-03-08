@@ -23,7 +23,7 @@
 </string-array>
 
 <string-array name="pCallOnVibrateTime">
-	<item>100</item>
+	<item>100(推荐)</item>
 	<item>300</item>
 	<item>500</item>
 </string-array>
@@ -35,10 +35,21 @@
 
 <string-array name="pCallOffVibrateTime">
 	<item>100</item>
-	<item>300</item>
+	<item>300(推荐)</item>
 	<item>500</item>
 </string-array>
 <string-array name="pCallOffVibrateTimeValue">
+	<item>100</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+
+<string-array name="pCallOn45SecVibrateTime">
+	<item>100(推荐)</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+<string-array name="pCallOn45SecVibrateTimeValue">
 	<item>100</item>
 	<item>300</item>
 	<item>500</item>
