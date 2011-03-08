@@ -19,7 +19,8 @@
 		<ListPreference android:key="pMultiMedia" android:title="更改默认多媒体引擎(*)"
 			android:summary="推荐新版引擎  stagefright" android:dialogTitle="请选择多媒体引擎"
 			android:entries="@array/pMultiMedia" android:entryValues="@array/pMultiMediaValue"/>
-		<PreferenceScreen android:title="更多设置">
+		<PreferenceScreen android:title="更多设置" 
+			android:summary="按键/背景灯/提示音...">
 			<PreferenceCategory android:title="按键管理（重启后生效）">
 				<CheckBoxPreference android:key="pCameraKey" android:title="相机键点亮屏幕(*)"
 					android:summaryOn="允许相机键点亮屏幕" android:summaryOff="禁用相机键点亮屏幕"
@@ -55,7 +56,8 @@
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="增强功能">
-		<PreferenceScreen android:title="通话震动提醒">
+		<PreferenceScreen android:title="通话震动提醒"
+			android:summary="接通/挂断/45秒">
 			<PreferenceCategory android:title="拨号接通后震动">
 				<CheckBoxPreference android:key="pCallOnVibrate" android:title="拨号接通后震动提醒"
 					android:summaryOn="启用" android:summaryOff="禁用"
