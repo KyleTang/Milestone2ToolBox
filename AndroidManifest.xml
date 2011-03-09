@@ -2,8 +2,38 @@
 <manifest android:versionCode="163" android:versionName="1.6.3"
     package="cn.kyle.ms2toolbox" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="7"/>
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-        
+    <application android:label="@string/app_name" android:icon="@drawable/icon" android:debuggable="true">
+        <activity android:label="@string/app_name" android:name=".SettingsPreferenceActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/flashlight" android:icon="@drawable/flashlight" android:name=".FlashLight" android:taskAffinity=".FlashLight">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/lockscreen" android:icon="@drawable/lockscreen" android:name=".LockScreen" android:taskAffinity=".LockScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Dialog" android:label="@string/power" android:icon="@drawable/power" android:name=".Power" android:taskAffinity=".Power">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ListView"/>
         <activity android:name=".FontView" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".MinFreeMem"/>
@@ -16,33 +46,6 @@
 	    		<action android:name="android.intent.action.SEARCH_LONG_PRESS" />
 			</intent-filter>   
 		</receiver> 
-		<activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/flashlight" 
-			android:icon="@drawable/flashlight" android:name=".FlashLight">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/lockscreen" 
-			android:icon="@drawable/lockscreen" android:name=".LockScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" /> 
-            </intent-filter>
-        </activity>
-        <activity android:theme="@android:style/Theme.Dialog" android:label="@string/power" 
-			android:icon="@drawable/power" android:name=".Power">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <!-- 
         <service android:name=".MyService" android:enabled="true">
 	        <intent-filter>
@@ -51,13 +54,6 @@
 			</intent-filter>
 		</service>
 		 -->
-		<activity android:label="@string/app_name" android:name=".SettingsPreferenceActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
