@@ -10,6 +10,7 @@ public enum Pref {
 	pModel,
 	pMultiMedia,
 	
+	pDalvikVMHeapMax,
 	pCameraKey,
 	pVolUpKey,
 	pVolDownKey,

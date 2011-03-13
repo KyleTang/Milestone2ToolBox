@@ -154,6 +154,21 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			
 		});
 		
+		ListPreference pDalvikVMHeapMax = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pDalvikVMHeapMax.toString());
+		pDalvikVMHeapMax.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			public boolean onPreferenceChange(Preference preference,
+					Object newValue) {
+				int value = Integer.parseInt((String)newValue);
+				if (Module.setDalvikVMHeapMax(value)){
+					myToast("设置成功");
+				}else{
+					myToast("设置失败");
+				}
+				L.debug("pDalvikVMHeapMax: value= "+value);
+				return true;
+			}
+			
+		});
 		ListPreference pWifiAutoCloseMin = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pWifiAutoCloseMin.toString());
 		pWifiAutoCloseMin.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
 			public boolean onPreferenceChange(Preference preference,

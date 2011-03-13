@@ -22,6 +22,23 @@
     <item>stagefright</item>
 </string-array>
 
+<string-array name="pDalvikVMHeapMax">
+    <item>30(默认)</item>
+    <item>36</item>
+    <item>42(推荐)</item>
+    <item>48</item>
+    <item>54</item>
+    <item>60</item>
+</string-array>
+<string-array name="pDalvikVMHeapMaxValue">
+    <item>30</item>
+    <item>36</item>
+    <item>42</item>
+    <item>48</item>
+    <item>54</item>
+    <item>60</item>
+</string-array>
+
 <string-array name="pCallOnVibrateTime">
 	<item>100(推荐)</item>
 	<item>300</item>

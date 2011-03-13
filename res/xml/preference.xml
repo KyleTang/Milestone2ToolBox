@@ -20,7 +20,13 @@
 			android:summary="推荐新版引擎  stagefright" android:dialogTitle="请选择多媒体引擎"
 			android:entries="@array/pMultiMedia" android:entryValues="@array/pMultiMediaValue"/>
 		<PreferenceScreen android:title="更多设置" 
-			android:summary="按键/背景灯/提示音...">
+			android:summary="按键/背景灯/提示音/虚拟机内存...">
+			<PreferenceCategory android:title="单个程序占用内存最大值（重启后生效）">
+				<ListPreference android:key="pDalvikVMHeapMax" android:title="虚拟机内存最大值(*)"
+					android:summary="单个程序占用内存最大值，如果运行默认浏览器、火狐浏览器、或大内存占用的程序，经常出现自动关闭，请尝试将此值调大一些。" 
+					android:dialogTitle="请选择内存最大值"
+					android:entries="@array/pDalvikVMHeapMax" android:entryValues="@array/pDalvikVMHeapMaxValue"/>
+			</PreferenceCategory>
 			<PreferenceCategory android:title="按键管理（重启后生效）">
 				<CheckBoxPreference android:key="pCameraKey" android:title="相机键点亮屏幕(*)"
 					android:summaryOn="允许相机键点亮屏幕" android:summaryOff="禁用相机键点亮屏幕"

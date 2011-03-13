@@ -142,6 +142,25 @@ public class Module {
 		return false;
 	}
 	
+	public static boolean setDalvikVMHeapMax(int value){
+		if (value<30) value = 30;
+		if (value>100) value = 30;
+		if (!C.runSuCommandReturnBoolean(
+				C.CmdMountSystemRW+" ; "+
+				"chmod 666 "+buildProp+" ; ")){
+			return false;
+		}
+		PropFile pf = new PropFile();
+		if (pf.load(buildProp)){
+			pf.putValue("dalvik.vm.heapsize", ""+value+"m");
+			if ( pf.save())
+				return true;
+			else
+				return false;
+		}
+		return false;
+	}
+	
 	public static boolean setModel(String set){
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
