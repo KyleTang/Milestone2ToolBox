@@ -58,6 +58,9 @@
 				<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音(*)"
 					android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
 					android:defaultValue="false" />
+				<ListPreference android:key="pLowBatteryOff" android:title="屏蔽电量低提示音"
+					android:summary="设置屏蔽电量低提示音" android:dialogTitle="请选择屏蔽方法"
+					android:entries="@array/pLowBatteryOffMethod" android:entryValues="@array/pLowBatteryOffMethodValue"/>
 			</PreferenceCategory>
 		</PreferenceScreen>
 	</PreferenceCategory>

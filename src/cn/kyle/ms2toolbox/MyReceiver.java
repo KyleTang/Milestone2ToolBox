@@ -51,6 +51,16 @@ public class MyReceiver extends BroadcastReceiver{
 			callOffVibrate(context,intent);
 		}else if ("android.intent.action.SEARCH".equals(action)){
 			//
+		}else if ("android.intent.action.HEADSET_PLUG".equals(action)){
+			lowBatteryOff(context,intent);
+		}
+	}
+	
+	private void lowBatteryOff(Context context, Intent intent) {
+		//仅当设置为头戴耳机插入时生效，才有此标志位
+		if (getPrefFlagFile(context,Pref.pLowBatteryOff).exists()){
+			//state - 0 for unplugged, 1 for plugged.
+			Module.setLowBatteryOff(intent.getIntExtra("state", 1)==1);
 		}
 	}
 	

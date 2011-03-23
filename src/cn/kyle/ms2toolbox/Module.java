@@ -373,4 +373,8 @@ public class Module {
 		 */
 		C.runSuCommandReturnBoolean("sendevent /dev/input/event2 1 107 1 ; sendevent /dev/input/event2 1 107 0 ;");
 	}
+	
+	public static boolean setLowBatteryOff(boolean setOff){
+		return setFileDisable(new File("/system/media/audio/ui/LowBattery.ogg"),setOff);
+	}
 }

@@ -169,6 +169,28 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 			
 		});
+		
+		ListPreference pLowBatteryOff = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pLowBatteryOff.toString());
+		pLowBatteryOff.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			public boolean onPreferenceChange(Preference preference,
+					Object newValue) {
+				//never, always, headseton
+				if ("headseton".equalsIgnoreCase((String) newValue)){
+					Module.setLowBatteryOff(false);
+					Module.setPrefFlag(true,getPrefFlagFile(Pref.pLowBatteryOff));
+				}else {
+					if ("always".equalsIgnoreCase((String) newValue)){
+						Module.setLowBatteryOff(true);
+					}else {
+						Module.setLowBatteryOff(false);
+					}
+					Module.setPrefFlag(false,getPrefFlagFile(Pref.pLowBatteryOff));
+				}
+				return true;
+			}
+			
+		});
+		
 		ListPreference pWifiAutoCloseMin = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pWifiAutoCloseMin.toString());
 		pWifiAutoCloseMin.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
 			public boolean onPreferenceChange(Preference preference,
