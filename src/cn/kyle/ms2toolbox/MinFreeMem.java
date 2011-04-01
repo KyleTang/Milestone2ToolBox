@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.mobclick.android.MobclickAgent;
+
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 
@@ -36,12 +38,24 @@ public class MinFreeMem extends Activity {
 	private String manual = null;
 	
 	private EditText[] etMem = new EditText[7];
+	
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this); 
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Event.count(this, Event.MinFreeMem);
 		setContentView(R.layout.minfreemem);
 		lastapply = this.getFilesDir().getAbsoluteFile()+"/minfree_lastapply";
 		manual = this.getFilesDir().getAbsoluteFile()+"/minfree_manual";

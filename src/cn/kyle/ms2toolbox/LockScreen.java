@@ -31,6 +31,7 @@ public class LockScreen extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Event.count(this, Event.LockScreen);
 		Module.pressPowerButton();
 		this.finish();
 	}

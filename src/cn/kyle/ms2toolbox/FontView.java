@@ -3,6 +3,8 @@ package cn.kyle.ms2toolbox;
 import java.io.File;
 import java.io.IOException;
 
+import com.mobclick.android.MobclickAgent;
+
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 
@@ -22,12 +24,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class FontView extends Activity {
+	
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this); 
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+		
 		setContentView(R.layout.fontview);
 		Bundle b = this.getIntent().getExtras();
 		if (b!=null){

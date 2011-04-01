@@ -39,6 +39,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
+import com.mobclick.android.MobclickAgent;
+
 public class SettingsPreferenceActivity extends PreferenceActivity {
 	ProgressDialog pBar = null;
 	Toast myToast = null;
@@ -56,9 +58,21 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public String sd2rom_apk = "/mnt/sdcard/tmp_sd2rom-hack.apk";
 	
 	public Handler handler = new Handler();
+	
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this); 
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		MobclickAgent.onError(this);
+		Event.count(this, Event.Main);
 		haveRoot = C.haveRoot();
 		if (!haveRoot){
 			AlertDialog ad = new AlertDialog.Builder(this)
@@ -431,6 +445,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		if (key.equals(Pref.pWifiAutoClose.toString())){
+			if (((CheckBoxPreference)preference).isChecked()){
+				Event.count(this, Event.WifiAutoClose);
+			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pWifiAutoClose))){
 				myToast("设置成功");
 			}else{
@@ -440,6 +457,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		if (key.equals(Pref.pCallOnVibrate.toString())){
+			if (((CheckBoxPreference)preference).isChecked()){
+				Event.count(this, Event.CallOnVibrate);
+			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOnVibrate))){
 				myToast("设置成功");
 			}else{
@@ -449,6 +469,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		if (key.equals(Pref.pCallOffVibrate.toString())){
+			if (((CheckBoxPreference)preference).isChecked()){
+				Event.count(this, Event.CallOffVibrate);
+			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOffVibrate))){
 				myToast("设置成功");
 			}else{
@@ -458,6 +481,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		if (key.equals(Pref.pCallOn45SecVibrate.toString())){
+			if (((CheckBoxPreference)preference).isChecked()){
+				Event.count(this, Event.CallOn45SecVibrate);
+			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOn45SecVibrate))){
 				myToast("设置成功");
 			}else{

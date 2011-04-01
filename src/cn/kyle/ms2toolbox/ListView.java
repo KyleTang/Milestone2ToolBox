@@ -3,6 +3,8 @@ package cn.kyle.ms2toolbox;
 import java.io.File;
 import java.io.IOException;
 
+import com.mobclick.android.MobclickAgent;
+
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 
@@ -32,14 +34,26 @@ public class ListView extends Activity {
 	public static String tempFile = "/system/media/bootanimation.zip.temp";
 	
 	public int type = -1;
+	
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this); 
+	}
+	
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+	
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+		
 		setContentView(R.layout.listview);
-
 		Bundle b = this.getIntent().getExtras();
 		if (b!=null){
 			type = b.getInt(LIST_TYPE);
@@ -62,6 +76,7 @@ public class ListView extends Activity {
 		});
 		
 		if (type==TYPE_BOOTANIMATIONS){
+			Event.count(this, Event.BootAnimation);
 			this.setTitle("更改系统启动动画");
 			tvTip.setText("/sdcard/ms2toolbox/bootanimations");
 			btnPreview.setText("10秒钟预览");
@@ -138,6 +153,7 @@ public class ListView extends Activity {
 			}
 			
 		}else if (type==TYPE_FONTS){
+			Event.count(this, Event.Font);
 			this.setTitle("更改系统显示字体");
 			btnPreview.setText("预览选择字体");
 			//btnPreview.setVisibility(android.view.View.INVISIBLE);

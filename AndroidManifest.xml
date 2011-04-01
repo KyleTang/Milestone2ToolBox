@@ -55,6 +55,7 @@
 			</intent-filter>
 		</service>
 		 -->
+		<meta-data android:value="4d95213e112cf77c8b02c0a0" android:name="UMENG_APPKEY"></meta-data>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

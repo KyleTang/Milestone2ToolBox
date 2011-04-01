@@ -31,6 +31,7 @@ public class FlashLight extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Event.count(this, Event.FlashLight);
 		SharedPreferences sp = this.getSharedPreferences("cn.kyle.ms2toolbox_preferences",Context.MODE_PRIVATE);
 		int level = Integer.parseInt(sp.getString(Pref.pFlashLightLevel.toString(), "80"))	;
 		final int time = Integer.parseInt(sp.getString(Pref.pFlashLightTime.toString(), "120"))	;
