@@ -5,16 +5,18 @@ import android.content.Context;
 import com.mobclick.android.MobclickAgent;
 
 public enum Event {
-	Main("0","主程序"),
-	BootAnimation("1","切换启动画面"),
-	Font("2","切换字体"),
-	FlashLight("3","手电筒"),
-	MinFreeMem("4","最小内存管理"),
-	LockScreen("5","锁屏"),
-	WifiAutoClose("6","WiFi自动管理"),
-	CallOnVibrate("7","接通震动"),
-	CallOffVibrate("8","挂断震动"),
-	CallOn45SecVibrate("9","45秒震动");
+	Main("ms2toolbox","主程序"),
+	BootAnimation("ms2toolbox","切换启动画面"),
+	Font("ms2toolbox","切换字体"),
+	FlashLight("ms2toolbox","手电筒"),
+	MinFreeMem("ms2toolbox","最小内存管理"),
+	LockScreen("ms2toolbox","锁屏"),
+	WifiAutoClose("ms2toolbox","WiFi自动管理"),
+	CallOnVibrate("ms2toolbox","接通震动"),
+	CallOffVibrate("ms2toolbox","挂断震动"),
+	CallOn45SecVibrate("ms2toolbox","45秒震动"),
+	CheckUpdate("ms2toolbox","检测版本"),
+	FeedBack("ms2toolbox","反馈意见");
 	
 	public String event_id;
 	public String event_label;
