@@ -20,7 +20,7 @@
 			android:summary="推荐新版引擎  stagefright" android:dialogTitle="请选择多媒体引擎"
 			android:entries="@array/pMultiMedia" android:entryValues="@array/pMultiMediaValue"/>
 		<PreferenceScreen android:title="更多设置" 
-			android:summary="按键/背景灯/提示音/虚拟机内存...">
+			android:summary="按键/背景灯/提示音/虚拟机内存/GMS...">
 			<PreferenceCategory android:title="单个程序占用内存最大值（重启后生效）">
 				<ListPreference android:key="pDalvikVMHeapMax" android:title="虚拟机内存最大值(*)"
 					android:summary="单个程序占用内存最大值，如果运行默认浏览器、火狐浏览器、或大内存占用的程序，经常出现自动关闭，请尝试将此值调大一些。" 
@@ -63,6 +63,18 @@
 					android:entries="@array/pLowBatteryOffMethod" android:entryValues="@array/pLowBatteryOffMethodValue"/>
 			</PreferenceCategory>
 		</PreferenceScreen>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="桌面及服务">
+		<CheckBoxPreference android:key="pFixBlurHomeIconOrder" android:title="修正Blur程序图标排序(*)"
+			android:summaryOn="已经修正Blur桌面程序图标排序方式为“数字-字母-中文”，去掉勾选，恢复为默认"
+			android:summaryOff="勾选后，可修正Blur桌面程序图标排序方式为“数字-字母-中文”, 需重启"
+			android:defaultValue="false" />
+		<CheckBoxPreference android:key="pFixGms" android:title="修复谷歌服务连接问题(*)"
+			android:summaryOn="启用" android:summaryOff="禁用（勾选后可解决Google服务连接不正常的问题, 需重启）"
+			android:defaultValue="false" />
+		<CheckBoxPreference android:key="pFixImoseyonLog" android:title="修复imoseyon禁用的日志(*)"
+			android:summaryOn="启用（禁用系统日志，强烈不推荐）" android:summaryOff="禁用（建议勾选，如果刷过imoseyon包，会禁用系统日志，造成程序无法调试，请勾选本项）"
+			android:defaultValue="false" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="增强功能">
 		<PreferenceScreen android:title="通话震动提醒"

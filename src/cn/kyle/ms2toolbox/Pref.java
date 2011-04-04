@@ -22,6 +22,10 @@ public enum Pref {
 	pVideoRecord,
 	pLowBatteryOff,
 	
+	pFixBlurHomeIconOrder,
+	pFixGms,
+	pFixImoseyonLog,
+	
 	pCallOnVibrate,
 	pCallOnVibrateTime,
 	pCallOffVibrate,

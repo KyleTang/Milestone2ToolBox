@@ -377,4 +377,6 @@ public class Module {
 	public static boolean setLowBatteryOff(boolean setOff){
 		return setFileDisable(new File("/system/media/audio/ui/LowBattery.ogg"),setOff);
 	}
+	
+	
 }

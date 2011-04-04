@@ -25,8 +25,8 @@
 <string-array name="pDalvikVMHeapMax">
     <item>30(默认)</item>
     <item>36</item>
-    <item>42(推荐)</item>
-    <item>48</item>
+    <item>42</item>
+    <item>48(推荐)</item>
     <item>54</item>
     <item>60</item>
 </string-array>

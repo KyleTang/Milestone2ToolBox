@@ -60,7 +60,9 @@ public class MyReceiver extends BroadcastReceiver{
 		//仅当设置为头戴耳机插入时生效，才有此标志位
 		if (getPrefFlagFile(context,Pref.pLowBatteryOff).exists()){
 			//state - 0 for unplugged, 1 for plugged.
-			Module.setLowBatteryOff(intent.getIntExtra("state", 1)==1);
+			int state = intent.getIntExtra("state", 1);
+			L.debug("state="+state);
+			Module.setLowBatteryOff(state==1);
 		}
 	}
 	

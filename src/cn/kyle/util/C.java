@@ -150,4 +150,8 @@ public class C {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String getSqlite3Path(Context context){
+		return new File(context.getFilesDir().getAbsolutePath(),"sqlite3").getAbsolutePath();
+	}
 }
