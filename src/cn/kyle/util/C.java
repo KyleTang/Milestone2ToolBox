@@ -60,6 +60,7 @@ public class C {
 			dataOut.writeBytes("exit\n");
 			dataOut.flush();
 			int i = process.waitFor();
+			//L.debug("process.waitFor="+i+", cmd="+command);
 			if (i==0)
 				return true;
 		} catch (InterruptedException e) {
@@ -153,5 +154,10 @@ public class C {
 	
 	public static String getSqlite3Path(Context context){
 		return new File(context.getFilesDir().getAbsolutePath(),"sqlite3").getAbsolutePath();
+	}
+	
+	public static String getSqlite3CmdString(Context context, String dbFilePath, String sqls){
+		String sqlite3 = new File(context.getFilesDir().getAbsolutePath(),"sqlite3").getAbsolutePath();
+		return sqlite3+" "+dbFilePath+" "+sqls;
 	}
 }

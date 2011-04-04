@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import android.content.Context;
+
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 import cn.kyle.util.PropFile;
@@ -33,6 +35,10 @@ public class Module {
 	public static String zh2en_key   = "key 167";
 	public static String zh2en_voice = "key 167   VOICE             WAKE_DROPPED";
 	public static String zh2en_zh2en = "key 167   EXPLORER          WAKE_DROPPED";
+	
+	public static boolean getVoiceZh2EnEnable(){
+		return C.runSuCommandReturnBoolean("busybox grep '"+zh2en_zh2en+"' /system/usr/keylayout/umts_milestone2-keypad.kl");
+	}
 	
 	public static boolean setVoiceZh2En(boolean set){
 		if (!C.runSuCommandReturnBoolean(
@@ -86,6 +92,10 @@ public class Module {
 		}else{
 			return false;
 		}
+	}
+	
+	public static boolean getCameraKeyWakeupEnable(){
+		return C.runSuCommandReturnBoolean("busybox grep '"+cameraWakeupSet_Focus+"' /system/usr/keylayout/umts_milestone2-keypad.kl");
 	}
 	
 	public static boolean setCameraKeyWakeup(boolean set){
@@ -378,5 +388,75 @@ public class Module {
 		return setFileDisable(new File("/system/media/audio/ui/LowBattery.ogg"),setOff);
 	}
 	
+	public static boolean getFixBlurIconOrderEnable(){
+		return new File("/system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak").exists();
+	}
 	
+	public static boolean setFixBlurIconOrder(Context context , boolean isChecked){
+		String initFilePath = "/system/etc/motorola/com.motorola.blur.home/iconorder.mkitso";
+		String dbFilePath = "/data/data/com.motorola.blur.home/databases/launcher.db";
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(C.CmdMountSystemRW+" ; ");
+		if (isChecked){
+			//backup
+			sb.append(" if ! -r /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak \n then \n ")
+				.append(" busybox cp -a /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak ; ")
+				.append(" fi ; \n ");
+			sb.append(" if ! -r /data/data/com.motorola.blur.home/databases/launcher.db.bak \n then \n ")
+				.append(" busybox cp -a /data/data/com.motorola.blur.home/databases/launcher.db /data/data/com.motorola.blur.home/databases/launcher.db.bak ; ")
+				.append(" fi ; \n ");
+			//fix
+			sb.append(" echo '' > /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso ; ");
+			sb.append(C.getSqlite3CmdString(context, dbFilePath, "'delete from iconorder;'")).append(" ; ");
+			sb.append(" chmod 777 /data/data/com.motorola.blur.home/databases/launcher.db ; ");
+		}else{
+			//restore
+			sb.append(" busybox cp -a /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso ; ");
+			sb.append(" busybox cp -a /data/data/com.motorola.blur.home/databases/launcher.db.bak /data/data/com.motorola.blur.home/databases/launcher.db ; ");
+			sb.append(" rm /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak ; ");
+			sb.append(" rm /data/data/com.motorola.blur.home/databases/launcher.db.bak ; ");
+			sb.append(" chmod 777 /data/data/com.motorola.blur.home/databases/launcher.db ; ");
+			sb.append(" echo 1 ");
+		}
+		return C.runSuCommandReturnBoolean(sb.toString());
+	}
+	
+	/**
+	 * 查看gms连接是否修复
+	 * @return true为已经修复，false 尚未修复
+	 */
+	public static boolean getFixGmsEnable(){
+		return C.runSuCommandReturnBoolean("busybox grep -v '#' /system/etc/hosts | busybox grep '74.125.93.113' ;");
+	}
+	
+	public static boolean setFixGms(boolean isChecked){
+		StringBuilder sb = new StringBuilder();
+		sb.append(C.CmdMountSystemRW+" ; ");
+		sb.append(" busybox sed -i '/android.clients.google.com/d' /system/etc/hosts ; ");
+		if (isChecked){
+			sb.append(" echo '74.125.93.113 android.clients.google.com' >> /system/etc/hosts ; ");
+		}
+		return C.runSuCommandReturnBoolean(sb.toString());
+	}
+	
+	public static boolean hasFixImoseyon(){
+		return new File("/system/etc/init.d/99imoseyon").exists();
+	}
+	
+	public static boolean getFixImoseyonLogEnable(){
+		return !C.runSuCommandReturnBoolean("busybox grep -v '#' /system/etc/init.d/99imoseyon | busybox grep -E 'rm.*/dev/log/main' ;");
+	}
+
+	public static boolean setFixImoseyonLog(boolean isChecked){
+		//   /system/etc/init.d/99imoseyon
+		StringBuilder sb = new StringBuilder();
+		sb.append(C.CmdMountSystemRW+" ; ");
+		if (isChecked){
+			sb.append(" busybox sed -i -r 's/.*rm.+dev.log.main/# rm \\/dev\\/log\\/main/g' /system/etc/init.d/99imoseyon ; ");
+		}else{
+			sb.append(" busybox sed -i -r 's/.*rm.+dev.log.main/rm \\/dev\\/log\\/main/g' /system/etc/init.d/99imoseyon ; ");
+		}
+		return C.runSuCommandReturnBoolean(sb.toString());
+	}
 }

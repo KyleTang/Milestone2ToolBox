@@ -17,6 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import cn.kyle.util.C;
 import cn.kyle.util.L;
+import cn.kyle.util.PropFile;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -446,15 +447,40 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 		}
 		
-		if (key.equals(Pref.pWifiAutoClose.toString())){
-			if (((CheckBoxPreference)preference).isChecked()){
-				Event.count(this, Event.WifiAutoClose);
-			}
-			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pWifiAutoClose))){
+		//blur icon order
+		if (key.equals(Pref.pFixBlurHomeIconOrder.toString())){
+			boolean set = ((CheckBoxPreference)preference).isChecked();
+			Module.setFixBlurIconOrder(this, set);
+			boolean result = Module.getFixBlurIconOrderEnable();
+			if (set==result){
 				myToast("设置成功");
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast("设置失败！");
+			}
+		}
+		//gms
+		if (key.equals(Pref.pFixGms.toString())){
+			boolean set = ((CheckBoxPreference)preference).isChecked();
+			Module.setFixGms(set);
+			boolean result = Module.getFixGmsEnable();
+			if (set==result){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast("设置失败！");
+			}
+		}
+		//main log
+		if (key.equals(Pref.pFixImoseyonLog.toString())){
+			boolean set = ((CheckBoxPreference)preference).isChecked();
+			Module.setFixImoseyonLog(set);
+			boolean result = Module.getFixImoseyonLogEnable();
+			if (set==result){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast("设置失败！");
 			}
 		}
 		
@@ -494,6 +520,24 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 		}
 		
+		if (key.equals(Pref.pWifiAutoClose.toString())){
+			if (((CheckBoxPreference)preference).isChecked()){
+				Event.count(this, Event.WifiAutoClose);
+			}
+			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pWifiAutoClose))){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast("设置失败");
+			}
+		}
+		
+		//
+		if (key.equals(Pref.pMinFreeMem.toString())){
+			Intent i = new Intent(this,MinFreeMem.class);
+			startActivity(i);
+		}
+		
 		if (key.equals(Pref.pFlashLight.toString())){
 			boolean set = ((CheckBoxPreference)preference).isChecked();
 			ListPreference pFlashLightLevel = (ListPreference)this.getPreferenceScreen().
@@ -522,11 +566,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				myToast("设置失败");
 			}
 		}
-		//
-		if (key.equals(Pref.pMinFreeMem.toString())){
-			Intent i = new Intent(this,MinFreeMem.class);
-			startActivity(i);
-		}
+		
 		//
 		if (key.equals(Pref.pSd2romHack.toString())){
 			Intent i = new Intent();
@@ -762,6 +802,46 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		pTitle.setSummary("版本："+versionName+"  作者：Kyle Tang");
 		
+		//
+		PropFile prop = new PropFile();
+		prop.load("/system/build.prop");
+		String strModel = prop.getValue("ro.product.model");
+		String strMultiMedia = prop.getValue("media.stagefright.enable-player");
+		String strDalvikVMHeapMax = prop.getValue("dalvik.vm.heapsize").replace("m", "");
+		
+		ListPreference lp = ((ListPreference)findPreference(Pref.pModel.toString()));
+		if (strModel.equalsIgnoreCase("MotoA953")){
+			lp.setValue("MotoA953");
+		}else if (strModel.equalsIgnoreCase("A953")){
+			lp.setValue("A953");
+		}else if (strModel.equalsIgnoreCase("ME722")){
+			lp.setValue("ME722");
+		}
+		
+		lp = ((ListPreference)findPreference(Pref.pMultiMedia.toString()));
+		if (strMultiMedia.equalsIgnoreCase("false")){
+			lp.setValue("opencore");
+		}else if (strMultiMedia.equalsIgnoreCase("true")){
+			lp.setValue("stagefright");
+		}
+		
+		lp = ((ListPreference)findPreference(Pref.pDalvikVMHeapMax.toString()));
+		if (strDalvikVMHeapMax.equalsIgnoreCase("30")){
+			lp.setValue("30");
+		}else if (strDalvikVMHeapMax.equalsIgnoreCase("48")){
+			lp.setValue("48");
+		}
+		
+		//设置
+		boolean bCameraKeyWakeupEnable = Module.getCameraKeyWakeupEnable();
+		((CheckBoxPreference)findPreference(Pref.pCameraKey.toString()))
+			.setChecked(bCameraKeyWakeupEnable);
+		
+		//设置
+		boolean bVoiceZh2EnEnable = Module.getVoiceZh2EnEnable();
+		((CheckBoxPreference)findPreference(Pref.pVoiceKey.toString()))
+			.setChecked(bVoiceZh2EnEnable);
+		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pButtonBacklight.toString()))
 			.setChecked(getPrefFlagFile(Pref.pButtonBacklight).exists());
@@ -780,9 +860,22 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		((CheckBoxPreference)findPreference(Pref.pVideoRecord.toString()))
 			.setChecked(Module.getVideoRecordDisable());
 		
-		//设置wifi自动关闭状态
-		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))
-			.setChecked(getPrefFlagFile(Pref.pWifiAutoClose).exists());
+		//
+		CheckBoxPreference cp = ((CheckBoxPreference)findPreference(Pref.pFixBlurHomeIconOrder.toString()));
+		cp.setChecked(Module.getFixBlurIconOrderEnable());
+		
+		//
+		cp = ((CheckBoxPreference)findPreference(Pref.pFixGms.toString()));
+		cp.setChecked(Module.getFixGmsEnable());
+		
+		//
+		cp = ((CheckBoxPreference)findPreference(Pref.pFixImoseyonLog.toString()));
+		if (Module.hasFixImoseyon()){
+			cp.setChecked(Module.getFixImoseyonLogEnable());
+		}else{
+			cp.setEnabled(false);
+			cp.setSummary("没有安装imoseyon");
+		}
 		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pCallOnVibrate.toString()))
@@ -795,6 +888,11 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pCallOn45SecVibrate.toString()))
 			.setChecked(getPrefFlagFile(Pref.pCallOn45SecVibrate).exists());
+		
+		//设置wifi自动关闭状态
+		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))
+			.setChecked(getPrefFlagFile(Pref.pWifiAutoClose).exists());
+		
 	}
 
 	public void refreshItem(String key){
