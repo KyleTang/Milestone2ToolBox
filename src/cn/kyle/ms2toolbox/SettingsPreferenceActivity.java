@@ -40,6 +40,8 @@ import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.UmengUpdateListener;
+import com.mobclick.android.UpdateStatus;
 
 public class SettingsPreferenceActivity extends PreferenceActivity {
 	ProgressDialog pBar = null;
@@ -577,6 +579,22 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 					}
 				}).create();
 			ad.show();
+		}
+		
+		if (key.equals(Pref.pCheckUpdate.toString())){
+//			MobclickAgent.setUpdateListener(new UmengUpdateListener(){
+//				public void onUpdateReturned(int status) {
+//					if (status==UpdateStatus.Yes){
+//						
+//					}
+//				}
+//			});
+			MobclickAgent.update(this);
+			
+		}
+		
+		if (key.equals(Pref.pFeedBack.toString())){
+			MobclickAgent.openFeedbackActivity(this);
 		}
 		
 		return false;

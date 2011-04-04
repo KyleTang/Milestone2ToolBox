@@ -150,6 +150,15 @@
 			android:summary="" android:defaultValue="" />
 		-->
 	</PreferenceCategory>
+	<PreferenceCategory android:title="关于">
+		<!--  
+		<Preference android:key="pCheckUpdate" android:title="检测新版本"
+			android:summary="推荐使用新版本" android:defaultValue="" />
+		-->
+		<Preference android:key="pFeedBack" android:title="意见及问题反馈"
+			android:summary="把您的好想法提交给我，或者提交使用中遇到的问题" 
+			android:defaultValue="" />
+	</PreferenceCategory>
 	<!-- 
 	<PreferenceCategory android:title="第三方工具">
 		<Preference android:key="pMilestoneOverclock" android:title="超频利器"

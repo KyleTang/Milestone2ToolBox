@@ -37,6 +37,7 @@
         <activity android:name=".ListView"/>
         <activity android:name=".FontView" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".MinFreeMem"/>
+        
         <receiver android:name=".MyReceiver">  
 			<intent-filter>  
 	    		<action android:name="android.intent.action.BOOT_COMPLETED"/>  
@@ -56,6 +57,7 @@
 		</service>
 		 -->
 		<meta-data android:value="4d95213e112cf77c8b02c0a0" android:name="UMENG_APPKEY"></meta-data>
+		<activity android:name="com.mobclick.android.UmengFeedback"></activity>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

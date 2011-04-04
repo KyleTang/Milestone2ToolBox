@@ -49,6 +49,9 @@ public enum Pref {
 	
 	pMilestoneOverclock,
 	pSetCpu,
-	pQuadrantAdvanced
+	pQuadrantAdvanced,
+	
+	pCheckUpdate,
+	pFeedBack
 	
 }
