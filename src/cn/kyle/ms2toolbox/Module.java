@@ -407,16 +407,17 @@ public class Module {
 				.append(" busybox cp -a /data/data/com.motorola.blur.home/databases/launcher.db /data/data/com.motorola.blur.home/databases/launcher.db.bak ; ")
 				.append(" fi ; \n ");
 			//fix
-			sb.append(" echo '' > /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso ; ");
-			sb.append(C.getSqlite3CmdString(context, dbFilePath, "'delete from iconorder;'")).append(" ; ");
-			sb.append(" chmod 777 /data/data/com.motorola.blur.home/databases/launcher.db ; ");
+			sb.append(" echo '' > /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso ; \n");
+			sb.append(C.getSqlite3CmdString(context, dbFilePath, "'delete from iconorder;'")).append(" ; \n");
+			sb.append(" chmod 777 /data/data/com.motorola.blur.home/databases/launcher.db ; \n");
+			L.debug(sb.toString());
 		}else{
 			//restore
-			sb.append(" busybox cp -a /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso ; ");
-			sb.append(" busybox cp -a /data/data/com.motorola.blur.home/databases/launcher.db.bak /data/data/com.motorola.blur.home/databases/launcher.db ; ");
-			sb.append(" rm /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak ; ");
-			sb.append(" rm /data/data/com.motorola.blur.home/databases/launcher.db.bak ; ");
-			sb.append(" chmod 777 /data/data/com.motorola.blur.home/databases/launcher.db ; ");
+			sb.append(" busybox cp -a /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso ; \n");
+			sb.append(" busybox cp -a /data/data/com.motorola.blur.home/databases/launcher.db.bak /data/data/com.motorola.blur.home/databases/launcher.db ; \n");
+			sb.append(" rm /system/etc/motorola/com.motorola.blur.home/iconorder.mkitso.bak ; \n");
+			sb.append(" rm /data/data/com.motorola.blur.home/databases/launcher.db.bak ; \n");
+			sb.append(" chmod 777 /data/data/com.motorola.blur.home/databases/launcher.db ; \n");
 			sb.append(" echo 1 ");
 		}
 		return C.runSuCommandReturnBoolean(sb.toString());

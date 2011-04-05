@@ -84,7 +84,7 @@ public class C {
 //		}
 	}
 
-	public static boolean unpackBusyBox(Context context){
+	public static boolean hasUnpackBusyBox(Context context){
 		return new File(getBusyBoxPath(context)).exists();
 	}
 	
@@ -94,7 +94,7 @@ public class C {
 	
 	public static boolean installBusyBox(Context context){
 		//if (!mountSystemRW()) return false;
-		if (!unpackBusyBox(context))
+		if (!hasUnpackBusyBox(context))
 			C.unpackFile(context, "busybox", "777");
 		String busybox = getBusyBoxPath(context);
 		StringBuilder sb = new StringBuilder();
@@ -143,21 +143,26 @@ public class C {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		try {
-			runSuCommand(context,"chmod "+chmod+" "+file.getAbsolutePath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		runSuCommandReturnBoolean("chmod "+chmod+" "+file.getAbsolutePath());
+	}
+
+	public static boolean hasUnpacksSqlite3(Context context){
+		return getSqlite3File(context).exists();
 	}
 	
-	public static String getSqlite3Path(Context context){
-		return new File(context.getFilesDir().getAbsolutePath(),"sqlite3").getAbsolutePath();
+	public static File getSqlite3File(Context context){
+		return new File(context.getFilesDir().getAbsolutePath(),"sqlite3");
+	}
+	
+	public static void unpacksSqlite3(Context context){
+		C.unpackFile(context, "sqlite3", "777");
 	}
 	
 	public static String getSqlite3CmdString(Context context, String dbFilePath, String sqls){
-		String sqlite3 = new File(context.getFilesDir().getAbsolutePath(),"sqlite3").getAbsolutePath();
+		String sqlite3 = getSqlite3File(context).getAbsolutePath();
+		if (!hasUnpacksSqlite3(context)){
+			unpacksSqlite3(context);
+		}
 		return sqlite3+" "+dbFilePath+" "+sqls;
 	}
 }
