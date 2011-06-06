@@ -43,7 +43,7 @@
 	    		<action android:name="android.intent.action.BOOT_COMPLETED"/>  
 	    		<action android:name="android.net.wifi.STATE_CHANGE"/> 
 	    		<action android:name="android.intent.action.PHONE_STATE"/> 
-	    		<action android:name="android.intent.action.NEW_OUTGOING_CALL"/> 
+	    		<!-- <action android:name="android.intent.action.NEW_OUTGOING_CALL"/> --> 
 	    		<action android:name="android.intent.action.SEARCH_LONG_PRESS" />
 	    		<action android:name="android.intent.action.HEADSET_PLUG" />
 			</intent-filter>   
@@ -65,7 +65,7 @@
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" /> 
+	<!--  <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />   -->
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>  
 	<uses-permission android:name="android.permission.VIBRATE"/>  	
 	<uses-permission android:name="android.permission.GLOBAL_SEARCH"/>  	

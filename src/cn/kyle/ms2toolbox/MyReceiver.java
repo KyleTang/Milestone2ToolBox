@@ -42,13 +42,14 @@ public class MyReceiver extends BroadcastReceiver{
 		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
 			setBacklight(context,intent);
 			setMinFreeMem(context,intent);
-		}else if ("android.intent.action.NEW_OUTGOING_CALL".equals(action)){
+		//}else if ("android.intent.action.NEW_OUTGOING_CALL".equals(action)){
+		}else if ("android.intent.action.PHONE_STATE".equals(action)){
 			L.debug("PHONE_NUMBER:"+intent.getStringExtra(ExtraPhoneNumber));
 			pre_state = PhoneStateCalling;
 			callOnVibrate(context,intent);
-		}else if ("android.intent.action.PHONE_STATE".equals(action)){
-			L.debug("PhoneState:"+intent.getStringExtra("state"));
-			callOffVibrate(context,intent);
+//		}else if ("android.intent.action.PHONE_STATE".equals(action)){
+//			L.debug("PhoneState:"+intent.getStringExtra("state"));
+//			callOffVibrate(context,intent);
 		}else if ("android.intent.action.SEARCH".equals(action)){
 			//
 		}else if ("android.intent.action.HEADSET_PLUG".equals(action)){
@@ -91,16 +92,20 @@ public class MyReceiver extends BroadcastReceiver{
 	private boolean bExitCallOn = false;
 	/**
 	 * 通话接通震动
+	 * @since 1.4.8  拨出通话，接入通话，均在此函数判断
 	 * @param context
 	 * @param intent
 	 */
 	private void callOnVibrate(final Context context, Intent intent) {
-		File f = getPrefFlagFile(context,Pref.pCallOnVibrate);
-		if (!f.exists())
+		final File fOn = getPrefFlagFile(context,Pref.pCallOnVibrate);
+		final File fOff = getPrefFlagFile(context,Pref.pCallOffVibrate);
+		if ((!fOn.exists())&&(!fOff.exists()))
 			return ;
 		final int callOnVibTime = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOnVibrateTime), "100"));
 		final File fOn45Sec = getPrefFlagFile(context,Pref.pCallOn45SecVibrate);
 		final int callOn45SecVibTime = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOn45SecVibrateTime), "100"));
+		final int callOffVibTime = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOffVibrateTime), "300"));
+		
 		final Vibrator vibrator = (Vibrator)context.getSystemService("vibrator");
 		final long lCallTimeStart = System.currentTimeMillis();
 		final String strCallTimeStart = timeToStr(lCallTimeStart);
@@ -114,60 +119,89 @@ public class MyReceiver extends BroadcastReceiver{
 					BufferedReader br = new BufferedReader(new InputStreamReader(localInputStream));
 					String line = null;
 					boolean bCallOn = false;
+					boolean bCallOut = false;
+					//跳过旧的日志
 					while((line=br.readLine())!=null){
-						if ( !((line.contains("GET_CURRENT_CALLS")) 
-								|| (line.contains("ACTIVE"))
-								|| (line.contains("onDisconnect"))
+						if (!before(strCallTimeStart,line)) continue;
+						else break;
+					}
+					//分析新的日志
+					while((line=br.readLine())!=null){
+						//跳过不符合的记录
+						if ( !(//(line.contains("GET_CURRENT_CALLS")) 
+								(line.contains("GSMConn")) 
+								&& ( (line.contains("ACTIVE")) || (line.contains("onDisconnect") || 
+										line.contains("DIALING") || line.contains("INCOMING") ))
 							)){
 							continue;
 						}
-						if (!before(strCallTimeStart,line)) continue;
+						//if (!before(strCallTimeStart,line)) continue;
 						L.debug("line="+line);
-						long vibTime = callOnVibTime;
-						if (line.contains("onDisconnect")){
-							if (line.contains("BUSY")||line.contains("ERROR_UNSPECIFIED")){
-								//被拒绝，或无人接听
-								vibTime = callOnVibTime*2;
-								if (vibTime>500){
-									vibTime = 500;
-								}
-								vibrator.vibrate(vibTime);
-								L.debug("vibrate=BUSY or ERROR_UNSPECIFIED");
-							}else if (line.contains("LOCAL")||line.contains("NORMAL")){
-								//主动挂断，或正常结束
-								L.debug("vibrate=LOCAL or NORMAL");
-							}else {
-								//其它情况
-								L.debug("vibrate="+line);
-							}
-							//结束通话
-							bExitCallOn = true;
-							break;
-						}else if (line.contains("GET_CURRENT_CALLS")&&line.contains("ACTIVE")&&!bCallOn){
-							bCallOn = true;
-							final long timeCountStart = System.currentTimeMillis();
-							vibrator.vibrate(vibTime);
-							L.debug("vibrate=ACTIVE");
-							final long tipVibTime = vibTime;
-							if (fOn45Sec.exists()){
-								new Thread(){
-									public void run(){
-										try {
-											while(!bExitCallOn){
-												Thread.sleep(1000);
-												if ((System.currentTimeMillis()-timeCountStart)/1000%60==45){
-													vibrator.vibrate(tipVibTime);
-													L.debug("vibrate=45s");
-												}
-											}
-										} catch (InterruptedException e) {
-											e.printStackTrace();
-										}
+						if (line.contains("DIALING")){
+							bCallOut = true;
+						}else if (line.contains("INCOMING")){
+							bCallOut = false;
+						}else{
+							//long vibTime = callOnVibTime;
+							if (line.contains("onDisconnect")){
+								if (line.contains("BUSY")||line.contains("ERROR_UNSPECIFIED")){
+									//被拒绝，或无人接听
+//									vibTime = callOnVibTime*2;
+//									if (vibTime>1000){
+//										vibTime = 800;
+//									}
+									vibrator.vibrate(callOffVibTime);
+									L.debug("vibrate=BUSY or ERROR_UNSPECIFIED");
+								}else if (line.contains("LOCAL")||line.contains("NORMAL")){
+									//主动挂断，或正常结束
+									if (fOff.exists()){
+										vibrator.vibrate(callOffVibTime);
 									}
-								}.start();
+									L.debug("vibrate=LOCAL or NORMAL");
+									
+								}else if (line.contains("INCOMING_MISSED")){
+									//漏接来电，或挂断来电
+									if (fOff.exists()){
+										vibrator.vibrate(callOffVibTime);
+									}
+									L.debug("vibrate=INCOMING_MISSED");
+								}else {
+									//其它情况
+									L.debug("vibrate="+line);
+								}
+								//结束通话
+								bExitCallOn = true;
+								break;
+							//}else if (line.contains("GET_CURRENT_CALLS")&&line.contains("ACTIVE")&&!bCallOn){
+							}else if (line.contains("GSMConn")&&line.contains("ACTIVE")&&!bCallOn){
+								bCallOn = true;
+								final long timeCountStart = System.currentTimeMillis();
+								if(bCallOut){
+									//如果是拨出，接通震动
+									vibrator.vibrate(callOnVibTime);
+									L.debug("vibrate=ACTIVE");
+								}
+								
+								//45秒震动
+								if (fOn45Sec.exists()){
+									new Thread(){
+										public void run(){
+											try {
+												while(!bExitCallOn){
+													Thread.sleep(1000);
+													if ((System.currentTimeMillis()-timeCountStart)/1000%60==45){
+														vibrator.vibrate(callOn45SecVibTime);
+														L.debug("vibrate=45s");
+													}
+												}
+											} catch (InterruptedException e) {
+												e.printStackTrace();
+											}
+										}
+									}.start();
+								}
 							}
 						}
-						
 					}
 					process.destroy();
 					br.close();
@@ -212,22 +246,29 @@ public class MyReceiver extends BroadcastReceiver{
 	}
 	/**
 	 * 通话挂断震动
+	 * @since 1.4.8 不再使用
+	 * @deprecated
 	 * @param context
 	 * @param intent
 	 */
-	private void callOffVibrate(Context context, Intent intent) {
-		if (getPrefFlagFile(context,Pref.pCallOffVibrate).exists()){
-			String str = intent.getStringExtra(ExtraPhoneState);
-			//if ((pre_state.equals(PhoneStateCalling)) && (str.equals(PhoneStateOffhook))){
-			if ((pre_state.equals(PhoneStateOffhook)) && (str.equals(PhoneStateIdle))){
-		    	int time = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOffVibrateTime), "300"));
-		        Vibrator vibrator = (Vibrator)context.getSystemService("vibrator");
-		        vibrator.vibrate(time);
-		    }
-		    pre_state = str;
-		}
-	}
+//	private void callOffVibrate(Context context, Intent intent) {
+//		if (getPrefFlagFile(context,Pref.pCallOffVibrate).exists()){
+//			String str = intent.getStringExtra(ExtraPhoneState);
+//			//if ((pre_state.equals(PhoneStateCalling)) && (str.equals(PhoneStateOffhook))){
+//			if ((pre_state.equals(PhoneStateOffhook)) && (str.equals(PhoneStateIdle))){
+//		    	int time = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pCallOffVibrateTime), "300"));
+//		        Vibrator vibrator = (Vibrator)context.getSystemService("vibrator");
+//		        vibrator.vibrate(time);
+//		    }
+//		    pre_state = str;
+//		}
+//	}
 	
+	/**
+	 * 
+	 * @param context
+	 * @param intent
+	 */
 	private void setBacklight(Context context, Intent intent){
 		if (getPrefFlagFile(context,Pref.pButtonBacklight).exists()){
 			Module.setButtonBacklightClosed(true);
