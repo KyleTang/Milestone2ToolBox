@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+		<TextView android:text="超频工具箱 " android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textStyle="bold" android:textSize="20dip"/>
+		<TextView android:text="频率电压" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textStyle="bold" android:textSize="20dip"/>	
+	</LinearLayout>
+	<CheckBox android:id="@+id/cbOcAutoApply" android:text="开机自动超频 （拔掉SD卡后不超频）"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	<TextView android:text="一键设置" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textStyle="bold" android:textSize="18dip"/>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<Button android:id="@+id/btnOcDefault" android:text=" 1000 "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<Button android:id="@+id/btnOc1100" android:text=" 1100 "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<Button android:id="@+id/btnOc1200" android:text=" 1200 "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<Button android:id="@+id/btnOc1300" android:text=" 1300 "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<Button android:id="@+id/btnOcCurrentSystem" android:text=" 当前 "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</LinearLayout>
+	<TextView android:text="自定义设置" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textStyle="bold" android:textSize="18dip" />
+	<TextView android:text="您可以设置4个频率(MHz)和电压(Vsel)组合" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView android:text="1 频率" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etF1" android:text="" 
+			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+		<TextView android:text="Vsel" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etV1" android:layout_width="40dip" android:text="" 
+			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+	</LinearLayout>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView android:text="2 频率" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etF2" android:text="" 
+			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+		<TextView android:text="Vsel" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etV2" android:layout_width="40dip" android:text="" 
+			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+	</LinearLayout>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView android:text="3 频率" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etF3" android:text="" 
+			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+		<TextView android:text="Vsel" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etV3" android:layout_width="40dip" android:text="" 
+			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+	</LinearLayout>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView android:text="4 频率" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etF4" android:text="" 
+			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+		<TextView android:text="Vsel" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/etV4" android:layout_width="40dip" android:text="" 
+			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+	</LinearLayout>
+	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<Button android:id="@+id/btnOcTest" android:text="测试（重启后恢复） "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<Button android:id="@+id/btnOcApply" android:text="应用（永久生效） "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</LinearLayout>
+	
+</LinearLayout>

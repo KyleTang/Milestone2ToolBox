@@ -40,6 +40,8 @@ public enum Pref {
 	pWifiAutoCloseMin,
 	
 	pSd2romHack,
+	pOverClock,
+	
 	pBusyBox,
 	pReboot,
 	pRebootToRecovery,

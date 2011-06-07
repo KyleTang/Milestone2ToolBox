@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiManager;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class MyReceiver extends BroadcastReceiver{
 		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
 			setBacklight(context,intent);
 			setMinFreeMem(context,intent);
+			setOverClock(context,intent);
 		//}else if ("android.intent.action.NEW_OUTGOING_CALL".equals(action)){
 		}else if ("android.intent.action.PHONE_STATE".equals(action)){
 			L.debug("PHONE_NUMBER:"+intent.getStringExtra(ExtraPhoneNumber));
@@ -87,6 +89,13 @@ public class MyReceiver extends BroadcastReceiver{
 			C.runSuCommandReturnBoolean("echo "+ value + " > /sys/module/lowmemorykiller/parameters/minfree ; ");
 		}
 		
+	}
+	
+	private void setOverClock(Context context, Intent intent) {
+		if (C.isExternalStorageWritable() && getPrefFlagFile(context,Pref.pOverClock).exists()){
+			OCM.ocLoadFreqVsel(context);
+			OCM.ocApplyToSystem();
+		}
 	}
 
 	private boolean bExitCallOn = false;

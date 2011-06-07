@@ -10,6 +10,7 @@ public enum Event {
 	Font("ms2toolbox","切换字体"),
 	FlashLight("ms2toolbox","手电筒"),
 	MinFreeMem("ms2toolbox","最小内存管理"),
+	OverClock("ms2toolbox","超频工具箱"),
 	LockScreen("ms2toolbox","锁屏"),
 	WifiAutoClose("ms2toolbox","WiFi自动管理"),
 	CallOnVibrate("ms2toolbox","接通震动"),

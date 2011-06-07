@@ -143,6 +143,8 @@
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="高级工具">
+		<Preference android:key="pOverClock" android:title="超频工具箱"
+			android:summary="超频/降频/节能" android:defaultValue="" />
 		<Preference android:key="pSd2romHack" android:title="Sd2Rom Hack工具"
 			android:summary="将SD卡数据移动到手机内部存储ROM" android:defaultValue="" />
 		<!--

@@ -9,6 +9,7 @@ import java.io.OutputStream;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 
 public class C {
 	public final static String SCRIPT_NAME = "surunner.sh";
@@ -164,5 +165,10 @@ public class C {
 			unpacksSqlite3(context);
 		}
 		return sqlite3+" "+dbFilePath+" "+sqls;
+	}
+	
+	public static boolean isExternalStorageWritable() {
+		String str = Environment.getExternalStorageState();
+		return "mounted".equals(str);
 	}
 }

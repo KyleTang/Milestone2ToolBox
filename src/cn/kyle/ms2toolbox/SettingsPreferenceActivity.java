@@ -568,6 +568,12 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		//
+		if (key.equals(Pref.pOverClock.toString())){
+			Intent i = new Intent(this,OverClock.class);
+			startActivity(i);
+		}
+		
+		//
 		if (key.equals(Pref.pSd2romHack.toString())){
 			Intent i = new Intent();
 			i.setAction(Intent.ACTION_MAIN);

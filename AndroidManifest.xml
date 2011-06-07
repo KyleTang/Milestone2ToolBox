@@ -36,7 +36,8 @@
         </activity>
         <activity android:name=".ListView"/>
         <activity android:name=".FontView" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".MinFreeMem"/>
+        <activity android:name=".MinFreeMem" android:screenOrientation="portrait" android:launchMode="singleTask"/>
+        <activity android:name=".OverClock" android:screenOrientation="portrait" android:launchMode="singleTask"/>
         
         <receiver android:name=".MyReceiver">  
 			<intent-filter>  
