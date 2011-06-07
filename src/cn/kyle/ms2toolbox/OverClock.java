@@ -86,6 +86,9 @@ public class OverClock extends Activity {
 			public void onClick(View v) {
 				ocLoadSystemFreqVsel();
 				fillCurrentFreqVselIntoEditText();
+				if (!OCM.isLoadKO()){
+					myToast("系统没有超频");
+				}
 			}
 		});
 		
@@ -103,7 +106,7 @@ public class OverClock extends Activity {
 			public void onClick(View v) {
 				//Oc
 				ocSettingToFreqVselCurrent();
-				OCM.ocApplyToSystem();
+				OCM.ocApplyToSystem(OverClock.this);
 			}
 		});
 		
@@ -112,7 +115,7 @@ public class OverClock extends Activity {
 			public void onClick(View v) {
 				//Oc and save setting
 				ocSettingToFreqVselCurrent();
-				OCM.ocApplyToSystem();
+				OCM.ocApplyToSystem(OverClock.this);
 				OCM.ocSaveFreqVsel(OverClock.this);
 			}
 		});
@@ -167,6 +170,10 @@ public class OverClock extends Activity {
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			for(int i=0;i<4;i++){
+				OCM.FreqVselCurrent[i][OCM.Freq]=0;
+				OCM.FreqVselCurrent[i][OCM.Vsel]=0;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally{

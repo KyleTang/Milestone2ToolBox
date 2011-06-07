@@ -125,7 +125,7 @@ public class C {
 		return getBusyBoxPath(context) + " " + cmd;
 	}
 	
-	public static void unpackFile(Context context, String filename, String chmod){
+	public static String unpackFile(Context context, String filename, String chmod){
 		if (chmod==null || chmod.trim().equals("")){
 			chmod = "777";
 		}
@@ -145,6 +145,7 @@ public class C {
 			e.printStackTrace();
 		}
 		runSuCommandReturnBoolean("chmod "+chmod+" "+file.getAbsolutePath());
+		return file.getAbsolutePath();
 	}
 
 	public static boolean hasUnpacksSqlite3(Context context){

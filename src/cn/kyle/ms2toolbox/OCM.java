@@ -21,8 +21,7 @@ public class OCM {
 	public static final int FV_1300 = 3;
 	public static final int Freq = 0;
 	public static final int Vsel = 1;
-	private static String OverClockKO = "/system/bootmenu/ext/modules/overclock_defy.ko";
-	
+	private static String OverClockKO_FILE = "overclock_droidx_22.ko";
 	
 	public static int FreqVselCurrent[][] = {
 			{300,22},
@@ -57,6 +56,18 @@ public class OCM {
 				{1300,66}
 			}
 	};
+	
+	public static File getOverClockKOFile(Context context){
+		return new File(context.getFilesDir().getAbsolutePath(),OverClockKO_FILE);
+	}
+	
+	public static String getOverClockKO(Context context){
+		File f = getOverClockKOFile(context);
+		if (!f.exists() ){
+			C.unpackFile(context, OverClockKO_FILE, "555");
+		}
+		return f.getAbsolutePath();
+	}
 	
 	/**
 	 * 保存FreqVselCurrent设置到配置文件
@@ -94,18 +105,18 @@ public class OCM {
 	/**
 	 * 应用FreqVselCurrent到系统
 	 */
-	public static void ocApplyToSystem(){
+	public static void ocApplyToSystem(Context context){
 		// 安全保护，防止由于电压和频率设置过高，造成损害
 		for (int i=0;i<4;i++){
-			if (OCM.FreqVselCurrent[i][OCM.Freq] > 2000)
+			if (OCM.FreqVselCurrent[i][OCM.Freq] > 2000 || OCM.FreqVselCurrent[i][OCM.Freq] < 1)
 				OCM.FreqVselCurrent[i][OCM.Freq] = 1000;
-			if (OCM.FreqVselCurrent[i][OCM.Vsel] > 100)
+			if (OCM.FreqVselCurrent[i][OCM.Vsel] > 100 || OCM.FreqVselCurrent[i][OCM.Vsel] < 1)
 				OCM.FreqVselCurrent[i][OCM.Vsel] = 66;
 		}
 		//
 		StringBuilder sb = new StringBuilder();
 		sb.append("rmmod overclock ; \n");
-		sb.append("insmod "+OverClockKO+" ; \n");
+		sb.append("insmod "+getOverClockKO(context)+" ; \n");
 		sb.append("echo 0x"+findOmapAddr()+" > /proc/overclock/omap2_clk_init_cpufreq_table_addr ; \n");
 		sb.append("echo 0x"+findStatsAddr()+" > /proc/overclock/cpufreq_stats_update_addr ; \n");
 		sb.append("echo "+OCM.FreqVselCurrent[3][OCM.Vsel]+" > /proc/overclock/max_vsel ; \n");
@@ -135,6 +146,9 @@ public class OCM {
 		}
 	}
 	
+	public static boolean isLoadKO(){
+		return new File("/proc/overclock").exists();
+	}
 
 	private static String findOmapAddr(){
 		return findKallsymsAddr(" T omap2_clk_init_cpufreq_table");
