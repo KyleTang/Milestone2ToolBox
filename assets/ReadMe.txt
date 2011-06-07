@@ -24,7 +24,7 @@ PS：有些地方是直接修改的系统，所以卸载本软件或wipe仍然�
 -------【按键管理】
 ----------- 相机键点亮屏幕
 ----------- 语音键/中英切换键（仅摩托输入法有效）
------------ 防止键盘抖动（解决连击）（来自XDA的解决方案）（参考http://bbs.gfan.com/android-1430818-1-1.html ，http://forum.xda-developers.com/showpost.php?p=13927675&postcount=44）
+----------- 防止按键抖动(解决连击)（来自XDA的解决方案）（参考http://bbs.gfan.com/android-1430818-1-1.html ，http://forum.xda-developers.com/showpost.php?p=13927675&postcount=44）
 -------【背景灯管理】
 ----------- 关闭屏幕底部LED灯
 ----------- 关闭侧滑键盘灯

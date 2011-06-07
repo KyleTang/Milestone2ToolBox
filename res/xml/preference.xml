@@ -34,7 +34,7 @@
 				<CheckBoxPreference android:key="pVoiceKey" android:title="语音键/中英切换键(*) "
 					android:summaryOn="(仅摩托输入法)当前为中英文切换键 " android:summaryOff="(仅摩托输入法)当前为语音键"
 					android:defaultValue="false" />
-				<CheckBoxPreference android:key="pDebounce" android:title="防止键盘抖动（解决连击）"
+				<CheckBoxPreference android:key="pDebounce" android:title="防止按键抖动(解决连击)"
 					android:summaryOn="来自XDA的解决方案" android:summaryOff="来自XDA的解决方案"
 					android:defaultValue="false" />
 				<!-- 

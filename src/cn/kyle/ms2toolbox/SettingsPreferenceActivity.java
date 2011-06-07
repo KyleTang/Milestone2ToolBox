@@ -423,7 +423,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			boolean checked = ((CheckBoxPreference)preference).isChecked();
 			if (Module.setDebounce(checked,this)){
 				myToast("设置成功");
-				Module.setPrefFlag(true, this.getPrefFlagFile(Pref.pDebounce));
+				Module.setPrefFlag(checked, this.getPrefFlagFile(Pref.pDebounce));
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
 				Module.setPrefFlag(false, this.getPrefFlagFile(Pref.pDebounce));

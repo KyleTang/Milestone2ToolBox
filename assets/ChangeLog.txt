@@ -4,7 +4,7 @@
 增加：超频工具箱(超频模块来自 http://code.google.com/p/milestone-overclock/)
 提示：sd2rom hack和基带切换插件，请从论坛自行下载
 （基带切换插件http://bbs.gfan.com/android-663382-1-1.html，sd2rom hack插件http://bbs.gfan.com/android-460981-1-1.html）
-整合：防止键盘抖动（解决键盘连击）（来自XDA的解决方案）
+整合：防止按键抖动(解决连击)（来自XDA的解决方案）
 （参考http://bbs.gfan.com/android-1430818-1-1.html ，http://forum.xda-developers.com/showpost.php?p=13927675&postcount=44）
 
 ----1.6.7 2011-4-5
