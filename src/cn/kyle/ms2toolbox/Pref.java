@@ -15,6 +15,7 @@ public enum Pref {
 	pVolUpKey,
 	pVolDownKey,
 	pVoiceKey,
+	pDebounce,
 	pButtonBacklight,
 	pKeyboardBacklight,
 	

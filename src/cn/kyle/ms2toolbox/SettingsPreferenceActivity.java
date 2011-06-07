@@ -54,11 +54,15 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 //	public String update_url = "http://124.207.182.168:9080/downapk/ms2toolbox.apk";
 //	public String update_apk = "/mnt/sdcard/tmp_ms2toolbox.apk";
 
-	public String bpsw_url = "http://124.207.182.168:9080/downapk/BPSW-Switcher.apk";
+//	public String bpsw_url = "http://124.207.182.168:9080/downapk/BPSW-Switcher.apk";
+	public String bpsw_url = "http://bbs.gfan.com/android-663382-1-1.html";
 	public String bpsw_apk = "/mnt/sdcard/BPSW-Switcher.apk";
 	
-	public String sd2rom_url = "http://124.207.182.168:9080/down/sd2rom-hack.apk";
+//	public String sd2rom_url = "http://124.207.182.168:9080/down/sd2rom-hack.apk";
+	public String sd2rom_url = "http://bbs.gfan.com/android-460981-1-1.html";
 	public String sd2rom_apk = "/mnt/sdcard/tmp_sd2rom-hack.apk";
+	
+	
 	
 	public Handler handler = new Handler();
 	
@@ -343,7 +347,13 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			try{
 				startActivity(i);
 			}catch(android.content.ActivityNotFoundException e){
-				installPluginTip(bpsw_url, bpsw_apk);
+				AlertDialog d = new AlertDialog.Builder(this)
+					.setTitle("没有安装，请从论坛下载")
+					.setMessage(bpsw_url)
+					.setPositiveButton("确定", null)
+					.create();
+				d.show();
+				//installPluginTip(bpsw_url, bpsw_apk);
 			}
 		}
 		
@@ -407,6 +417,19 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				((CheckBoxPreference)preference).setChecked(false);
 				myToast("设置失败");
 			}
+		}
+		
+		if (key.equals(Pref.pDebounce.toString())){
+			boolean checked = ((CheckBoxPreference)preference).isChecked();
+			if (Module.setDebounce(checked,this)){
+				myToast("设置成功");
+				Module.setPrefFlag(true, this.getPrefFlagFile(Pref.pDebounce));
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				Module.setPrefFlag(false, this.getPrefFlagFile(Pref.pDebounce));
+				myToast("设置失败");
+			}
+			
 		}
 		
 		if (key.equals(Pref.pButtonBacklight.toString())){
@@ -581,7 +604,13 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			try{
 				startActivity(i);
 			}catch(android.content.ActivityNotFoundException e){
-				installPluginTip(sd2rom_url, sd2rom_apk);
+				//installPluginTip(sd2rom_url, sd2rom_apk);
+				AlertDialog d = new AlertDialog.Builder(this)
+					.setTitle("没有安装，请从论坛下载")
+					.setMessage(sd2rom_url)
+					.setPositiveButton("确定", null)
+					.create();
+				d.show();
 			}
 		}
 		
@@ -847,6 +876,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		boolean bVoiceZh2EnEnable = Module.getVoiceZh2EnEnable();
 		((CheckBoxPreference)findPreference(Pref.pVoiceKey.toString()))
 			.setChecked(bVoiceZh2EnEnable);
+		
+		//设置
+		((CheckBoxPreference)findPreference(Pref.pDebounce.toString()))
+			.setChecked(this.getPrefFlagFile(Pref.pDebounce).exists());
 		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pButtonBacklight.toString()))

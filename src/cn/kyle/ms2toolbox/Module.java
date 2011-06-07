@@ -36,6 +36,8 @@ public class Module {
 	public static String zh2en_voice = "key 167   VOICE             WAKE_DROPPED";
 	public static String zh2en_zh2en = "key 167   EXPLORER          WAKE_DROPPED";
 	
+	public static String DebounceKO_FILE = "debounce.ko";
+	
 	public static boolean getVoiceZh2EnEnable(){
 		return C.runSuCommandReturnBoolean("busybox grep '"+zh2en_zh2en+"' /system/usr/keylayout/umts_milestone2-keypad.kl");
 	}
@@ -457,6 +459,28 @@ public class Module {
 			sb.append(" busybox sed -i -r 's/.*rm.+dev.log.main/# rm \\/dev\\/log\\/main/g' /system/etc/init.d/99imoseyon ; ");
 		}else{
 			sb.append(" busybox sed -i -r 's/.*rm.+dev.log.main/rm \\/dev\\/log\\/main/g' /system/etc/init.d/99imoseyon ; ");
+		}
+		return C.runSuCommandReturnBoolean(sb.toString());
+	}
+	
+	public static File getDebounceKOFile(Context context){
+		return new File(context.getFilesDir().getAbsolutePath(),DebounceKO_FILE);
+	}
+	
+	public static String getDebounceKO(Context context){
+		File f = getDebounceKOFile(context);
+		if (!f.exists() ){
+			C.unpackFile(context, DebounceKO_FILE, "555");
+		}
+		return f.getAbsolutePath();
+	}
+	
+	public static boolean setDebounce(boolean isChecked,Context context){
+		StringBuilder sb = new StringBuilder();
+		if (isChecked){
+			sb.append("rmmod debounce ; \n insmod "+getDebounceKO(context)+" debounce_delay=10 ; \n");
+		}else{
+			sb.append("rmmod debounce ; \n");
 		}
 		return C.runSuCommandReturnBoolean(sb.toString());
 	}

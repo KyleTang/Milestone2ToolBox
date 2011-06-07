@@ -11,14 +11,11 @@ import java.util.Date;
 
 import cn.kyle.util.C;
 import cn.kyle.util.L;
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiManager;
-import android.os.Environment;
 import android.os.Vibrator;
 import android.widget.Toast;
 
@@ -43,6 +40,7 @@ public class MyReceiver extends BroadcastReceiver{
 		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
 			setBacklight(context,intent);
 			setMinFreeMem(context,intent);
+			setDebounce(context, intent);
 			setOverClock(context,intent);
 		//}else if ("android.intent.action.NEW_OUTGOING_CALL".equals(action)){
 		}else if ("android.intent.action.PHONE_STATE".equals(action)){
@@ -333,6 +331,10 @@ public class MyReceiver extends BroadcastReceiver{
 			L.debug("Receiver wifi: connected");
 			flagSingle.delete();
 		}
+	}
+	
+	private void setDebounce(Context context, Intent intent){
+		Module.setDebounce(getPrefFlagFile(context,Pref.pDebounce).exists(), context);
 	}
 	
 	private File getPrefFlagFile(Context c ,Pref p){

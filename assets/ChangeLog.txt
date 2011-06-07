@@ -1,4 +1,12 @@
 更新：
+----1.7.0 2011-6-7
+修复：在“有的android2.2.2环境下，通话震动失效”的问题
+增加：超频工具箱(超频模块来自 http://code.google.com/p/milestone-overclock/)
+提示：sd2rom hack和基带切换插件，请从论坛自行下载
+（参考http://bbs.gfan.com/android-663382-1-1.html，sd2rom http://bbs.gfan.com/android-460981-1-1.html）
+整合：防止键盘抖动（解决键盘连击）（来自XDA的解决方案）
+（参考http://bbs.gfan.com/android-1430818-1-1.html ，http://forum.xda-developers.com/showpost.php?p=13927675&postcount=44）
+
 ----1.6.7 2011-4-5
 修复：“修正Blur程序图标排序”不生效的问题
 
