@@ -78,7 +78,15 @@ public class OCM {
 			sb.append(FreqVselCurrent[i][Freq]).append(",");
 			sb.append(FreqVselCurrent[i][Vsel]).append(";");
 		}
-		Module.setPrefFlagValue(getConfigFile(context), sb.toString());
+		File f = getConfigFile(context);
+		if (!f.exists()){
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		Module.setPrefFlagValue(f, sb.toString());
 	}
 	
 	/**

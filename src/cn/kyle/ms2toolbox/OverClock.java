@@ -106,6 +106,7 @@ public class OverClock extends Activity {
 				Module.setPrefFlag(isChecked, f);
 			}
 		});
+		cbOcAutoApply.setChecked(getPrefFlagFile(Pref.pOverClock).exists());
 		
 		Button btnOcTest = (Button)findViewById(R.id.btnOcTest);
 		btnOcTest.setOnClickListener(new OnClickListener(){
