@@ -3,12 +3,12 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
+	android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
 		<TextView android:text="超频工具箱 " android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:textStyle="bold" android:textSize="20dip"/>
-		<TextView android:text="频率电压" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textStyle="bold" android:textSize="20dip"/>	
+		<TextView android:id="@+id/tvOcStatus" android:text="频率电压" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>	
 	</LinearLayout>
 	<CheckBox android:id="@+id/cbOcAutoApply" android:text="开机自动超频 （拔掉SD卡后不超频）"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
@@ -90,5 +90,12 @@
 		<Button android:id="@+id/btnOcApply" android:text="应用（永久生效） "
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
-	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<Button android:id="@+id/btnOcUnLoad" android:text="恢复默认（永久生效） "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<Button android:id="@+id/btnOcHelp" android:text="帮助 "
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</LinearLayout>
 </LinearLayout>

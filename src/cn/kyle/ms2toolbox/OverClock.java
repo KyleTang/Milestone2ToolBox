@@ -10,6 +10,8 @@ import com.mobclick.android.MobclickAgent;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,15 +20,18 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class OverClock extends Activity {
-	private Toast myToast =null;
+	private Toast myToast = null;
 	private EditText[][] edFreqVsel = new EditText[4][2];
+	private TextView tvOcStatus = null;
 	
 	protected void onResume() {
 		this.ocLoadSystemFreqVsel();
 		this.fillCurrentFreqVselIntoEditText();
+		this.refreshStatus();
 		super.onResume();
 		MobclickAgent.onResume(this); 
 	}
@@ -45,6 +50,7 @@ public class OverClock extends Activity {
 		Event.count(this, Event.OverClock);
 		setContentView(R.layout.overclock);
 		
+		tvOcStatus = (TextView)findViewById(R.id.tvOcStatus);
 		//
 		this.edFreqVsel[0][0] = (EditText)findViewById(R.id.etF1);
 		this.edFreqVsel[0][1] = (EditText)findViewById(R.id.etV1);
@@ -92,7 +98,7 @@ public class OverClock extends Activity {
 			}
 		});
 		
-		CheckBox cbOcAutoApply = (CheckBox)findViewById(R.id.cbOcAutoApply);
+		final CheckBox cbOcAutoApply = (CheckBox)findViewById(R.id.cbOcAutoApply);
 		cbOcAutoApply.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
@@ -107,6 +113,7 @@ public class OverClock extends Activity {
 				//Oc
 				ocSettingToFreqVselCurrent();
 				OCM.ocApplyToSystem(OverClock.this);
+				OverClock.this.refreshStatus();
 			}
 		});
 		
@@ -117,8 +124,39 @@ public class OverClock extends Activity {
 				ocSettingToFreqVselCurrent();
 				OCM.ocApplyToSystem(OverClock.this);
 				OCM.ocSaveFreqVsel(OverClock.this);
+				OverClock.this.refreshStatus();
 			}
 		});
+		
+		Button btnOcUnLoad = (Button)findViewById(R.id.btnOcUnLoad);
+		btnOcUnLoad.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				OCM.ocUnLoad();
+				cbOcAutoApply.setChecked(false);
+				OverClock.this.refreshStatus();
+			}
+		});
+		
+		Button btnOcHelp = (Button)findViewById(R.id.btnOcHelp);
+		btnOcHelp.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				AlertDialog d = new AlertDialog.Builder(OverClock.this)
+				.setTitle("超频帮助")
+				.setMessage("1. 请通过'测试'进行尝试，确保可以稳定工作，再选择‘应用’\n"+
+						"2. 应用并选择开机自动超频，如果系统反复重启，请拔掉sd卡，再开机")
+				.setPositiveButton("确定", null)
+				.create();
+				d.show();
+			}
+		});
+	}
+	
+	public void refreshStatus(){
+		if (!OCM.isLoadKO()){
+			tvOcStatus.setText(" 未超频");
+		}else{
+			tvOcStatus.setText(" 最大频率:"+OCM.FreqVselCurrent[3][OCM.Freq]+",最大电压:"+OCM.FreqVselCurrent[3][OCM.Vsel]);
+		}
 	}
 	
 	public void fillFreqVselIntoEditText(int profile){

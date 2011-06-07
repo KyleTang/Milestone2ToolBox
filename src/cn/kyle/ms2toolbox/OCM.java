@@ -103,6 +103,13 @@ public class OCM {
 	}
 	
 	/**
+	 * 禁用超频
+	 */
+	public static void ocUnLoad(){
+		C.runSuCommandReturnBoolean("rmmod overclock");
+	}
+	
+	/**
 	 * 应用FreqVselCurrent到系统
 	 */
 	public static void ocApplyToSystem(Context context){
