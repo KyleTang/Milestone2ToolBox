@@ -854,9 +854,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		lp = ((ListPreference)findPreference(Pref.pMultiMedia.toString()));
-		if (strMultiMedia.equalsIgnoreCase("false")){
+		if ("false".equalsIgnoreCase(strMultiMedia)){
 			lp.setValue("opencore");
-		}else if (strMultiMedia.equalsIgnoreCase("true")){
+		}else if ("true".equalsIgnoreCase(strMultiMedia)){
 			lp.setValue("stagefright");
 		}
 		
