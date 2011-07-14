@@ -37,6 +37,7 @@ public class Module {
 	public static String zh2en_zh2en = "key 167   EXPLORER          WAKE_DROPPED";
 	
 	public static String DebounceKO_FILE = "debounce.ko";
+	public static String DefyMoreKO_FILE = "defy_more.ko";
 	
 	public static boolean getVoiceZh2EnEnable(){
 		return C.runSuCommandReturnBoolean("busybox grep '"+zh2en_zh2en+"' /system/usr/keylayout/umts_milestone2-keypad.kl");
@@ -481,6 +482,28 @@ public class Module {
 			sb.append("rmmod debounce ; \n insmod "+getDebounceKO(context)+" debounce_delay=10 ; \n");
 		}else{
 			sb.append("rmmod debounce ; \n");
+		}
+		return C.runSuCommandReturnBoolean(sb.toString());
+	}
+	
+	public static File getDefyMoreKOFile(Context context){
+		return new File(context.getFilesDir().getAbsolutePath(),Module.DefyMoreKO_FILE);
+	}
+	
+	public static String getDefyMoreKO(Context context){
+		File f = getDefyMoreKOFile(context);
+		if (!f.exists() ){
+			C.unpackFile(context, DefyMoreKO_FILE, "555");
+		}
+		return f.getAbsolutePath();
+	}
+	
+	public static boolean setDefyMore(boolean enable,Context context,int n){
+		StringBuilder sb = new StringBuilder();
+		if (enable){
+			sb.append("rmmod defy_more ; \n insmod "+getDefyMoreKO(context)+" touch_num="+n+" ; \n");
+		}else{
+			sb.append("rmmod defy_more ; \n");
 		}
 		return C.runSuCommandReturnBoolean(sb.toString());
 	}

@@ -17,7 +17,8 @@ public enum Event {
 	CallOffVibrate("ms2toolbox","挂断震动"),
 	CallOn45SecVibrate("ms2toolbox","45秒震动"),
 	CheckUpdate("ms2toolbox","检测版本"),
-	FeedBack("ms2toolbox","反馈意见");
+	FeedBack("ms2toolbox","反馈意见"),
+	DefyMore("ms2toolbox","多点触控");
 	
 	public String event_id;
 	public String event_label;

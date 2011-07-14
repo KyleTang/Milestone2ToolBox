@@ -230,6 +230,38 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			
 		});
 		
+		ListPreference pDefyMoreNum = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pDefyMoreNum.toString());
+		pDefyMoreNum.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			public boolean onPreferenceChange(Preference preference,
+					Object newValue) {
+				File flag = getPrefFlagFile(Pref.pDefyMoreNum);
+				if (!flag.exists()){
+					flag.getParentFile().mkdirs();
+					try {
+						flag.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				boolean ret = Module.setPrefFlagValue(flag, (String)newValue);
+				if (ret){
+					if ("2".equalsIgnoreCase((String)newValue)){
+						ret = Module.setDefyMore(false,null, 0);
+						myToast("恢复系统默认多点触控，成功");
+					}else{
+						ret = Module.setDefyMore(true, SettingsPreferenceActivity.this, Integer.parseInt((String)newValue));
+						if(ret){
+							myToast("设置多点最大"+(String)newValue+"点，成功。\n 请稍等片刻后，再进行触摸操作.");
+						}else{
+							myToast("设置多点最大"+(String)newValue+"点，失败。");
+						}
+					}
+				}
+				return ret ;
+			}
+			
+		});
+		
 		ListPreference pCallOnVibrateTime = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pCallOnVibrateTime.toString());
 		pCallOnVibrateTime.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
 			public boolean onPreferenceChange(Preference preference,
@@ -430,6 +462,18 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				myToast("设置失败");
 			}
 			
+		}
+		
+		if (key.equals(Pref.pDefyMore.toString())){
+			if (((CheckBoxPreference)preference).isChecked()){
+				Event.count(this, Event.DefyMore);
+			}
+			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pDefyMore))){
+				myToast("设置成功");
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast("设置失败");
+			}
 		}
 		
 		if (key.equals(Pref.pButtonBacklight.toString())){
@@ -880,6 +924,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pDebounce.toString()))
 			.setChecked(this.getPrefFlagFile(Pref.pDebounce).exists());
+		
+		//设置
+		((CheckBoxPreference)findPreference(Pref.pDefyMore.toString()))
+			.setChecked(getPrefFlagFile(Pref.pDefyMore).exists());
 		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pButtonBacklight.toString()))

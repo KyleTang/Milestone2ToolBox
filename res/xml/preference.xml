@@ -46,6 +46,14 @@
 					android:defaultValue="false" />
 				 -->
 			</PreferenceCategory>
+			<PreferenceCategory android:title="多点触控(大于2点)">
+				<CheckBoxPreference android:key="pDefyMore" android:title="开机自动启用"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pDefyMoreNum" android:title="设置最大触点数"
+					android:summary="点击设置" android:dialogTitle="请选择最大触点数"
+					android:entries="@array/pDefyMoreNum" android:entryValues="@array/pDefyMoreNumValue"/>
+			</PreferenceCategory>
 			<PreferenceCategory android:title="背景灯管理">
 				<CheckBoxPreference android:key="pButtonBacklight" android:title="关闭屏幕底部LED灯 "
 					android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
