@@ -115,14 +115,21 @@
 					android:entries="@array/pCallOn45SecVibrateTime" android:entryValues="@array/pCallOn45SecVibrateTimeValue"/>
 			</PreferenceCategory>
 		</PreferenceScreen>
-		<PreferenceScreen android:title="Wi-Fi自动关闭"
-			android:summary="断开几分钟后自动关闭，以节约电能" >
-			<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
-				android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"
-				android:defaultValue="false" />
-			<ListPreference android:key="pWifiAutoCloseMin" android:title="设置延迟时间（分钟）"
-				android:summary="当Wi-Fi连接断开后，自动关闭等候时间" android:dialogTitle="请选择延迟时间（分钟）"
-				android:entries="@array/pWifiAutoCloseMin" android:entryValues="@array/pWifiAutoCloseMinValue"/>
+		<PreferenceScreen android:title="Wi-Fi增强管理"
+			android:summary="调整设置以节约电能" >
+			<PreferenceCategory android:title="Wi-Fi自动关闭">
+				<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
+					android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"
+					android:defaultValue="false" />
+				<ListPreference android:key="pWifiAutoCloseMin" android:title="设置延迟时间（分钟）"
+					android:summary="当Wi-Fi连接断开后，自动关闭等候时间" android:dialogTitle="请选择延迟时间（分钟）"
+					android:entries="@array/pWifiAutoCloseMin" android:entryValues="@array/pWifiAutoCloseMinValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="Wi-Fi扫描间隔时间">
+				<ListPreference android:key="pWifiScanInterval" android:title="设置Wi-Fi扫描间隔(*)"
+					android:summary="适当增长扫描间隔时间，减少电能消耗" android:dialogTitle="设置Wi-Fi扫描间隔（秒）"
+					android:entries="@array/pWifiScanInterval" android:entryValues="@array/pWifiScanIntervalValue"/>
+			</PreferenceCategory>
 		</PreferenceScreen>
 		<Preference android:key="pMinFreeMem" android:title="最小内存管理"
 				android:summary="解决了MinFreeManager开机应用不生效的问题" />

@@ -174,6 +174,23 @@ public class Module {
 		return false;
 	}
 	
+	public static boolean setWifiScanInterval(int value){
+		if (!C.runSuCommandReturnBoolean(
+				C.CmdMountSystemRW+" ; "+
+				"chmod 666 "+buildProp+" ; ")){
+			return false;
+		}
+		PropFile pf = new PropFile();
+		if (pf.load(buildProp)){
+			pf.putValue("wifi.supplicant_scan_interval ", " "+value);
+			if ( pf.save())
+				return true;
+			else
+				return false;
+		}
+		return false;
+	}
+	
 	public static boolean setModel(String set){
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+

@@ -41,6 +41,8 @@ public enum Pref {
 	pFlashLightTime,
 	pWifiAutoClose,
 	pWifiAutoCloseMin,
+	pWifiScanInterval,
+	pWifiScanIntervalValue,
 	
 	pSd2romHack,
 	pOverClock,

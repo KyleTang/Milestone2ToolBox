@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingLeft="10dp" android:paddingRight="10dp" android:paddingBottom="10dp">
 
@@ -10,28 +10,28 @@
 	android:id="@+id/btnPowerOff"
 	android:text="快速关机"
 	android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     />
 <Button 
 	android:id="@+id/btnRestart"
 	android:text="快速重启"
 	android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     />
 <Button 
 	android:id="@+id/btnRestartToRecovery"
 	android:text="重启至恢复模式"
 	android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     />
 <Button 
 	android:id="@+id/btnSystemPoweroff"
 	android:text="系统关机选项"
 	android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     />
 </LinearLayout>

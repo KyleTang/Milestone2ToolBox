@@ -230,6 +230,22 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			
 		});
 		
+		ListPreference pWifiScanInterval = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pWifiScanInterval.toString());
+		pWifiScanInterval.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			public boolean onPreferenceChange(Preference preference,
+					Object newValue) {
+				int value = Integer.parseInt((String)newValue);
+				if (Module.setWifiScanInterval(value)){
+					myToast("设置成功, 新值为"+(String)newValue+"秒! ");
+				}else{
+					myToast("设置失败");
+				}
+				L.debug("wifi.supplicant_scan_interval: value= "+value);
+				return true;
+			}
+			
+		});
+		
 		ListPreference pDefyMoreNum = (ListPreference)this.getPreferenceScreen().findPreference(Pref.pDefyMoreNum.toString());
 		pDefyMoreNum.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
 			public boolean onPreferenceChange(Preference preference,
@@ -884,11 +900,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//
 		PropFile prop = new PropFile();
 		prop.load("/system/build.prop");
-		String strModel = prop.getValue("ro.product.model");
-		String strMultiMedia = prop.getValue("media.stagefright.enable-player");
-		String strDalvikVMHeapMax = prop.getValue("dalvik.vm.heapsize").replace("m", "");
 		
 		ListPreference lp = ((ListPreference)findPreference(Pref.pModel.toString()));
+		String strModel = prop.getValue("ro.product.model");
 		if (strModel.equalsIgnoreCase("MotoA953")){
 			lp.setValue("MotoA953");
 		}else if (strModel.equalsIgnoreCase("A953")){
@@ -898,13 +912,20 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		lp = ((ListPreference)findPreference(Pref.pMultiMedia.toString()));
-		if ("false".equalsIgnoreCase(strMultiMedia)){
-			lp.setValue("opencore");
-		}else if ("true".equalsIgnoreCase(strMultiMedia)){
-			lp.setValue("stagefright");
+		if (android.os.Build.VERSION.RELEASE.contains("2.3")){
+			lp.setEnabled(false);
+			lp.setSummary("2.3.x无此设置");
+		}else{
+			String strMultiMedia = prop.getValue("media.stagefright.enable-player");
+			if ("false".equalsIgnoreCase(strMultiMedia)){
+				lp.setValue("opencore");
+			}else if ("true".equalsIgnoreCase(strMultiMedia)){
+				lp.setValue("stagefright");
+			}
 		}
 		
 		lp = ((ListPreference)findPreference(Pref.pDalvikVMHeapMax.toString()));
+		String strDalvikVMHeapMax = prop.getValue("dalvik.vm.heapsize").replace("m", "");
 		if (strDalvikVMHeapMax.equalsIgnoreCase("30")){
 			lp.setValue("30");
 		}else if (strDalvikVMHeapMax.equalsIgnoreCase("48")){
@@ -948,8 +969,16 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			.setChecked(Module.getVideoRecordDisable());
 		
 		//
-		CheckBoxPreference cp = ((CheckBoxPreference)findPreference(Pref.pFixBlurHomeIconOrder.toString()));
-		cp.setChecked(Module.getFixBlurIconOrderEnable());
+		CheckBoxPreference cp = null ;
+		cp = ((CheckBoxPreference)findPreference(Pref.pFixBlurHomeIconOrder.toString()));
+		if (android.os.Build.VERSION.RELEASE.contains("2.3")){
+			//2.3系统不需要
+			cp.setEnabled(false);
+			cp.setSummaryOff("2.3.x无需此设置");
+			cp.setSummaryOn("2.3.x无需此设置");
+		}else{
+			cp.setChecked(Module.getFixBlurIconOrderEnable());
+		}
 		
 		//
 		cp = ((CheckBoxPreference)findPreference(Pref.pFixGms.toString()));
@@ -961,7 +990,8 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			cp.setChecked(Module.getFixImoseyonLogEnable());
 		}else{
 			cp.setEnabled(false);
-			cp.setSummary("没有安装imoseyon");
+			cp.setSummaryOff("没有安装imoseyon");
+			cp.setSummaryOn("没有安装imoseyon");
 		}
 		
 		//设置
