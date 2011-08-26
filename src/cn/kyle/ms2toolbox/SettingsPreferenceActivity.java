@@ -64,7 +64,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public String sd2rom_url = "http://bbs.gfan.com/android-460981-1-1.html";
 	public String sd2rom_apk = "/mnt/sdcard/tmp_sd2rom-hack.apk";
 	
-	public MultiLang ml = new MultiLang(this);
+	public MultiLang ml = null;
 	
 	public Handler handler = new Handler();
 	
@@ -82,6 +82,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		MobclickAgent.onError(this);
 		Event.count(this, Event.Main);
+		ml = new MultiLang(this);
 		haveRoot = C.haveRoot();
 		if (!haveRoot){
 			AlertDialog ad = new AlertDialog.Builder(this)
@@ -745,23 +746,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 		});
 	}
-	
-	public void myToast(String tipInfo) {
-		if (myToast == null)
-			myToast = new Toast(this);
-		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
-	}
-	
-	public void myToast(int tipInfo) {
-		if (myToast == null)
-			myToast = new Toast(this);
-		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
-	}
-	
-	public File getPrefFlagFile(Pref p){
-		return new File(this.getFilesDir(),p.toString()+".flag");
-	}
-	
+
 	public void refreshItemAll(){
 		this.setTitle(this.getTitle()+(haveRoot?ml.t(R.string.msg_tip_root, null):ml.t(R.string.msg_tip_noRoot, null)));
 		Preference pTitle = this.findPreference(Pref.pTitle.toString());
@@ -886,5 +871,22 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))
 			.setChecked(getPrefFlagFile(Pref.pWifiAutoClose).exists());
 		
+	}
+	
+	
+	public void myToast(String tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public void myToast(int tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public File getPrefFlagFile(Pref p){
+		return new File(this.getFilesDir(),p.toString()+".flag");
 	}
 }

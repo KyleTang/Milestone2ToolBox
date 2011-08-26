@@ -24,6 +24,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 锁屏
+ * @author KyleTang
+ *
+ */
 public class LockScreen extends Activity {
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)

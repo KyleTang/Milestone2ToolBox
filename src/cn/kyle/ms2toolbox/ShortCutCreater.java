@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShortCutCreater extends Activity {
+	Toast myToast = null;
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
@@ -82,11 +83,28 @@ public class ShortCutCreater extends Activity {
         	//title=""+this.getResources().getText(R.string.lcdbacklight);
         	//icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.lcdbacklight); //获取快捷键的图标
             //myIntent=new Intent(this, Power.class);
+        	myToast("Oops. comming soon.");
         	break;
         }
     	addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);//快捷方式的标题
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);//快捷方式的图标
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, myIntent);//快捷方式的动作
         sendBroadcast(addIntent);//发送广播
+	}
+	
+	public void myToast(String tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public void myToast(int tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public File getPrefFlagFile(Pref p){
+		return new File(this.getFilesDir(),p.toString()+".flag");
 	}
 }

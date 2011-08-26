@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class Power extends Activity {
 	
-	public MultiLang ml = new MultiLang(this);
+	public MultiLang ml = null;
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
@@ -33,6 +33,7 @@ public class Power extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.power);
+		ml = new MultiLang(this);
 		
 		Button btnPowerOff = (Button)findViewById(R.id.btnPowerOff); 
 		btnPowerOff.setOnClickListener(new OnClickListener(){

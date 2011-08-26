@@ -24,6 +24,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 手电筒
+ * @author KyleTang
+ *
+ */
 public class FlashLight extends Activity {
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)

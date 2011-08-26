@@ -23,6 +23,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 字体预览界面
+ * @author KyleTang
+ *
+ */
 public class FontView extends Activity {
 	
 	protected void onResume() {

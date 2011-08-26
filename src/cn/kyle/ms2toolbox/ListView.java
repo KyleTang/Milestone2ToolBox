@@ -23,6 +23,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 列表展示界面
+ * @author KyleTang
+ *
+ */
 public class ListView extends Activity {
 	public static final String LIST_TYPE = "ListType" ;
 	public static final int TYPE_BOOTANIMATIONS = 1 ;

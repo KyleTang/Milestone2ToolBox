@@ -35,7 +35,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity-alias>
-        <activity android:theme="@android:style/Theme.Dialog" android:label="@string/QuickNavPanel" android:icon="@drawable/quicknavpanel" android:name=".QuickNavPanel" android:taskAffinity=".QuickNavPanel">
+        <activity android:theme="@android:style/Theme.Dialog" android:label="@string/title_QuickNavPanel" android:icon="@drawable/quicknavpanel" android:name=".QuickNavPanel" android:taskAffinity=".QuickNavPanel">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
                 <category android:name="android.intent.category.DEFAULT" />

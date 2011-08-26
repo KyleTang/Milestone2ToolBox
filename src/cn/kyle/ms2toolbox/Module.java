@@ -15,6 +15,11 @@ import cn.kyle.util.PropFile;
 import cn.kyle.util.PropFile.FindMode;
 import cn.kyle.util.PropFile.ReplaceMode;
 
+/**
+ * 模块方法集
+ * @author KyleTang
+ *
+ */
 public class Module {
 	public static String qwerty    = "/system/usr/keylayout/qwerty.kl";
 	public static String ms2keypad = "/system/usr/keylayout/umts_milestone2-keypad.kl";

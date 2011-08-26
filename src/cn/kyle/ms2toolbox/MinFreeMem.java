@@ -25,6 +25,11 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * 最小内存管理
+ * @author KyleTang
+ *
+ */
 public class MinFreeMem extends Activity {
 	private Toast myToast =null;
 	public static String defaultValue="3072,4608,9216,10752,12288,12288";

@@ -4,6 +4,11 @@ import android.content.Context;
 
 import com.mobclick.android.MobclickAgent;
 
+/**
+ * 不需要进行多国语言翻译，这个类的不是展示内容
+ * @author KyleTang
+ *
+ */
 public enum Event {
 	Main("ms2toolbox","主程序"),
 	BootAnimation("ms2toolbox","切换启动画面"),

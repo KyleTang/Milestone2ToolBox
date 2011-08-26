@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuickNavPanel extends Activity {
+	Toast myToast = null;
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
@@ -33,7 +34,22 @@ public class QuickNavPanel extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quicknavpanel );
 		Event.count(this, Event.QuickNavPanel);
-
+		myToast("Oops. comming soon.");
 	}
 	
+	public void myToast(String tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public void myToast(int tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public File getPrefFlagFile(Pref p){
+		return new File(this.getFilesDir(),p.toString()+".flag");
+	}
 }
