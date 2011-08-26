@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="173" android:versionName="1.7.3"
+<manifest android:versionCode="174" android:versionName="1.7.4"
     package="cn.kyle.ms2toolbox" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="7"/>
     <application android:label="@string/app_name" android:icon="@drawable/icon" android:debuggable="true">
@@ -11,25 +11,32 @@
             </intent-filter>
         </activity>
         <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/flashlight" android:icon="@drawable/flashlight" android:name=".FlashLight" android:taskAffinity=".FlashLight" android:launchMode="singleTask">
-            <intent-filter>
+        	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/lockscreen" android:icon="@drawable/lockscreen" android:name=".LockScreen" android:taskAffinity=".LockScreen">
-            <intent-filter>
+        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/lockscreen" android:icon="@drawable/lockscreen" android:name=".LockScreen" android:taskAffinity=".LockScreen" >
+        	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:theme="@android:style/Theme.Dialog" android:label="@string/power" android:icon="@drawable/power" android:name=".Power" android:taskAffinity=".Power">
-            <intent-filter>
+        	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@android:style/Theme.Dialog" android:label="@string/app_name" android:icon="@drawable/icon" android:name=".ShortCutCreater" android:taskAffinity=".ShortCutCreater"/>
+        <activity-alias android:label="@string/app_name" android:icon="@drawable/icon" android:name=".ShortCutCreater" android:targetActivity=".ShortCutCreater">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:theme="@android:style/Theme.Dialog" android:label="@string/QuickNavPanel" android:icon="@drawable/quicknavpanel" android:name=".QuickNavPanel" android:taskAffinity=".QuickNavPanel">
+            <intent-filter>
                 <action android:name="android.intent.action.SEARCH_LONG_PRESS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -71,4 +78,5 @@
 	<uses-permission android:name="android.permission.VIBRATE"/>  	
 	<uses-permission android:name="android.permission.GLOBAL_SEARCH"/>  	
 	<uses-permission android:name="android.permission.READ_LOGS" />
+	<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 </manifest>

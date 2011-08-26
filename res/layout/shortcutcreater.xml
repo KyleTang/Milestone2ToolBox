@@ -6,29 +6,29 @@
     android:paddingLeft="10dp" android:paddingRight="10dp" android:paddingBottom="10dp">
 
 <Button 
-	android:id="@+id/btnPowerOff"
-	android:text="@string/power_btn_powerOff"
+	android:id="@+id/btnPower"
+	android:text="电源快捷方式"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
 <Button 
-	android:id="@+id/btnReboot"
-	android:text="@string/power_btn_reboot"
+	android:id="@+id/btnFlashLight"
+	android:text="手电筒快捷方式"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
 <Button 
-	android:id="@+id/btnRebootToRecovery"
-	android:text="@string/power_btn_rebootToRecovery"
+	android:id="@+id/btnLockScreen"
+	android:text="锁屏快捷方式"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
 <Button 
-	android:id="@+id/btnSystemPoweroff"
-	android:text="@string/power_btn_systemPoweroff"
+	android:id="@+id/btnLCDBackLight"
+	android:text="屏幕背光调节快捷方式"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"

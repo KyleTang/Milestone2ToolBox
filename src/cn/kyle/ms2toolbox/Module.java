@@ -229,18 +229,18 @@ public class Module {
 
 	public static boolean setButtonBacklightClosed(boolean checked) {
 		return C.runSuCommandReturnBoolean(
-				"chmod 666 /sys/devices/platform/ld-button-backlight/leds/button-backlight/brightness; "+
+				"chmod 666 /sys/class/leds/button-backlight/brightness; "+
 				"echo "+(checked?"0":"255")
-				+" > /sys/devices/platform/ld-button-backlight/leds/button-backlight/brightness ; "+
-				(checked?"chmod 444 /sys/devices/platform/ld-button-backlight/leds/button-backlight/brightness; ":""));
+				+" > /sys/class/leds/button-backlight/brightness ; "+
+				(checked?"chmod 444 /sys/class/leds/button-backlight/brightness; ":""));
 	}
 
 	public static boolean setKeyboardBacklightClosed(boolean checked) {
 		return C.runSuCommandReturnBoolean(
-				"chmod 666 /sys/devices/platform/ld-keyboard-backlight/leds/keyboard-backlight/brightness; "+
+				"chmod 666 /sys/class/leds/keyboard-backlight/brightness; "+
 				"echo "+(checked?"0":"255")
-				+" > /sys/devices/platform/ld-keyboard-backlight/leds/keyboard-backlight/brightness ; " +
-				(checked?"chmod 444 /sys/devices/platform/ld-keyboard-backlight/leds/keyboard-backlight/brightness; ":""));
+				+" > /sys/class/leds/keyboard-backlight/brightness ; " +
+				(checked?"chmod 444 /sys/class/leds/keyboard-backlight/brightness; ":""));
 	}
 	
 	public static boolean setFlashLight(int level){
@@ -249,15 +249,32 @@ public class Module {
 		if (value<0) value = 0;
 		L.debug("Open FlashLight Level = "+level+", value="+value);
 		return C.runSuCommandReturnBoolean(
-				"chmod 666 /sys/devices/platform/i2c_omap.3/i2c-3/3-0053/leds/torch-flash/flash_light; "+
+				"chmod 666 /sys/class/leds/torch-flash/flash_light; "+
 				"echo "+value
-				+" > /sys/devices/platform/i2c_omap.3/i2c-3/3-0053/leds/torch-flash/flash_light ;");
+				+" > /sys/class/leds/torch-flash/flash_light ;");
 	}
 
 	public static int getFlashLightCurrentValue(){
 		return Integer.parseInt(
 				getPrefFlagValue(
-						new File("/sys/devices/platform/i2c_omap.3/i2c-3/3-0053/leds/torch-flash/flash_light"),"0"));
+						new File("/sys/class/leds/torch-flash/flash_light"),"0"));
+	}
+	
+	public static boolean setLcdLight(int level){
+		int value = (int)(255.0/100*level);
+		if (value>255) value = 100;
+		if (value<0) value = 0;
+		L.debug("Open FlashLight Level = "+level+", value="+value);
+		return C.runSuCommandReturnBoolean(
+				"chmod 666 /sys/class/leds/lcd-backlight/flash_light; "+
+				"echo "+value
+				+" > /sys/class/leds/lcd-backlight/flash_light ;");
+	}
+
+	public static int getLcdLightCurrentValue(){
+		return Integer.parseInt(
+				getPrefFlagValue(
+						new File("/sys/class/leds/lcd-backlight/flash_light"),"0"));
 	}
 	
 	public static boolean setCameraClickDisable(boolean set){

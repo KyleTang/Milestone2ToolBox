@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import cn.kyle.util.C;
 import cn.kyle.util.L;
+import cn.kyle.util.MultiLang;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Power extends Activity {
+	
+	public MultiLang ml = new MultiLang(this);
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
@@ -38,17 +41,17 @@ public class Power extends Activity {
 			}
 		});
 		
-		Button btnRestart = (Button)findViewById(R.id.btnRestart); 
+		Button btnRestart = (Button)findViewById(R.id.btnReboot); 
 		btnRestart.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				doPower(R.id.btnRestart);
+				doPower(R.id.btnReboot);
 			}
 		});
 		
-		Button btnRestartToRecovery = (Button)findViewById(R.id.btnRestartToRecovery); 
+		Button btnRestartToRecovery = (Button)findViewById(R.id.btnRebootToRecovery); 
 		btnRestartToRecovery.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				doPower(R.id.btnRestartToRecovery);
+				doPower(R.id.btnRebootToRecovery);
 			}
 		});
 		
@@ -64,25 +67,25 @@ public class Power extends Activity {
 	
 	public void doPower(final int id){
 		AlertDialog ad = new AlertDialog.Builder(this)
-			.setTitle("提示")
-			.setMessage("是否要执行"+
-					(id==R.id.btnPowerOff?" 关机":
-					id==R.id.btnRestart?" 重启":
-					id==R.id.btnRestartToRecovery?" 重启至恢复模式":"系统关机选项"))
-			.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			.setTitle(R.string.dialog_title_tip)
+			.setMessage(id==R.id.btnPowerOff?ml.t(R.string.power_text_powerOff,null):
+						id==R.id.btnReboot?ml.t(R.string.power_text_reboot,null):
+						id==R.id.btnRebootToRecovery?ml.t(R.string.power_text_rebootToRecovery,null):
+							ml.t(R.string.power_text_systemPoweroff,null))
+			.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					String cmd = "";
 					if (id==R.id.btnPowerOff){
 						cmd = "busybox poweroff -f;";
-					}else if (id==R.id.btnRestart){
+					}else if (id==R.id.btnReboot){
 						cmd = "reboot;";
-					}else if (id==R.id.btnRestartToRecovery){
+					}else if (id==R.id.btnRebootToRecovery){
 						cmd = "reboot recovery;";
 					}
 					C.runSuCommandReturnBoolean(cmd);
 				}
 			})
-			.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					//Power.this.finish();
 				}

@@ -18,7 +18,8 @@ public enum Event {
 	CallOn45SecVibrate("ms2toolbox","45秒震动"),
 	CheckUpdate("ms2toolbox","检测版本"),
 	FeedBack("ms2toolbox","反馈意见"),
-	DefyMore("ms2toolbox","多点触控");
+	DefyMore("ms2toolbox","多点触控"),
+	QuickNavPanel("ms2toolbox","快速导航面板");
 	
 	public String event_id;
 	public String event_label;

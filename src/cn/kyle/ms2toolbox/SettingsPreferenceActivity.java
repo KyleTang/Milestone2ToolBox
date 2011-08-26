@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,6 +18,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import cn.kyle.util.C;
 import cn.kyle.util.L;
+import cn.kyle.util.MultiLang;
 import cn.kyle.util.PropFile;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -62,7 +64,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public String sd2rom_url = "http://bbs.gfan.com/android-460981-1-1.html";
 	public String sd2rom_apk = "/mnt/sdcard/tmp_sd2rom-hack.apk";
 	
-	
+	public MultiLang ml = new MultiLang(this);
 	
 	public Handler handler = new Handler();
 	
@@ -83,9 +85,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		haveRoot = C.haveRoot();
 		if (!haveRoot){
 			AlertDialog ad = new AlertDialog.Builder(this)
-				.setTitle("提示")
-				.setMessage("没有ROOT权限，程序即将退出")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+				.setTitle(R.string.dialog_title_tip)
+				.setMessage(R.string.msg_noRoot)
+				.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						System.exit(0);
 					}
@@ -103,9 +105,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}else{
 				L.debug("auto install busybox fail, exit");
 				AlertDialog ad = new AlertDialog.Builder(this)
-					.setTitle("提示")
-					.setMessage("检测的没有安装busybox，自动安装失败，程序即将退出")
-					.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+					.setTitle(R.string.dialog_title_tip)
+					.setMessage(R.string.msg_noBusybox)
+					.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int which) {
 							System.exit(0);
 						}
@@ -115,8 +117,14 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 		}
 		
-		// 所的的值将会自动保存到SharePreferences
-		addPreferencesFromResource(R.xml.preference);
+		//设置主界面的菜单语言
+		if (this.getResources().getConfiguration().locale.equals(Locale.CHINESE)){
+			// 所的的值将会自动保存到SharePreferences
+			addPreferencesFromResource(R.xml.preference_chs);
+		}else{
+			// 所的的值将会自动保存到SharePreferences
+			addPreferencesFromResource(R.xml.preference);
+		}
 		
 //		RingtonePreference pBootupTone = (RingtonePreference)this.getPreferenceScreen().findPreference(Pref.pBootupTone.toString());
 //		pBootupTone.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
@@ -139,16 +147,16 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 						String line = br.readLine();
 						br.close();
 						Module.setModel(line);
-						myToast("恢复成默认");
+						myToast(R.string.msg_restoreToDefault);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}else if (Module.setModel((String)newValue)){
-					myToast("设置成功");
+					myToast(R.string.msg_successfullyApplied);
 				}else{
-					myToast("设置失败");
+					myToast(R.string.msg_failedToApply);
 				}
 				L.debug("pMultiMedia: stagefright= "+newValue);
 				return true;
@@ -165,9 +173,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 					set = true;
 				}
 				if (Module.setStagefright(set)){
-					myToast("设置成功");
+					myToast(R.string.msg_successfullyApplied);
 				}else{
-					myToast("设置失败");
+					myToast(R.string.msg_failedToApply);
 				}
 				L.debug("pMultiMedia: stagefright= "+set);
 				return true;
@@ -181,9 +189,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 					Object newValue) {
 				int value = Integer.parseInt((String)newValue);
 				if (Module.setDalvikVMHeapMax(value)){
-					myToast("设置成功");
+					myToast(R.string.msg_successfullyApplied);
 				}else{
-					myToast("设置失败");
+					myToast(R.string.msg_failedToApply);
 				}
 				L.debug("pDalvikVMHeapMax: value= "+value);
 				return true;
@@ -236,9 +244,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 					Object newValue) {
 				int value = Integer.parseInt((String)newValue);
 				if (Module.setWifiScanInterval(value)){
-					myToast("设置成功, 新值为"+(String)newValue+"秒! ");
+					myToast(ml.t(R.string.msg_wifiScanInterval_applyAndNewValue, new String[]{(String)newValue}));
 				}else{
-					myToast("设置失败");
+					myToast(R.string.msg_failedToApply);
 				}
 				L.debug("wifi.supplicant_scan_interval: value= "+value);
 				return true;
@@ -263,13 +271,13 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				if (ret){
 					if ("2".equalsIgnoreCase((String)newValue)){
 						ret = Module.setDefyMore(false,null, 0);
-						myToast("恢复系统默认多点触控，成功");
+						myToast(R.string.msg_multiTouch_restore);
 					}else{
 						ret = Module.setDefyMore(true, SettingsPreferenceActivity.this, Integer.parseInt((String)newValue));
 						if(ret){
-							myToast("设置多点最大"+(String)newValue+"点，成功。\n 请稍等片刻后，再进行触摸操作.");
+							myToast(ml.t(R.string.msg_multiTouch_success, new String[]{(String)newValue}));
 						}else{
-							myToast("设置多点最大"+(String)newValue+"点，失败。");
+							myToast(ml.t(R.string.msg_multiTouch_fail, new String[]{(String)newValue}));
 						}
 					}
 				}
@@ -331,49 +339,8 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 			
 		});
-//		不好用，废弃
-//		SharedPreferences sp = this.getPreferenceManager().getDefaultSharedPreferences(this);
-//		sp.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener(){
-//			public void onSharedPreferenceChanged(
-//					SharedPreferences sharedPreferences, String key) {
-//				L.debug("changeKey= "+key);
-//				if (key.equals(Pref.pMultiMedia.toString())){
-//					String value = sharedPreferences.getString(key, "stagefright");
-//					boolean set = false;
-//					if (value.equals("opencore")){
-//						set = false;
-//					}else if (value.equals("stagefright")){
-//						set = true;
-//					}
-//					if (Module.setStagefright(set)){
-//						myToast("设置成功");
-//					}else{
-//						myToast("设置失败");
-//					}	
-//				}
-//			}
-//        	
-//        });
 		
-		//
 		refreshItemAll();
-	}
-	
-	public static enum DownFileError{
-		None("成功"),
-		NotAvailableServer("服务器不可用"),
-		NotHttpServer("不是HTTP服务器"),
-		InvalidURL("无效的URL地址"),
-		DownloadBreak("下载中断，请检查网络"),
-		FileNotFound("文件不存在");
-		
-		final String info;
-		DownFileError(String info){
-			this.info = info;
-		}
-		public String toString(){
-			return info;
-		}
 	}
 	
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
@@ -396,9 +363,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				startActivity(i);
 			}catch(android.content.ActivityNotFoundException e){
 				AlertDialog d = new AlertDialog.Builder(this)
-					.setTitle("没有安装，请从论坛下载")
+					.setTitle(R.string.msg_notInstallPlugin)
 					.setMessage(bpsw_url)
-					.setPositiveButton("确定", null)
+					.setPositiveButton(R.string.btn_confirm, null)
 					.create();
 				d.show();
 				//installPluginTip(bpsw_url, bpsw_apk);
@@ -433,49 +400,49 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//
 		if (key.equals(Pref.pCameraKey.toString())){
 			if (Module.setCameraKeyWakeup(((CheckBoxPreference)preference).isChecked())){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}		
 		}
 		
 		if (key.equals(Pref.pVolUpKey.toString())){
 			if (Module.setVolupWakeup(((CheckBoxPreference)preference).isChecked())){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}		
 		}
 		
 		if (key.equals(Pref.pVolDownKey.toString())){
 			if (Module.setVoldownWakeup(((CheckBoxPreference)preference).isChecked())){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}		
 		}
 		
 		if (key.equals(Pref.pVoiceKey.toString())){
 			if (Module.setVoiceZh2En(((CheckBoxPreference)preference).isChecked())){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
 		if (key.equals(Pref.pDebounce.toString())){
 			boolean checked = ((CheckBoxPreference)preference).isChecked();
 			if (Module.setDebounce(checked,this)){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 				Module.setPrefFlag(checked, this.getPrefFlagFile(Pref.pDebounce));
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
 				Module.setPrefFlag(false, this.getPrefFlagFile(Pref.pDebounce));
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 			
 		}
@@ -485,48 +452,48 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				Event.count(this, Event.DefyMore);
 			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pDefyMore))){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
 		if (key.equals(Pref.pButtonBacklight.toString())){
 			if (Module.setButtonBacklightClosed(((CheckBoxPreference)preference).isChecked())
 					&& Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pButtonBacklight))){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
 		if (key.equals(Pref.pKeyboardBacklight.toString())){
 			if (Module.setKeyboardBacklightClosed(((CheckBoxPreference)preference).isChecked())
 					&& Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pKeyboardBacklight))){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
 		if (key.equals(Pref.pCameraClick.toString())){
 			if (Module.setCameraClickDisable(((CheckBoxPreference)preference).isChecked())){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(true);
-				myToast("设置失败, 声音文件已经不存在！");
+				myToast(R.string.msg_soundDisable_fail);
 			}
 		}
 		
 		if (key.equals(Pref.pVideoRecord.toString())){
 			if (Module.setVideoRecordDisable(((CheckBoxPreference)preference).isChecked())){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(true);
-				myToast("设置失败, 声音文件已经不存在！");
+				myToast(R.string.msg_soundDisable_fail);
 			}
 		}
 		
@@ -536,10 +503,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			Module.setFixBlurIconOrder(this, set);
 			boolean result = Module.getFixBlurIconOrderEnable();
 			if (set==result){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败！");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		//gms
@@ -548,10 +515,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			Module.setFixGms(set);
 			boolean result = Module.getFixGmsEnable();
 			if (set==result){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败！");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		//main log
@@ -560,10 +527,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			Module.setFixImoseyonLog(set);
 			boolean result = Module.getFixImoseyonLogEnable();
 			if (set==result){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败！");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
@@ -572,10 +539,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				Event.count(this, Event.CallOnVibrate);
 			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOnVibrate))){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
@@ -584,10 +551,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				Event.count(this, Event.CallOffVibrate);
 			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOffVibrate))){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
@@ -596,10 +563,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				Event.count(this, Event.CallOn45SecVibrate);
 			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pCallOn45SecVibrate))){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
@@ -608,10 +575,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				Event.count(this, Event.WifiAutoClose);
 			}
 			if (Module.setPrefFlag(((CheckBoxPreference)preference).isChecked(),getPrefFlagFile(Pref.pWifiAutoClose))){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
@@ -630,7 +597,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			final int time = Integer.parseInt(pFlashLightLevel.getSharedPreferences().getString(Pref.pFlashLightTime.toString(), "120"));
 			final Preference pref = preference;
 			if (Module.setFlashLight(set?level:0)){
-				myToast("设置成功");
+				myToast(R.string.msg_successfullyApplied);
 				if (set){
 					new Thread(){
 						public void run(){
@@ -646,7 +613,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				}
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
-				myToast("设置失败");
+				myToast(R.string.msg_failedToApply);
 			}
 		}
 		
@@ -666,9 +633,9 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}catch(android.content.ActivityNotFoundException e){
 				//installPluginTip(sd2rom_url, sd2rom_apk);
 				AlertDialog d = new AlertDialog.Builder(this)
-					.setTitle("没有安装，请从论坛下载")
+					.setTitle(R.string.msg_notInstallPlugin)
 					.setMessage(sd2rom_url)
-					.setPositiveButton("确定", null)
+					.setPositiveButton(R.string.btn_confirm, null)
 					.create();
 				d.show();
 			}
@@ -685,14 +652,14 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		//
 		if (key.equals(Pref.pReboot.toString())){
 			AlertDialog ad = new AlertDialog.Builder(this)
-				.setTitle("提示")
-				.setMessage("是否立即重启")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+				.setTitle(R.string.dialog_title_tip)
+				.setMessage(R.string.msg_power_reboot)
+				.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						C.runSuCommandReturnBoolean("reboot;");
 					}
 				})
-				.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+				.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						
 					}
@@ -701,14 +668,14 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		if (key.equals(Pref.pRebootToRecovery.toString())){
 			AlertDialog ad = new AlertDialog.Builder(this)
-				.setTitle("提示")
-				.setMessage("是否立即重启到恢复模式")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+				.setTitle(R.string.dialog_title_tip)
+				.setMessage(R.string.msg_power_rebootToRecovery)
+				.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						C.runSuCommandReturnBoolean("reboot recovery;");
 					}
 				})
-				.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+				.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener(){
 					public void onClick(DialogInterface dialog, int which) {
 						
 					}
@@ -745,103 +712,6 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		
 	}
 	
-	public void installPluginTip(final String url, final String apk){
-		AlertDialog ad = new AlertDialog.Builder(this)
-		.setTitle("提示")
-		.setMessage("尚未安装该组件，是否下载安装")
-		.setPositiveButton("下载安装", new OnClickListener(){
-			public void onClick(DialogInterface dialog, int which) {
-				pBar = new ProgressDialog(SettingsPreferenceActivity.this);
-				pBar.setTitle("正在下载");
-				pBar.setMessage("请稍候...");
-				pBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-				pBar.show();
-				new Thread() {
-					public void run() {
-						boolean downOK = false;
-						DownFileError ret = downFile(url, apk);
-						if (ret==DownFileError.None){
-							downOK = true;
-						}
-						//L.debug("下载文件：error="+ret.toString()+", url="+url+", apk="+apk);
-						if (downOK){
-							handlerDownloadFinished(apk);
-						} else {
-							handlerDownloadFailed("下载文件失败！");
-						}
-					}
-				}.start();
-			}
-		}).setNegativeButton("暂不安装", new OnClickListener(){
-			public void onClick(DialogInterface dialog, int which) {
-				
-			}
-		}).create();
-		ad.show();
-	}
-
-	DownFileError downFile(final String url, final String tmpFile) {
-		HttpClient client = new DefaultHttpClient();
-		HttpGet get = new HttpGet(url);
-		L.debug("downFile - begin URL=" + url);
-		long startDown = System.currentTimeMillis();
-		HttpResponse response = null;
-		DownFileError result = null;
-		try {
-			response = client.execute(get);
-			//client.execute 执行失败会跑异常，不会有空指针，所以response不需要判断
-			if (response.getStatusLine()==null||response.getStatusLine().getStatusCode()!=HttpStatus.SC_OK){
-				if (response.getStatusLine().getStatusCode()!=HttpStatus.SC_NOT_FOUND){
-					return DownFileError.FileNotFound;
-				}
-				return DownFileError.InvalidURL;
-			}
-			result = DownFileError.None;
-			HttpEntity entity = response.getEntity();
-			long length = entity.getContentLength();
-			InputStream is = entity.getContent();
-			FileOutputStream fileOutputStream = null;
-			if (is != null) {
-				File file = null;
-				if (tmpFile.startsWith("/"))
-					file = new File(tmpFile);
-				else
-					file = new File(Environment.getExternalStorageDirectory(),
-						tmpFile);
-				if (file.exists())
-					file.delete();
-				fileOutputStream = new FileOutputStream(file);
-				byte[] buf = new byte[1024];
-				int ch = -1;
-				int count = 0;
-				while ((ch = is.read(buf)) != -1) {
-					fileOutputStream.write(buf, 0, ch);
-					count += ch;
-					if (length > 0) {
-					}
-				}
-			}
-			fileOutputStream.flush();
-			if (fileOutputStream != null) {
-				fileOutputStream.close();
-			}
-			L.debug("downFile - end , time= "
-							+ (System.currentTimeMillis() - startDown)
-							+ ", URL=" + url);
-			return DownFileError.None;
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			L.debug("downFile URL=" + url + ", IOException=" + e.getMessage());
-			e.printStackTrace();
-			if(result==null)
-				return DownFileError.NotAvailableServer; /*连接超时*/
-			else
-				return DownFileError.DownloadBreak;
-		}
-		return DownFileError.NotHttpServer;
-	}
-	
 	void installApk(String file) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setDataAndType(Uri.fromFile(new File(file)),
@@ -863,8 +733,8 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		handler.post(new Runnable() {
 			public void run() {
 				AlertDialog d = new AlertDialog.Builder(SettingsPreferenceActivity.this)
-						.setTitle("警告").setMessage(errorInfo)
-						.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+						.setTitle(R.string.dialog_title_warning).setMessage(errorInfo)
+						.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
 															
 							}
@@ -882,20 +752,26 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
 	}
 	
+	public void myToast(int tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
+	
 	public File getPrefFlagFile(Pref p){
 		return new File(this.getFilesDir(),p.toString()+".flag");
 	}
 	
 	public void refreshItemAll(){
-		this.setTitle(this.getTitle()+(haveRoot?"(已ROOT)":"(未ROOT)"));
+		this.setTitle(this.getTitle()+(haveRoot?ml.t(R.string.msg_tip_root, null):ml.t(R.string.msg_tip_noRoot, null)));
 		Preference pTitle = this.findPreference(Pref.pTitle.toString());
-		String versionName = null;
+		String versionName = "null";
 		try{
 			versionName = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
 		}catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		pTitle.setSummary("版本："+versionName+"  作者：Kyle Tang");
+		pTitle.setSummary(ml.t(R.string.text_version, new String[]{versionName})+"  "+ml.t(R.string.text_author, new String[]{"Kyle Tang"}));
 		
 		//
 		PropFile prop = new PropFile();
@@ -914,7 +790,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		lp = ((ListPreference)findPreference(Pref.pMultiMedia.toString()));
 		if (android.os.Build.VERSION.RELEASE.contains("2.3")){
 			lp.setEnabled(false);
-			lp.setSummary("2.3.x无此设置");
+			lp.setSummary(R.string.text_noSetting_2_3_x);
 		}else{
 			String strMultiMedia = prop.getValue("media.stagefright.enable-player");
 			if ("false".equalsIgnoreCase(strMultiMedia)){
@@ -974,8 +850,8 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		if (android.os.Build.VERSION.RELEASE.contains("2.3")){
 			//2.3系统不需要
 			cp.setEnabled(false);
-			cp.setSummaryOff("2.3.x无需此设置");
-			cp.setSummaryOn("2.3.x无需此设置");
+			cp.setSummaryOff(R.string.text_noNeedSetting_2_3_x);
+			cp.setSummaryOn(R.string.text_noNeedSetting_2_3_x);
 		}else{
 			cp.setChecked(Module.getFixBlurIconOrderEnable());
 		}
@@ -990,8 +866,8 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			cp.setChecked(Module.getFixImoseyonLogEnable());
 		}else{
 			cp.setEnabled(false);
-			cp.setSummaryOff("没有安装imoseyon");
-			cp.setSummaryOn("没有安装imoseyon");
+			cp.setSummaryOff(ml.t(R.string.text_noInstall,new String[]{"imoseyon"}));
+			cp.setSummaryOn(ml.t(R.string.text_noInstall,new String[]{"imoseyon"}));
 		}
 		
 		//设置
@@ -1010,37 +886,5 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))
 			.setChecked(getPrefFlagFile(Pref.pWifiAutoClose).exists());
 		
-	}
-
-	public void refreshItem(String key){
-		
-	}
-	
-	private abstract class Task{
-		public String name = null;
-		public Task(String name){
-			this.name = name;
-		}
-		public abstract Integer run();
-	}
-	
-	private class MyAsyncTask extends AsyncTask<Void, Void, Integer>{
-		Task task = null;
-		
-		MyAsyncTask(Task task){
-			this.task = task;
-		}
-		
-		protected Integer doInBackground(Void... params) {
-			return task.run();
-		}
-		
-		protected void onPreExecute() {
-			
-		}
-		
-		protected void onPostExecute(Integer a) {
-			
-		}
 	}
 }

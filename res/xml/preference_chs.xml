@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference android:key="pTitle" android:title="加星号的为重启后生效"
+		android:summary="版本：1.0.0    作者：Kyle Tang" android:defaultValue="" />
+	<PreferenceCategory android:title="系统调整 (加星号的为重启后生效)">
+		<Preference android:key="pBpsw" android:title="基带切换工具(*)"
+			android:summary="如果手机的信号不好，可以切换试试" android:defaultValue="" />
+		<Preference android:key="pBootAnimation" android:title="更改启动动画(*)"
+			android:summary="/sdcard/ms2toolbox/bootanimations" android:defaultValue="" />
+		<Preference android:key="pFont" android:title="更改系统字体(*)"
+			android:summary="/sdcard/ms2toolbox/fonts" android:defaultValue="" />
+		<!-- 
+		<RingtonePreference android:key="pBootupTone" android:title="更改系统启动铃声"
+			android:summary="" />
+		 -->
+		<ListPreference android:key="pModel" android:title="更改系统型号标识(*)"
+			android:summary="解决部分软件对型号的检查" android:dialogTitle="请选择型号标识"
+			android:entries="@array/pModel"	android:entryValues="@array/pModelValue" />
+		<ListPreference android:key="pMultiMedia" android:title="更改默认多媒体引擎(*)"
+			android:summary="推荐新版引擎  stagefright" android:dialogTitle="请选择多媒体引擎"
+			android:entries="@array/pMultiMedia" android:entryValues="@array/pMultiMediaValue"/>
+		<PreferenceScreen android:title="更多设置" 
+			android:summary="按键/背景灯/提示音/虚拟机内存...">
+			<PreferenceCategory android:title="单个程序占用内存最大值（重启后生效）">
+				<ListPreference android:key="pDalvikVMHeapMax" android:title="虚拟机内存最大值(*)"
+					android:summary="单个程序占用内存最大值，如果运行默认浏览器、火狐浏览器、或大内存占用的程序，经常出现自动关闭，请尝试将此值调大一些。" 
+					android:dialogTitle="请选择内存最大值"
+					android:entries="@array/pDalvikVMHeapMax" android:entryValues="@array/pDalvikVMHeapMaxValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="按键管理（重启后生效）">
+				<CheckBoxPreference android:key="pCameraKey" android:title="相机键点亮屏幕(*)"
+					android:summaryOn="允许相机键点亮屏幕" android:summaryOff="禁用相机键点亮屏幕"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pVoiceKey" android:title="语音键/中英切换键(*) "
+					android:summaryOn="(仅摩托输入法)当前为中英文切换键 " android:summaryOff="(仅摩托输入法)当前为语音键"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pDebounce" android:title="防止按键抖动(解决连击)"
+					android:summaryOn="来自XDA的解决方案" android:summaryOff="来自XDA的解决方案"
+					android:defaultValue="false" />
+				<!-- 
+				<CheckBoxPreference android:key="pVolUpKey" android:title="音量增大键点亮屏幕"
+					android:summaryOn="允许音量增大键点亮屏幕" android:summaryOff="禁用音量增大键点亮屏幕"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pVolDownKey" android:title="音量减少键点亮屏幕"
+					android:summaryOn="允许音量减少键点亮屏幕" android:summaryOff="禁用音量减少键点亮屏幕"
+					android:defaultValue="false" />
+				 -->
+			</PreferenceCategory>
+			<PreferenceCategory android:title="多点触控(大于2点)">
+				<CheckBoxPreference android:key="pDefyMore" android:title="开机自动启用"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pDefyMoreNum" android:title="设置最大触点数"
+					android:summary="点击设置" android:dialogTitle="请选择最大触点数"
+					android:entries="@array/pDefyMoreNum" android:entryValues="@array/pDefyMoreNumValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="背景灯管理">
+				<CheckBoxPreference android:key="pButtonBacklight" android:title="关闭屏幕底部LED灯 "
+					android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pKeyboardBacklight" android:title="关闭侧滑键盘灯 "
+					android:summaryOn="一直关闭 " android:summaryOff="系统自动调节"
+					android:defaultValue="false" />
+			</PreferenceCategory>
+			<PreferenceCategory android:title="消除提示音（有时候，重启后才生效）">
+				<CheckBoxPreference android:key="pCameraClick" android:title="禁用相机拍照提示音(*)"
+					android:summaryOn="消除拍照的咔嚓声（对焦的咚咚声仍存在）" android:summaryOff="消除拍照的咔嚓声（对焦的咚咚声仍存在）"
+					android:defaultValue="false" />
+				<CheckBoxPreference android:key="pVideoRecord" android:title="禁用视频录制提示音(*)"
+					android:summaryOn="禁用提示音" android:summaryOff="启用提示音"
+					android:defaultValue="false" />
+				<ListPreference android:key="pLowBatteryOff" android:title="屏蔽电量低提示音"
+					android:summary="设置屏蔽电量低提示音" android:dialogTitle="请选择屏蔽方法"
+					android:entries="@array/pLowBatteryOffMethod" android:entryValues="@array/pLowBatteryOffMethodValue"/>
+			</PreferenceCategory>
+		</PreferenceScreen>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="桌面及服务（重启后生效）">
+		<CheckBoxPreference android:key="pFixBlurHomeIconOrder" android:title="修正Blur程序图标排序(*)"
+			android:summaryOn="已经修正Blur桌面程序图标排序方式为“数字-字母-中文”，去掉勾选，恢复为默认"
+			android:summaryOff="勾选后，可修正Blur桌面程序图标排序方式为“数字-字母-中文”, 需重启"
+			android:defaultValue="false" />
+		<CheckBoxPreference android:key="pFixGms" android:title="修复谷歌服务连接问题(*)"
+			android:summaryOn="已修复" android:summaryOff="未修复（勾选后可解决Google服务连接不正常的问题, 需重启）"
+			android:defaultValue="false" />
+		<CheckBoxPreference android:key="pFixImoseyonLog" android:title="修复imoseyon禁用的日志(*)"
+			android:summaryOn="已修复（已经恢复系统日志，建议保持勾选状态）" android:summaryOff="未修复（建议勾选，如果刷过imoseyon包，会禁用系统日志，造成程序无法调试，请勾选本项）"
+			android:defaultValue="false" />
+	</PreferenceCategory>
+	<PreferenceCategory android:title="增强功能">
+		<PreferenceScreen android:title="通话震动提醒"
+			android:summary="接通/挂断/45秒">
+			<PreferenceCategory android:title="拨号接通后震动">
+				<CheckBoxPreference android:key="pCallOnVibrate" android:title="拨号接通后震动提醒"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pCallOnVibrateTime" android:title="震动持续时间"
+					android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+					android:entries="@array/pCallOnVibrateTime" android:entryValues="@array/pCallOnVibrateTimeValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="通话结束后震动">
+				<CheckBoxPreference android:key="pCallOffVibrate" android:title="通话结束后震动提醒"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pCallOffVibrateTime" android:title="震动持续时间"
+					android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+					android:entries="@array/pCallOffVibrateTime" android:entryValues="@array/pCallOffVibrateTimeValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="45秒震动">
+				<CheckBoxPreference android:key="pCallOn45SecVibrate" android:title="通话中45秒震动提醒"
+					android:summaryOn="启用" android:summaryOff="禁用"
+					android:defaultValue="false" />
+				<ListPreference android:key="pCallOn45SecVibrateTime" android:title="震动持续时间"
+					android:summary="设置震动持续时间" android:dialogTitle="请选择持续时间（毫秒）"
+					android:entries="@array/pCallOn45SecVibrateTime" android:entryValues="@array/pCallOn45SecVibrateTimeValue"/>
+			</PreferenceCategory>
+		</PreferenceScreen>
+		<PreferenceScreen android:title="Wi-Fi增强管理"
+			android:summary="调整设置以节约电能" >
+			<PreferenceCategory android:title="Wi-Fi自动关闭">
+				<CheckBoxPreference android:key="pWifiAutoClose" android:title="Wi-Fi断开后自动关闭 "
+					android:summaryOn="当Wi-Fi连接断开后，几分钟内没建立新连接，自动关闭，避免自动扫描浪费电能" android:summaryOff="不启用自动关闭Wi-Fi"
+					android:defaultValue="false" />
+				<ListPreference android:key="pWifiAutoCloseMin" android:title="设置延迟时间（分钟）"
+					android:summary="当Wi-Fi连接断开后，自动关闭等候时间" android:dialogTitle="请选择延迟时间（分钟）"
+					android:entries="@array/pWifiAutoCloseMin" android:entryValues="@array/pWifiAutoCloseMinValue"/>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="Wi-Fi扫描间隔时间">
+				<ListPreference android:key="pWifiScanInterval" android:title="设置Wi-Fi扫描间隔(*)"
+					android:summary="适当增长扫描间隔时间，减少电能消耗" android:dialogTitle="设置Wi-Fi扫描间隔（秒）"
+					android:entries="@array/pWifiScanInterval" android:entryValues="@array/pWifiScanIntervalValue"/>
+			</PreferenceCategory>
+		</PreferenceScreen>
+		<Preference android:key="pMinFreeMem" android:title="最小内存管理"
+				android:summary="解决了MinFreeManager开机应用不生效的问题" />
+	</PreferenceCategory>
+	<PreferenceCategory android:title="附加工具">
+		<PreferenceScreen android:title="手电筒功能">
+			<CheckBoxPreference android:key="pFlashLight" android:title="打开手电筒 "
+				android:summaryOn="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）" android:summaryOff="闪光灯持续高亮预设的最长点亮时间后会自动关闭（避免长时间使用）"
+				android:defaultValue="false" />
+			<ListPreference android:key="pFlashLightLevel" android:title="设置手电筒亮度级别"
+				android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择亮度级别"
+				android:entries="@array/pFlashLightLevel" android:entryValues="@array/pFlashLightLevelValue"/>
+			<ListPreference android:key="pFlashLightTime" android:title="设置最长点亮时间"
+				android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择最长点亮时间"
+				android:entries="@array/pFlashLightTime" android:entryValues="@array/pFlashLightTimeValue"/>
+		</PreferenceScreen>
+		<PreferenceScreen android:title="电源功能">
+			<Preference android:key="pReboot" android:title="快速重启手机"
+				android:summary="" android:defaultValue="" />
+			<Preference android:key="pRebootToRecovery" android:title="重启到恢复模式"
+				android:summary="" android:defaultValue="" />
+			
+			<!--
+			<Preference android:key="pRebootToBootloader" android:title="重启到bootloader模式"
+				android:summary="" android:defaultValue="" />
+			<Preference android:key="pBusyBox" android:title="安装busybox"
+				android:summary="" android:defaultValue="" />
+			-->
+		</PreferenceScreen>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="高级工具">
+		<Preference android:key="pOverClock" android:title="超频工具箱"
+			android:summary="超频/降频/节能" android:defaultValue="" />
+		<Preference android:key="pSd2romHack" android:title="Sd2Rom Hack工具"
+			android:summary="将SD卡数据移动到手机内部存储ROM" android:defaultValue="" />
+		<!--
+		<Preference android:key="pBusyBox" android:title="安装busybox"
+			android:summary="" android:defaultValue="" />
+		-->
+	</PreferenceCategory>
+	<PreferenceCategory android:title="关于">
+		<!--  
+		<Preference android:key="pCheckUpdate" android:title="检测新版本"
+			android:summary="推荐使用新版本" android:defaultValue="" />
+		-->
+		<Preference android:key="pFeedBack" android:title="意见及问题反馈"
+			android:summary="把您的好想法提交给我，或者提交使用中遇到的问题" 
+			android:defaultValue="" />
+	</PreferenceCategory>
+	<!-- 
+	<PreferenceCategory android:title="第三方工具">
+		<Preference android:key="pMilestoneOverclock" android:title="超频利器"
+			android:summary="Milestone Overclock" android:defaultValue="" />
+		<Preference android:key="pSetCpu" android:title="频率调节"
+			android:summary="SetCpu" android:defaultValue="" />
+		<Preference android:key="pQuadrantAdvanced" android:title="测评软件"
+			android:summary="象限 Quadrant Advanced" android:defaultValue="" />
+	</PreferenceCategory>
+	-->
+</PreferenceScreen>
