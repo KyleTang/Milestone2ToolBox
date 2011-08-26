@@ -22,7 +22,7 @@
 				    android:layout_height="wrap_content"
 				    android:layout_centerHorizontal="true"
 				    android:layout_marginTop="4dp"
-				    android:text="意见反馈"
+				    android:text="@string/feedback_umeng_title"
 				    android:textColor="#BCBCBC"
 				    android:textSize="21dp">
 			    </TextView>
@@ -43,7 +43,7 @@
 			   	android:textColor="#706F6D"
 			    android:layout_marginTop="10dp"
 			    android:layout_marginBottom="10dp"
-			    android:text="欢迎您提出宝贵的意见和建议，您留下的每个字都将用来改善我们的服务。">
+			    android:text="@string/umeng_feedback_title">
 		    </TextView>
 		    
 		     <RelativeLayout android:layout_width="fill_parent"
@@ -53,7 +53,7 @@
 		         android:layout_height="250dp"
 		         android:maxEms="10"
 		         android:minEms="10" 
-		         android:hint="请输入您的反馈意见（字数500以内）"
+		         android:hint="@string/umeng_feedback_content"
 		         android:gravity="top"/>
 		     </RelativeLayout>
 			     
@@ -77,7 +77,7 @@
 			<Button android:id="@+id/feedback_submit" 
 				android:layout_width="fill_parent"
 				android:layout_height="50dp"
-				android:text="提交反馈"
+				android:text="@string/umeng_feedback_submit"
 				android:textSize="19dp"
 				android:layout_gravity="center_horizontal"
 				android:layout_marginTop="10dp">
