@@ -11,49 +11,6 @@
 	    
 	<string name="text_version">Version: {0}</string>
 	<string name="text_author">Author: {0}</string>
-	
-	<string name="dialog_title_tip">提示</string>
-	<string name="dialog_title_warning">警告</string>
-	<string name="dialog_title_error">错误</string>
-	<string name="msg_power_reboot">是否立即重启</string>
-	<string name="msg_power_rebootToRecovery">是否立即重启到恢复模式</string>
-	
-	<string name="btn_ok">OK</string>
-	<string name="btn_confirm">确定</string>
-	<string name="btn_cancel">取消</string>
-	
-	<string name="msg_noRoot">没有ROOT权限，程序即将退出</string>
-	<string name="msg_noBusybox">检测的没有安装busybox，自动安装失败，程序即将退出</string>
-	<string name="msg_restoreToDefault">恢复成默认</string>
-	<string name="msg_successfullyApplied">设置成功</string>
-	<string name="msg_failedToApply">设置失败</string>
-	
-	<string name="msg_tip_root">已ROOT</string>
-	<string name="msg_tip_noRoot">没有ROOT</string>
-	
-	<string name="msg_soundDisable_fail">设置失败, 声音文件已经不存在！</string>
-	
-	<string name="msg_notInstallPlugin">没有安装，请从论坛下载</string>
-	
-	<string name="msg_wifiScanInterval_applyAndNewValue">设置成功, 新值为{0}秒! </string>
-	
-	<string name="msg_multiTouch_restore">恢复系统默认多点触控，成功</string>
-	<string name="msg_multiTouch_success">设置多点最大{0}点，成功。\n 请稍等片刻后，再进行触摸操作.</string>
-	<string name="msg_multiTouch_fail">"设置多点最大{0}点，失败。"</string>
-	
-	<string name="text_noSetting_2_3_x">2.3.x无此设置</string>
-	<string name="text_noNeedSetting_2_3_x">2.3.x无需此设置</string>
-	
-	<string name="text_noInstall">没有安装{0}</string>
-		
-	<string name="power_btn_powerOff">快速关机</string>
-	<string name="power_btn_reboot">快速重启</string>
-	<string name="power_btn_rebootToRecovery">重启至恢复模式</string>
-	<string name="power_btn_systemPoweroff">系统关机选项</string>	
-	<string name="power_text_powerOff">是否要执行 关机</string>
-	<string name="power_text_reboot">是否要执行 重启</string>
-	<string name="power_text_rebootToRecovery">是否要执行 重启至恢复模式</string>
-	<string name="power_text_systemPoweroff">是否要执行 系统关机选项</string>
 
 	<string name="kkk"></string>
 </resources>

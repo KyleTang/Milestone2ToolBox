@@ -64,7 +64,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public String sd2rom_url = "http://bbs.gfan.com/android-460981-1-1.html";
 	public String sd2rom_apk = "/mnt/sdcard/tmp_sd2rom-hack.apk";
 	
-	public MultiLang ml = null;
+	private MultiLang ml = null;
 	
 	public Handler handler = new Handler();
 	

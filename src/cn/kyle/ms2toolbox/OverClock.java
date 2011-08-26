@@ -9,6 +9,7 @@ import java.io.IOException;
 import com.mobclick.android.MobclickAgent;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
+import cn.kyle.util.MultiLang;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,6 +28,7 @@ public class OverClock extends Activity {
 	private Toast myToast = null;
 	private EditText[][] edFreqVsel = new EditText[4][2];
 	private TextView tvOcStatus = null;
+	private MultiLang ml = null;
 	
 	protected void onResume() {
 		this.ocLoadSystemFreqVsel();
@@ -49,6 +51,7 @@ public class OverClock extends Activity {
 		super.onCreate(savedInstanceState);
 		Event.count(this, Event.OverClock);
 		setContentView(R.layout.overclock);
+		ml = new MultiLang(this);
 		
 		tvOcStatus = (TextView)findViewById(R.id.tvOcStatus);
 		//
@@ -93,7 +96,7 @@ public class OverClock extends Activity {
 				ocLoadSystemFreqVsel();
 				fillCurrentFreqVselIntoEditText();
 				if (!OCM.isLoadKO()){
-					myToast("系统没有超频");
+					myToast(R.string.oc_msg_noOverClock);
 				}
 			}
 		});
@@ -142,10 +145,9 @@ public class OverClock extends Activity {
 		btnOcHelp.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				AlertDialog d = new AlertDialog.Builder(OverClock.this)
-				.setTitle("超频帮助")
-				.setMessage("1. 请通过'测试'进行尝试，确保可以稳定工作，再选择‘应用’\n"+
-						"2. 应用并选择开机自动超频，如果系统反复重启，请拔掉sd卡，再开机")
-				.setPositiveButton("确定", null)
+				.setTitle(R.string.oc_help_title)
+				.setMessage(R.string.oc_help_content)
+				.setPositiveButton(R.string.btn_confirm, null)
 				.create();
 				d.show();
 			}
@@ -154,9 +156,10 @@ public class OverClock extends Activity {
 	
 	public void refreshStatus(){
 		if (!OCM.isLoadKO()){
-			tvOcStatus.setText(" 未超频");
+			tvOcStatus.setText(ml.t(R.string.oc_tip_noOverClock, null));
 		}else{
-			tvOcStatus.setText(" 最大频率:"+OCM.FreqVselCurrent[3][OCM.Freq]+",最大电压:"+OCM.FreqVselCurrent[3][OCM.Vsel]);
+			tvOcStatus.setText(ml.t(R.string.oc_tip_noOverClock,
+					new String[]{""+OCM.FreqVselCurrent[3][OCM.Freq],""+OCM.FreqVselCurrent[3][OCM.Vsel]}));
 		}
 	}
 	
@@ -256,4 +259,9 @@ public class OverClock extends Activity {
 		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
 	}
 	
+	public void myToast(int tipInfo) {
+		if (myToast == null)
+			myToast = new Toast(this);
+		myToast.makeText(this, tipInfo, Toast.LENGTH_SHORT).show();
+	}
 }

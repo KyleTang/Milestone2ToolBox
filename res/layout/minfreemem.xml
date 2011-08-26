@@ -3,50 +3,50 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
 
-	<TextView android:text="前台程序(MB)" android:layout_width="fill_parent"
+	<TextView android:text="@string/mfm_tv_mem1" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<EditText android:id="@+id/etMem1" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-	<TextView android:text="可见程序(MB)" android:layout_width="fill_parent"
+	<TextView android:text="@string/mfm_tv_mem2" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<EditText android:id="@+id/etMem2" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-	<TextView android:text="辅助程序(MB)" android:layout_width="fill_parent"
+	<TextView android:text="@string/mfm_tv_mem3" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<EditText android:id="@+id/etMem3" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-	<TextView android:text="隐藏程序(MB)" android:layout_width="fill_parent"
+	<TextView android:text="@string/mfm_tv_mem4" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<EditText android:id="@+id/etMem4" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-	<TextView android:text="内容提供程序(MB)" android:layout_width="fill_parent"
+	<TextView android:text="@string/mfm_tv_mem5" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<EditText android:id="@+id/etMem5" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-	<TextView android:text="空置程序(MB)" android:layout_width="fill_parent"
+	<TextView android:text="@string/mfm_tv_mem6" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<EditText android:id="@+id/etMem6" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<CheckBox android:id="@+id/cbMemAutoApply" android:text="开机自动应用     "
+		<CheckBox android:id="@+id/cbMemAutoApply" android:text="@string/mfm_cbMemAutoApply"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemSaveDefault" android:text="保存为自定义 "
+		<Button android:id="@+id/btnMemSaveDefault" android:text="@string/mfm_btnMemSaveDefault"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<Button android:id="@+id/btnMemDefault" android:text=" 默 认 "
+		<Button android:id="@+id/btnMemDefault" android:text="@string/mfm_btnMemDefault"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemNormal" android:text=" 实 用 "
+		<Button android:id="@+id/btnMemNormal" android:text="@string/mfm_btnMemNormal"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemFast" android:text=" 极 速 "
+		<Button android:id="@+id/btnMemFast" android:text="@string/mfm_btnMemFast"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemManual" android:text="自定义"
+		<Button android:id="@+id/btnMemManual" android:text="@string/mfm_btnMemManual"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemApply" android:text=" 应 用 "
+		<Button android:id="@+id/btnMemApply" android:text="@string/mfm_btnMemApply"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
 </LinearLayout>

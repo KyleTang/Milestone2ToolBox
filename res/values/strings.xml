@@ -55,5 +55,38 @@
 	<string name="power_text_rebootToRecovery">是否要执行 重启至恢复模式</string>
 	<string name="power_text_systemPoweroff">是否要执行 系统关机选项</string>
 
-	<string name="kkk"></string>
+	<string name="oc_title">超频工具箱</string>
+	<string name="oc_msg_noOverClock">系统没有超频</string>
+	<string name="oc_help_title">超频帮助</string>
+	<string name="oc_help_content">1. 请通过\'测试\'进行尝试，确保可以稳定工作，再选择\'应用\'. \n 2. 应用并选择开机自动超频，如果系统反复重启，请拔掉sd卡，再开机.</string>
+	<string name="oc_tip_noOverClock"> 未超频</string>
+	<string name="oc_tip_overClock"> 最大频率:{0}, 最大电压:{1}</string>
+	<string name="oc_tv_freqVsel">频率电压</string>
+	<string name="oc_tv_onekeyset">一键设置</string>
+	<string name="oc_chb_ocAutoApply">开机自动超频 （拔掉SD卡后不超频）</string>
+	<string name="oc_btn_current">当前</string>
+	<string name="oc_tv_custom">自定义设置</string>
+	<string name="oc_tv_custom_tip">您可以设置4个频率(MHz)和电压(Vsel)组合</string>
+	<string name="oc_tv_freq1">1 频率</string>
+	<string name="oc_tv_freq2">2 频率</string>
+ 	<string name="oc_tv_freq3">3 频率</string>
+ 	<string name="oc_tv_freq4">4 频率</string>
+ 	<string name="oc_btn_ocTest">测试（重启后恢复）</string>
+ 	<string name="oc_btn_ocApply">应用（永久生效）</string>
+ 	<string name="oc_btn_ocRestoreDefault">恢复默认（永久生效） </string>
+ 	<string name="oc_btn_ocHelp">帮助 </string>
+
+	<string name="mfm_tv_mem1">前台程序(MB)</string>
+	<string name="mfm_tv_mem2">可见程序(MB)</string>
+	<string name="mfm_tv_mem3">辅助程序(MB)</string>
+	<string name="mfm_tv_mem4">隐藏程序(MB)</string>
+	<string name="mfm_tv_mem5">内容提供程序(MB)</string>
+	<string name="mfm_tv_mem6">空置程序(MB)</string>
+	<string name="mfm_cbMemAutoApply">开机自动应用     </string>
+	<string name="mfm_btnMemSaveDefault">保存为自定义 </string>
+	<string name="mfm_btnMemDefault"> 默 认 </string>
+	<string name="mfm_btnMemNormal"> 实 用 </string>
+	<string name="mfm_btnMemFast"> 极 速 </string>
+	<string name="mfm_btnMemManual">自定义</string>
+	<string name="mfm_btnMemApply"> 应 用 </string>
 </resources>

@@ -5,14 +5,14 @@
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="horizontal" android:layout_width="fill_parent"
 	android:layout_height="wrap_content">
-		<TextView android:text="超频工具箱 " android:layout_width="wrap_content"
+		<TextView android:text="@string/oc_title" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:textStyle="bold" android:textSize="20dip"/>
-		<TextView android:id="@+id/tvOcStatus" android:text="频率电压" android:layout_width="wrap_content"
+		<TextView android:id="@+id/tvOcStatus" android:text="@string/oc_tv_freqVsel" android:layout_width="wrap_content"
 			android:layout_height="wrap_content"/>	
 	</LinearLayout>
-	<CheckBox android:id="@+id/cbOcAutoApply" android:text="开机自动超频 （拔掉SD卡后不超频）"
+	<CheckBox android:id="@+id/cbOcAutoApply" android:text="@string/oc_chb_ocAutoApply"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-	<TextView android:text="一键设置" android:layout_width="fill_parent"
+	<TextView android:text="@string/oc_tv_onekeyset" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:textStyle="bold" android:textSize="18dip"/>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
@@ -25,18 +25,18 @@
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<Button android:id="@+id/btnOc1300" android:text=" 1300 "
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnOcCurrentSystem" android:text=" 当前 "
+		<Button android:id="@+id/btnOcCurrentSystem" android:text="@string/oc_btn_current"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
-	<TextView android:text="自定义设置" android:layout_width="fill_parent"
+	<TextView android:text="@string/oc_tv_custom" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:textStyle="bold" android:textSize="18dip" />
-	<TextView android:text="您可以设置4个频率(MHz)和电压(Vsel)组合" android:layout_width="fill_parent"
+	<TextView android:text="@string/oc_tv_custom_tip" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<TextView android:text="1 频率" android:layout_width="wrap_content"
+		<TextView android:text="@string/oc_tv_freq1" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 		<EditText android:id="@+id/etF1" android:text="" 
 			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
@@ -48,7 +48,7 @@
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<TextView android:text="2 频率" android:layout_width="wrap_content"
+		<TextView android:text="@string/oc_tv_freq2" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 		<EditText android:id="@+id/etF2" android:text="" 
 			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
@@ -60,7 +60,7 @@
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<TextView android:text="3 频率" android:layout_width="wrap_content"
+		<TextView android:text="@string/oc_tv_freq3" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 		<EditText android:id="@+id/etF3" android:text="" 
 			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
@@ -72,7 +72,7 @@
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<TextView android:text="4 频率" android:layout_width="wrap_content"
+		<TextView android:text="@string/oc_tv_freq4" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 		<EditText android:id="@+id/etF4" android:text="" 
 			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
@@ -85,17 +85,17 @@
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<Button android:id="@+id/btnOcTest" android:text="测试（重启后恢复） "
+		<Button android:id="@+id/btnOcTest" android:text="@string/oc_btn_ocTest"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnOcApply" android:text="应用（永久生效） "
+		<Button android:id="@+id/btnOcApply" android:text="@string/oc_btn_ocApply"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<Button android:id="@+id/btnOcUnLoad" android:text="恢复默认（永久生效） "
+		<Button android:id="@+id/btnOcUnLoad" android:text="@string/oc_btn_ocRestoreDefault"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnOcHelp" android:text="帮助 "
+		<Button android:id="@+id/btnOcHelp" android:text="@string/oc_btn_ocHelp"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
 </LinearLayout>
