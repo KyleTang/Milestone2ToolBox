@@ -1,98 +1,98 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">里程碑2工具箱</string>
-    <string name="flashlight">手电筒</string>
-    <string name="lockscreen">锁屏</string>
-    <string name="power">电源</string>
-    <string name="lcdbacklight">屏幕背光</string>
+    <string name="app_name">Milestone 2 Toolbox(M2T)</string>
+    <string name="flashlight">Flash Light(M2T)</string>
+    <string name="lockscreen">Lock Screen(M2T)</string>
+    <string name="power">Power Manager(M2T)</string>
+    <string name="lcdbacklight">LCD Back Light</string>
     
-	<string name="title_QuickNavPanel">快捷设置\n(请设置本项为默认设置)</string>
-	<string name="shortcut_title_ShortCutCreater">里程碑2工具箱</string>
+	<string name="title_QuickNavPanel">QuickNav\n(Set as default)</string>
+	<string name="shortcut_title_ShortCutCreater">QuickNavPanel(M2T)</string>
+	    
+	<string name="text_version">Version: {0}</string>
+	<string name="text_author">Author: {0} \n Translation: dangpzanco,Endless7</string>
 	
-	<string name="text_version">版本：{0}</string>
-	<string name="text_author">作者：{0}</string>
-	
-	<string name="dialog_title_tip">提示</string>
-	<string name="dialog_title_warning">警告</string>
-	<string name="dialog_title_error">错误</string>
-	<string name="msg_power_reboot">是否立即重启</string>
-	<string name="msg_power_rebootToRecovery">是否立即重启到恢复模式</string>
+	<string name="dialog_title_tip">Tip</string>
+	<string name="dialog_title_warning">Warning</string>
+	<string name="dialog_title_error">Error</string>
+	<string name="msg_power_reboot">Whether immediately reboot phone ?</string>
+	<string name="msg_power_rebootToRecovery">Whether immediately reboot to recovery mode ? </string>
 	
 	<string name="btn_ok">OK</string>
-	<string name="btn_confirm">确定</string>
-	<string name="btn_cancel">取消</string>
+	<string name="btn_confirm">OK</string>
+	<string name="btn_cancel">Cancel</string>
 	
-	<string name="msg_noRoot">没有ROOT权限，程序即将退出</string>
-	<string name="msg_noBusybox">检测的没有安装busybox，自动安装失败，程序即将退出</string>
-	<string name="msg_restoreToDefault">恢复成默认</string>
-	<string name="msg_successfullyApplied">设置成功</string>
-	<string name="msg_failedToApply">设置失败</string>
+	<string name="msg_noRoot">No Root Found! App Will Exit!</string>
+	<string name="msg_noBusybox">Busybox not installed and I failed miserably when installing it!</string>
+	<string name="msg_restoreToDefault">Restore Default</string>
+	<string name="msg_successfullyApplied">Successfully Applied</string>
+	<string name="msg_failedToApply">Failed to Apply</string>
 	
-	<string name="msg_tip_root">已ROOT</string>
-	<string name="msg_tip_noRoot">没有ROOT</string>
+	<string name="msg_tip_root">ROOT</string>
+	<string name="msg_tip_noRoot">No ROOT</string>
 	
-	<string name="msg_soundDisable_fail">设置失败, 声音文件已经不存在！</string>
+	<string name="msg_soundDisable_fail">Failed to Apply, sound file does not exist!</string>
 	
-	<string name="msg_notInstallPlugin">没有安装，请从论坛下载</string>
+	<string name="msg_notInstallPlugin">Not installed please download from the forum</string>
 	
-	<string name="msg_wifiScanInterval_applyAndNewValue">设置成功, 新值为{0}秒! </string>
+	<string name="msg_wifiScanInterval_applyAndNewValue">Successfully Applied, new value is {0} seconds </string>
 	
-	<string name="msg_multiTouch_restore">恢复系统默认多点触控，成功</string>
-	<string name="msg_multiTouch_success">设置多点最大{0}点，成功。\n 请稍等片刻后，再进行触摸操作.</string>
-	<string name="msg_multiTouch_fail">设置多点最大{0}点，失败。</string>
+	<string name="msg_multiTouch_restore">Restored system default multi-touch</string>
+	<string name="msg_multiTouch_success">Successfuly applied {0} point multitouch</string>
+	<string name="msg_multiTouch_fail">Failed to apply {0} point multitouch</string>
 	
-	<string name="text_noSetting_2_3_x">2.3.x无此设置</string>
-	<string name="text_noNeedSetting_2_3_x">2.3.x无需此设置</string>
+	<string name="text_noSetting_2_3_x">2.3.x no set </string>
+	<string name="text_noNeedSetting_2_3_x">2.3.x without setting</string>
 	
-	<string name="text_noInstall">没有安装{0}</string>
+	<string name="text_noInstall">Not installed {0}</string>
 		
-	<string name="power_btn_powerOff">快速关机</string>
-	<string name="power_btn_reboot">快速重启</string>
-	<string name="power_btn_rebootToRecovery">重启至恢复模式</string>
-	<string name="power_btn_systemPoweroff">系统关机选项</string>	
-	<string name="power_text_powerOff">是否要执行 关机</string>
-	<string name="power_text_reboot">是否要执行 重启</string>
-	<string name="power_text_rebootToRecovery">是否要执行 重启至恢复模式</string>
-	<string name="power_text_systemPoweroff">是否要执行 系统关机选项</string>
+	<string name="power_btn_powerOff">Quick shutdown</string>
+	<string name="power_btn_reboot">Quick reboot</string>
+	<string name="power_btn_rebootToRecovery">Reboot to recovery mode</string>
+	<string name="power_btn_systemPoweroff">System power menu</string>	
+	<string name="power_text_powerOff">Power off now ?</string>
+	<string name="power_text_reboot">Reboot now ?</string>
+	<string name="power_text_rebootToRecovery">Reboot to recovery mode now ?</string>
+	<string name="power_text_systemPoweroff">Open system power menu ?</string>
 
-	<string name="oc_title">超频工具箱</string>
-	<string name="oc_msg_noOverClock">系统没有超频</string>
-	<string name="oc_help_title">超频帮助</string>
+	<string name="oc_title">OverClock Tool </string>
+	<string name="oc_msg_noOverClock">System not over clock</string>
+	<string name="oc_help_title">OC Help</string>
 	<string name="oc_help_content">1. 请通过\'测试\'进行尝试，确保可以稳定工作，再选择\'应用\'. \n 2. 应用并选择开机自动超频，如果系统反复重启，请拔掉sd卡，再开机.</string>
-	<string name="oc_tip_noOverClock"> 未超频</string>
-	<string name="oc_tip_overClock"> 最大频率:{0}, 最大电压:{1}</string>
-	<string name="oc_tv_freqVsel">频率电压</string>
-	<string name="oc_tv_onekeyset">一键设置</string>
-	<string name="oc_chb_ocAutoApply">开机自动超频 （拔掉SD卡后不超频）</string>
-	<string name="oc_btn_current">当前</string>
-	<string name="oc_tv_custom">自定义设置</string>
-	<string name="oc_tv_custom_tip">您可以设置4个频率(MHz)和电压(Vsel)组合</string>
-	<string name="oc_tv_freq1">1 频率</string>
-	<string name="oc_tv_freq2">2 频率</string>
- 	<string name="oc_tv_freq3">3 频率</string>
- 	<string name="oc_tv_freq4">4 频率</string>
- 	<string name="oc_btn_ocTest">测试（重启后恢复）</string>
- 	<string name="oc_btn_ocApply">应用（永久生效）</string>
- 	<string name="oc_btn_ocRestoreDefault">恢复默认（永久生效） </string>
- 	<string name="oc_btn_ocHelp">帮助 </string>
+	<string name="oc_tip_noOverClock"> no over clock</string>
+	<string name="oc_tip_overClock"> Max clock:{0} vsel:{1}</string>
+	<string name="oc_tv_freqVsel">Clock and Vsel</string>
+	<string name="oc_tv_onekeyset">Quick settings</string>
+	<string name="oc_chb_ocAutoApply">Auto Apply (need a SD Card)</string>
+	<string name="oc_btn_current">Current</string>
+	<string name="oc_tv_custom">Custom</string>
+	<string name="oc_tv_custom_tip">You can set four clocks (MHz) and voltages (Vsel)</string>
+	<string name="oc_tv_freq1">Clock 1</string>
+	<string name="oc_tv_freq2">Clock 2</string>
+ 	<string name="oc_tv_freq3">Clock 3</string>
+ 	<string name="oc_tv_freq4">Clock 4</string>
+ 	<string name="oc_btn_ocTest">Test(Reboot restore) </string>
+ 	<string name="oc_btn_ocApply">Apply(Forever) </string>
+ 	<string name="oc_btn_ocRestoreDefault">Restore(Forever) </string>
+ 	<string name="oc_btn_ocHelp">Help </string>
 
-	<string name="mfm_tv_mem1">前台程序(MB)</string>
-	<string name="mfm_tv_mem2">可见程序(MB)</string>
-	<string name="mfm_tv_mem3">辅助程序(MB)</string>
-	<string name="mfm_tv_mem4">隐藏程序(MB)</string>
-	<string name="mfm_tv_mem5">内容提供程序(MB)</string>
-	<string name="mfm_tv_mem6">空置程序(MB)</string>
-	<string name="mfm_cbMemAutoApply">开机自动应用     </string>
-	<string name="mfm_btnMemSaveDefault">保存为自定义 </string>
-	<string name="mfm_btnMemDefault"> 默 认 </string>
-	<string name="mfm_btnMemMild"> 实 用 </string>
-	<string name="mfm_btnMemPositive"> 极 速 </string>
-	<string name="mfm_btnMemDefined">自定义</string>
-	<string name="mfm_btnMemApply"> 应 用 </string>
+	<string name="mfm_tv_mem1">Foreground Application(MB)</string>
+	<string name="mfm_tv_mem2">Visible Application(MB)</string>
+	<string name="mfm_tv_mem3">Secondary Server(MB)</string>
+	<string name="mfm_tv_mem4">Hidden Application(MB)</string>
+	<string name="mfm_tv_mem5">Content Provider(MB)</string>
+	<string name="mfm_tv_mem6">Empty Application(MB)</string>
+	<string name="mfm_cbMemAutoApply">Apply on boot</string>
+	<string name="mfm_btnMemSaveDefault">Save to Defined</string>
+	<string name="mfm_btnMemDefault">Default</string>
+	<string name="mfm_btnMemMild">Mild</string>
+	<string name="mfm_btnMemPositive">Positive</string>
+	<string name="mfm_btnMemDefined">Defined</string>
+	<string name="mfm_btnMemApply">Apply</string>
 	
-	<string name="feedback_umeng_title">意见及问题反馈</string>
-	<string name="umeng_feedback_title">把您的好想法提交给我，或者提交使用中遇到的问题</string>
-	<string name="umeng_feedback_content">请输入您的反馈意见（字数500以内）</string>
-	<string name="umeng_feedback_submit">提交反馈</string>
+	<string name="feedback_umeng_title">Suggestion and Feedback</string>
+	<string name="umeng_feedback_title">Give me suggestion or report me the issue</string>
+	<string name="umeng_feedback_content">Input your suggestion(Max 500 letters)</string>
+	<string name="umeng_feedback_submit">submit</string>
 	
 </resources>

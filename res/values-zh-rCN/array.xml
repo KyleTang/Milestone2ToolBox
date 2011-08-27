@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="pModel">
-	<item>Restore</item>
+	<item>还原为默认</item>
     <item>MotoA953</item>
     <item>A953</item>
     <item>ME722</item>
@@ -14,8 +14,8 @@
 </string-array>
 
 <string-array name="pMultiMedia">
-    <item>opencore(old engine)</item>
-    <item>stagefright(new engine)</item>
+    <item>旧版引擎 opencore</item>
+    <item>新版引擎 stagefright</item>
 </string-array>
 <string-array name="pMultiMediaValue">
     <item>opencore</item>
@@ -23,10 +23,10 @@
 </string-array>
 
 <string-array name="pDalvikVMHeapMax">
-    <item>30(default)</item>
+    <item>30(默认)</item>
     <item>36</item>
     <item>42</item>
-    <item>48(recommended)</item>
+    <item>48(推荐)</item>
     <item>54</item>
     <item>60</item>
 </string-array>
@@ -40,8 +40,8 @@
 </string-array>
 
 <string-array name="pLowBatteryOffMethod">
-	<item>Never(default)</item>
-    <item>Always</item>
+	<item>从不屏蔽(默认)</item>
+    <item>总是屏蔽</item>
    <!-- <item>仅插入耳机时屏蔽</item> -->
 </string-array>
 <string-array name="pLowBatteryOffMethodValue">
@@ -51,7 +51,7 @@
 </string-array>
 
 <string-array name="pCallOnVibrateTime">
-	<item>100(recommended)</item>
+	<item>100(推荐)</item>
 	<item>300</item>
 	<item>500</item>
 </string-array>
@@ -63,7 +63,7 @@
 
 <string-array name="pCallOffVibrateTime">
 	<item>100</item>
-	<item>300(recommended)</item>
+	<item>300(推荐)</item>
 	<item>500</item>
 </string-array>
 <string-array name="pCallOffVibrateTimeValue">
@@ -73,7 +73,7 @@
 </string-array>
 
 <string-array name="pCallOn45SecVibrateTime">
-	<item>100(recommended)</item>
+	<item>100(推荐)</item>
 	<item>300</item>
 	<item>500</item>
 </string-array>
@@ -89,7 +89,7 @@
 	<item>10%</item>
     <item>30%</item>
     <item>50%</item>
-    <item>80%(default)</item>
+    <item>80%(默认)</item>
     <item>100%</item>
 </string-array>
 <string-array name="pFlashLightLevelValue">
@@ -103,14 +103,14 @@
 </string-array>
 
 <string-array name="pFlashLightTime">
-	<item>5s</item>
-	<item>10s</item>
-	<item>20s</item>
-	<item>30s</item>
-    <item>1min</item>
-    <item>2min(default)</item>
-    <item>5min</item>
-    <item>10min</item>
+	<item>5秒</item>
+	<item>10秒</item>
+	<item>20秒</item>
+	<item>30秒</item>
+    <item>1分钟</item>
+    <item>2分钟(默认)</item>
+    <item>5分钟</item>
+    <item>10分钟</item>
 </string-array>
 <string-array name="pFlashLightTimeValue">
 	<item>5</item>
@@ -125,7 +125,7 @@
 
 <string-array name="pWifiAutoCloseMin">
 	<item>1</item>
-    <item>3(recommended)</item>
+    <item>3(推荐)</item>
     <item>5</item>
     <item>10</item>
     <item>15</item>
@@ -140,10 +140,10 @@
 
 <string-array name="pWifiScanInterval">
 	<item>5</item>
-    <item>45(default)</item>
+    <item>45(默认)</item>
     <item>90</item>
     <item>120</item>
-    <item>180(recommended)</item>
+    <item>180(推荐)</item>
     <item>240</item>
     <item>300</item>
 </string-array>
@@ -158,10 +158,10 @@
 </string-array>
 
 <string-array name="pDefyMoreNum">
-	<item>Restore</item>
+	<item>恢复默认</item>
 	<item>3</item>
-    <item>4(recommended)</item>
-    <item>5(Max stable value)</item>
+    <item>4(推荐)</item>
+    <item>5(最大稳定值)</item>
     <item>6</item>
     <item>7</item>
     <item>8</item>

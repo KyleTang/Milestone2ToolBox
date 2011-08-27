@@ -119,7 +119,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		//设置主界面的菜单语言
-		if (this.getResources().getConfiguration().locale.equals(Locale.CHINESE)){
+		if (this.getResources().getConfiguration().locale.getLanguage().equals(Locale.CHINESE.getLanguage())){
 			// 所的的值将会自动保存到SharePreferences
 			addPreferencesFromResource(R.xml.preference_chs);
 		}else{
