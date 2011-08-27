@@ -39,7 +39,7 @@
 	
 	<string name="msg_multiTouch_restore">恢复系统默认多点触控，成功</string>
 	<string name="msg_multiTouch_success">设置多点最大{0}点，成功。\n 请稍等片刻后，再进行触摸操作.</string>
-	<string name="msg_multiTouch_fail">"设置多点最大{0}点，失败。"</string>
+	<string name="msg_multiTouch_fail">设置多点最大{0}点，失败。</string>
 	
 	<string name="text_noSetting_2_3_x">2.3.x无此设置</string>
 	<string name="text_noNeedSetting_2_3_x">2.3.x无需此设置</string>
@@ -85,13 +85,13 @@
 	<string name="mfm_cbMemAutoApply">开机自动应用     </string>
 	<string name="mfm_btnMemSaveDefault">保存为自定义 </string>
 	<string name="mfm_btnMemDefault"> 默 认 </string>
-	<string name="mfm_btnMemNormal"> 实 用 </string>
-	<string name="mfm_btnMemFast"> 极 速 </string>
-	<string name="mfm_btnMemManual">自定义</string>
+	<string name="mfm_btnMemMild"> 实 用 </string>
+	<string name="mfm_btnMemPositive"> 极 速 </string>
+	<string name="mfm_btnMemDefined">自定义</string>
 	<string name="mfm_btnMemApply"> 应 用 </string>
 	
-	<string name="feedback_umeng_title">友盟反馈</string>
-	<string name="umeng_feedback_title">欢迎您提出宝贵的意见和建议，您留下的每个字都将用来改善我们的服务。</string>
+	<string name="feedback_umeng_title">意见及问题反馈</string>
+	<string name="umeng_feedback_title">把您的好想法提交给我，或者提交使用中遇到的问题</string>
 	<string name="umeng_feedback_content">请输入您的反馈意见（字数500以内）</string>
 	<string name="umeng_feedback_submit">提交反馈</string>
 	

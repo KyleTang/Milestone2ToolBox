@@ -77,20 +77,20 @@ public class MinFreeMem extends Activity {
 				loadValueStr(defaultValue);
 			}
 		});
-		Button btnMemNormal = (Button)findViewById(R.id.btnMemNormal);
-		btnMemNormal.setOnClickListener(new OnClickListener(){
+		Button btnMemMild = (Button)findViewById(R.id.btnMemMild);
+		btnMemMild.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				loadValueStr(normalValue);
 			}
 		});
-		Button btnMemFast = (Button)findViewById(R.id.btnMemFast);
-		btnMemFast.setOnClickListener(new OnClickListener(){
+		Button btnMemPositive = (Button)findViewById(R.id.btnMemPositive);
+		btnMemPositive.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				loadValueStr(fastValue);
 			}
 		});
-		Button btnMemManual = (Button)findViewById(R.id.btnMemManual);
-		btnMemManual.setOnClickListener(new OnClickListener(){
+		Button btnMemDefined = (Button)findViewById(R.id.btnMemDefined);
+		btnMemDefined.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				loadValue(manual);
 			}

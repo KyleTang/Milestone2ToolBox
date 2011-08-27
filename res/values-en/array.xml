@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="pModel">
+	<item>Restore</item>
+    <item>MotoA953</item>
+    <item>A953</item>
+    <item>ME722</item>
+</string-array>
+<string-array name="pModelValue">
+	<item>default</item>
+    <item>MotoA953</item>
+    <item>A953</item>
+    <item>ME722</item>
+</string-array>
+
+<string-array name="pMultiMedia">
+    <item>opencore(old engine)</item>
+    <item>stagefright(new engine)</item>
+</string-array>
+<string-array name="pMultiMediaValue">
+    <item>opencore</item>
+    <item>stagefright</item>
+</string-array>
+
+<string-array name="pDalvikVMHeapMax">
+    <item>30(default)</item>
+    <item>36</item>
+    <item>42</item>
+    <item>48(recommended)</item>
+    <item>54</item>
+    <item>60</item>
+</string-array>
+<string-array name="pDalvikVMHeapMaxValue">
+    <item>30</item>
+    <item>36</item>
+    <item>42</item>
+    <item>48</item>
+    <item>54</item>
+    <item>60</item>
+</string-array>
+
+<string-array name="pLowBatteryOffMethod">
+	<item>Never(default)</item>
+    <item>Always</item>
+   <!-- <item>仅插入耳机时屏蔽</item> -->
+</string-array>
+<string-array name="pLowBatteryOffMethodValue">
+    <item>never</item>
+    <item>always</item>
+  <!--  <item>headseton</item> -->
+</string-array>
+
+<string-array name="pCallOnVibrateTime">
+	<item>100(recommended)</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+<string-array name="pCallOnVibrateTimeValue">
+	<item>100</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+
+<string-array name="pCallOffVibrateTime">
+	<item>100</item>
+	<item>300(recommended)</item>
+	<item>500</item>
+</string-array>
+<string-array name="pCallOffVibrateTimeValue">
+	<item>100</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+
+<string-array name="pCallOn45SecVibrateTime">
+	<item>100(recommended)</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+<string-array name="pCallOn45SecVibrateTimeValue">
+	<item>100</item>
+	<item>300</item>
+	<item>500</item>
+</string-array>
+
+<string-array name="pFlashLightLevel">
+	<item>1%</item>
+    <item>5%</item>
+	<item>10%</item>
+    <item>30%</item>
+    <item>50%</item>
+    <item>80%(default)</item>
+    <item>100%</item>
+</string-array>
+<string-array name="pFlashLightLevelValue">
+	<item>1</item>
+	<item>5</item>
+	<item>10</item>
+    <item>30</item>
+    <item>50</item>
+    <item>80</item>
+    <item>100</item>
+</string-array>
+
+<string-array name="pFlashLightTime">
+	<item>5s</item>
+	<item>10s</item>
+	<item>20s</item>
+	<item>30s</item>
+    <item>1min</item>
+    <item>2min(default)</item>
+    <item>5min</item>
+    <item>10min</item>
+</string-array>
+<string-array name="pFlashLightTimeValue">
+	<item>5</item>
+	<item>10</item>
+	<item>20</item>
+	<item>30</item>
+    <item>60</item>
+    <item>120</item>
+    <item>300</item>
+    <item>600</item>
+</string-array>
+
+<string-array name="pWifiAutoCloseMin">
+	<item>1</item>
+    <item>3(recommended)</item>
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+</string-array>
+<string-array name="pWifiAutoCloseMinValue">
+	<item>1</item>
+    <item>3</item>
+    <item>5</item>
+    <item>10</item>
+    <item>15</item>
+</string-array>
+
+<string-array name="pWifiScanInterval">
+	<item>5</item>
+    <item>45(default)</item>
+    <item>90</item>
+    <item>120</item>
+    <item>180(recommended)</item>
+    <item>240</item>
+    <item>300</item>
+</string-array>
+<string-array name="pWifiScanIntervalValue">
+	<item>5</item>
+    <item>45</item>
+    <item>90</item>
+    <item>120</item>
+    <item>180</item>
+    <item>240</item>
+    <item>300</item>
+</string-array>
+
+<string-array name="pDefyMoreNum">
+	<item>Restore</item>
+	<item>3</item>
+    <item>4(recommended)</item>
+    <item>5(Max stable value)</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+</string-array>
+<string-array name="pDefyMoreNumValue">
+	<item>2</item>
+	<item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+</string-array>
+</resources>

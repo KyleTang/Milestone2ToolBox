@@ -24,6 +24,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 超频界面
+ * @author KyleTang
+ *
+ */
 public class OverClock extends Activity {
 	private Toast myToast = null;
 	private EditText[][] edFreqVsel = new EditText[4][2];
@@ -158,7 +163,7 @@ public class OverClock extends Activity {
 		if (!OCM.isLoadKO()){
 			tvOcStatus.setText(ml.t(R.string.oc_tip_noOverClock, null));
 		}else{
-			tvOcStatus.setText(ml.t(R.string.oc_tip_noOverClock,
+			tvOcStatus.setText(ml.t(R.string.oc_tip_overClock,
 					new String[]{""+OCM.FreqVselCurrent[3][OCM.Freq],""+OCM.FreqVselCurrent[3][OCM.Vsel]}));
 		}
 	}

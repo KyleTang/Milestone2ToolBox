@@ -23,6 +23,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 桌面快捷方式生成器
+ * @author KyleTang
+ *
+ */
 public class ShortCutCreater extends Activity {
 	Toast myToast = null;
 	/**
@@ -32,24 +37,28 @@ public class ShortCutCreater extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.shortcutcreater);
+		
 		Button btnPower = (Button)findViewById(R.id.btnPower); 
 		btnPower.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				onClickCreateShortCut(v);
 			}
 		});
+		
 		Button btnFlashLight = (Button)findViewById(R.id.btnFlashLight); 
 		btnFlashLight.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				onClickCreateShortCut(v);
 			}
 		});
+		
 		Button btnLockScreen = (Button)findViewById(R.id.btnLockScreen); 
 		btnLockScreen.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				onClickCreateShortCut(v);
 			}
 		});
+		
 		Button btnLCDBackLight = (Button)findViewById(R.id.btnLCDBackLight); 
 		btnLCDBackLight.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {

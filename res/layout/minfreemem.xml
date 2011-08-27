@@ -40,11 +40,11 @@
 		android:layout_height="wrap_content">
 		<Button android:id="@+id/btnMemDefault" android:text="@string/mfm_btnMemDefault"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemNormal" android:text="@string/mfm_btnMemNormal"
+		<Button android:id="@+id/btnMemMild" android:text="@string/mfm_btnMemMild"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemFast" android:text="@string/mfm_btnMemFast"
+		<Button android:id="@+id/btnMemPositive" android:text="@string/mfm_btnMemPositive"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<Button android:id="@+id/btnMemManual" android:text="@string/mfm_btnMemManual"
+		<Button android:id="@+id/btnMemDefined" android:text="@string/mfm_btnMemDefined"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<Button android:id="@+id/btnMemApply" android:text="@string/mfm_btnMemApply"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
