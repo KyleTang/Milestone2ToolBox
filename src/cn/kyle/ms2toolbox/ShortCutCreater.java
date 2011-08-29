@@ -59,8 +59,8 @@ public class ShortCutCreater extends Activity {
 			}
 		});
 		
-		Button btnLCDBackLight = (Button)findViewById(R.id.btnLCDBackLight); 
-		btnLCDBackLight.setOnClickListener(new OnClickListener(){
+		Button btnLcdBackLight = (Button)findViewById(R.id.btnLcdBackLight); 
+		btnLcdBackLight.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				onClickCreateShortCut(v);
 			}
@@ -88,11 +88,11 @@ public class ShortCutCreater extends Activity {
         	icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.lockscreen); //获取快捷键的图标
             myIntent=new Intent(this, LockScreen.class);
         	break;
-        case R.id.btnLCDBackLight:
-        	//title=""+this.getResources().getText(R.string.lcdbacklight);
-        	//icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.lcdbacklight); //获取快捷键的图标
-            //myIntent=new Intent(this, Power.class);
-        	myToast("Oops. comming soon.");
+        case R.id.btnLcdBackLight:
+        	title=""+this.getResources().getText(R.string.lcdbacklight);
+        	icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.lcdbacklight); //获取快捷键的图标
+            myIntent=new Intent(this, LcdBackLight.class);
+        	//myToast("Oops. comming soon.");
         	break;
         }
     	addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);//快捷方式的标题

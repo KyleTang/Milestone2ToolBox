@@ -24,6 +24,7 @@ public enum Event {
 	CheckUpdate("ms2toolbox","检测版本"),
 	FeedBack("ms2toolbox","反馈意见"),
 	DefyMore("ms2toolbox","多点触控"),
+	LcdBackLight("ms2toolbox","屏幕背光调节"),
 	QuickNavPanel("ms2toolbox","快速导航面板");
 	
 	public String event_id;

@@ -265,21 +265,32 @@ public class Module {
 						new File("/sys/class/leds/torch-flash/flash_light"),"0"));
 	}
 	
-	public static boolean setLcdLight(int level){
-		int value = (int)(255.0/100*level);
-		if (value>255) value = 100;
-		if (value<0) value = 0;
-		L.debug("Open FlashLight Level = "+level+", value="+value);
+	public static boolean setLcdBackLight(int value){
+		if (value>255) value = 255;
+		if (value<2) value = 2;
+		L.debug("set lcd-backlight value="+value);
 		return C.runSuCommandReturnBoolean(
-				"chmod 666 /sys/class/leds/lcd-backlight/flash_light; "+
-				"echo "+value
-				+" > /sys/class/leds/lcd-backlight/flash_light ;");
+				"chmod 777 /sys/class/leds/lcd-backlight/brightness; "+
+				"echo "+value+" > /sys/class/leds/lcd-backlight/brightness ;" 
+				+"chmod 444 /sys/class/leds/lcd-backlight/brightness; "
+				);
 	}
-
-	public static int getLcdLightCurrentValue(){
+	
+	public static boolean setLcdBackLightAuto(int value){
+		if (value>255) value = 255;
+		if (value<2) value = 2;
+		L.debug("set lcd-backlight value="+value);
+		return C.runSuCommandReturnBoolean(
+				"chmod 777 /sys/class/leds/lcd-backlight/brightness; "+
+				"echo "+value+" > /sys/class/leds/lcd-backlight/brightness ;" 
+				+"chmod 777 /sys/class/leds/lcd-backlight/brightness; "
+				);
+	}
+	
+	public static int getLcdBackLightCurrentValue(){
 		return Integer.parseInt(
 				getPrefFlagValue(
-						new File("/sys/class/leds/lcd-backlight/flash_light"),"0"));
+						new File("/sys/class/leds/lcd-backlight/brightness"),"2"));
 	}
 	
 	public static boolean setCameraClickDisable(boolean set){
@@ -546,4 +557,5 @@ public class Module {
 		}
 		return C.runSuCommandReturnBoolean(sb.toString());
 	}
+	
 }

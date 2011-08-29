@@ -4,7 +4,7 @@
     <string name="flashlight">手电筒</string>
     <string name="lockscreen">锁屏</string>
     <string name="power">电源</string>
-    <string name="lcdbacklight">屏幕背光</string>
+    <string name="lcdbacklight">屏幕背光调节</string>
     
 	<string name="title_QuickNavPanel">快捷设置\n(请设置本项为默认设置)</string>
 	<string name="shortcut_title_ShortCutCreater">里程碑2工具箱</string>
@@ -21,6 +21,8 @@
 	<string name="btn_ok">OK</string>
 	<string name="btn_confirm">确定</string>
 	<string name="btn_cancel">取消</string>
+	<string name="btn_apply">应用</string>
+	<string name="btn_auto">自动</string>
 	
 	<string name="msg_noRoot">没有ROOT权限，程序即将退出</string>
 	<string name="msg_noBusybox">检测的没有安装busybox，自动安装失败，程序即将退出</string>
@@ -89,6 +91,16 @@
 	<string name="mfm_btnMemPositive"> 极 速 </string>
 	<string name="mfm_btnMemDefined">自定义</string>
 	<string name="mfm_btnMemApply"> 应 用 </string>
+	
+	<string name="scc_btnPower">电源快捷方式</string>
+	<string name="scc_btnFlashLight">手电筒快捷方式</string>
+	<string name="scc_btnLockScreen">锁屏快捷方式</string>
+	<string name="scc_btnLcdBackLight">屏幕背光调节快捷方式</string>
+	
+	<string name="lcd_title">屏幕背光调节(突破超低亮度)</string>
+	<string name="lcd_text_currentLcdLightValue">请选择或输入(2~255)\n当前背光亮度值: {0}</string>
+	<string name="lcd_text_tip">输入值：</string>
+	<string name="lcd_msg_needRoot">突破超低亮度，需要root权限</string>
 	
 	<string name="feedback_umeng_title">意见及问题反馈</string>
 	<string name="umeng_feedback_title">把您的好想法提交给我，或者提交使用中遇到的问题</string>

@@ -21,6 +21,8 @@
 	<string name="btn_ok">OK</string>
 	<string name="btn_confirm">OK</string>
 	<string name="btn_cancel">Cancel</string>
+	<string name="btn_apply">Apply</string>
+	<string name="btn_auto">Auto</string>
 	
 	<string name="msg_noRoot">No Root Found! App Will Exit!</string>
 	<string name="msg_noBusybox">Busybox not installed and I failed miserably when installing it!</string>
@@ -89,6 +91,16 @@
 	<string name="mfm_btnMemPositive">Positive</string>
 	<string name="mfm_btnMemDefined">Defined</string>
 	<string name="mfm_btnMemApply">Apply</string>
+	
+	<string name="scc_btnPower">Power ShortCut</string>
+	<string name="scc_btnFlashLight">FlashLight ShortCut</string>
+	<string name="scc_btnLockScreen">LockScreen ShortCut</string>
+	<string name="scc_btnLcdBackLight">LcdBackLight ShortCut</string>
+	
+	<string name="lcd_title">Lcd BackLight(lowest)</string>
+	<string name="lcd_text_currentLcdLightValue">Current light value: {0}</string>
+	<string name="lcd_text_tip">Input: </string>
+	<string name="lcd_msg_needRoot">Break lowest brightness need root</string>
 	
 	<string name="feedback_umeng_title">Suggestion and Feedback</string>
 	<string name="umeng_feedback_title">Give me suggestion or report me the issue</string>

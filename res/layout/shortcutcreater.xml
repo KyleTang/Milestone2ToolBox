@@ -7,28 +7,28 @@
 
 <Button 
 	android:id="@+id/btnPower"
-	android:text="电源快捷方式"
+	android:text="@string/scc_btnPower"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
 <Button 
 	android:id="@+id/btnFlashLight"
-	android:text="手电筒快捷方式"
+	android:text="@string/scc_btnFlashLight"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
 <Button 
 	android:id="@+id/btnLockScreen"
-	android:text="锁屏快捷方式"
+	android:text="@string/scc_btnLockScreen"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     />
 <Button 
-	android:id="@+id/btnLCDBackLight"
-	android:text="屏幕背光调节快捷方式"
+	android:id="@+id/btnLcdBackLight"
+	android:text="@string/scc_btnLcdBackLight"
 	android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
