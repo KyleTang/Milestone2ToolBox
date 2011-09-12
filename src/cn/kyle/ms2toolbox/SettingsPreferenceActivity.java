@@ -26,6 +26,7 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -38,6 +39,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
@@ -70,6 +72,8 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	
 	protected void onResume() {
 		super.onResume();
+		//设置键盘防抖动
+		this.setDebouncePreference();
 		MobclickAgent.onResume(this); 
 	}
 	
@@ -363,13 +367,14 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			try{
 				startActivity(i);
 			}catch(android.content.ActivityNotFoundException e){
-				AlertDialog d = new AlertDialog.Builder(this)
-					.setTitle(R.string.msg_notInstallPlugin)
-					.setMessage(bpsw_url)
-					.setPositiveButton(R.string.btn_confirm, null)
-					.create();
-				d.show();
-				//installPluginTip(bpsw_url, bpsw_apk);
+				installApk(Module.getBpswApkFile(this).getAbsolutePath());
+//				AlertDialog d = new AlertDialog.Builder(this)
+//					.setTitle(R.string.msg_notInstallPlugin)
+//					.setMessage(bpsw_url)
+//					.setPositiveButton(R.string.btn_confirm, null)
+//					.create();
+//				d.show();
+//				//installPluginTip(bpsw_url, bpsw_apk);
 			}
 		}
 		
@@ -433,19 +438,6 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 				((CheckBoxPreference)preference).setChecked(false);
 				myToast(R.string.msg_failedToApply);
 			}
-		}
-		
-		if (key.equals(Pref.pDebounce.toString())){
-			boolean checked = ((CheckBoxPreference)preference).isChecked();
-			if (Module.setDebounce(checked,this)){
-				myToast(R.string.msg_successfullyApplied);
-				Module.setPrefFlag(checked, this.getPrefFlagFile(Pref.pDebounce));
-			}else{
-				((CheckBoxPreference)preference).setChecked(false);
-				Module.setPrefFlag(false, this.getPrefFlagFile(Pref.pDebounce));
-				myToast(R.string.msg_failedToApply);
-			}
-			
 		}
 		
 		if (key.equals(Pref.pDefyMore.toString())){
@@ -624,6 +616,16 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			startActivity(i);
 		}
 		
+		if (key.equals(Pref.pPower.toString())){
+			Intent i = new Intent(this,Power.class);
+			startActivity(i);
+		}
+		
+		if (key.equals(Pref.pLcdBacklight.toString())){
+			Intent i = new Intent(this,LcdBackLight.class);
+			startActivity(i);
+		}
+		
 		//
 		if (key.equals(Pref.pSd2romHack.toString())){
 			Intent i = new Intent();
@@ -632,13 +634,14 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			try{
 				startActivity(i);
 			}catch(android.content.ActivityNotFoundException e){
+				installApk(Module.getSd2romApkFile(this).getAbsolutePath());
 				//installPluginTip(sd2rom_url, sd2rom_apk);
-				AlertDialog d = new AlertDialog.Builder(this)
-					.setTitle(R.string.msg_notInstallPlugin)
-					.setMessage(sd2rom_url)
-					.setPositiveButton(R.string.btn_confirm, null)
-					.create();
-				d.show();
+//				AlertDialog d = new AlertDialog.Builder(this)
+//					.setTitle(R.string.msg_notInstallPlugin)
+//					.setMessage(sd2rom_url)
+//					.setPositiveButton(R.string.btn_confirm, null)
+//					.create();
+//				d.show();
 			}
 		}
 		
@@ -650,39 +653,6 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 //					myToast("BusyBox安装失败");
 //			}
 //		}
-		//
-		if (key.equals(Pref.pReboot.toString())){
-			AlertDialog ad = new AlertDialog.Builder(this)
-				.setTitle(R.string.dialog_title_tip)
-				.setMessage(R.string.msg_power_reboot)
-				.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
-						C.runSuCommandReturnBoolean("reboot;");
-					}
-				})
-				.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
-						
-					}
-				}).create();
-			ad.show();
-		}
-		if (key.equals(Pref.pRebootToRecovery.toString())){
-			AlertDialog ad = new AlertDialog.Builder(this)
-				.setTitle(R.string.dialog_title_tip)
-				.setMessage(R.string.msg_power_rebootToRecovery)
-				.setPositiveButton(R.string.btn_confirm, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
-						C.runSuCommandReturnBoolean("reboot recovery;");
-					}
-				})
-				.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int which) {
-						
-					}
-				}).create();
-			ad.show();
-		}
 		
 		if (key.equals(Pref.pCheckUpdate.toString())){
 //			MobclickAgent.setUpdateListener(new UmengUpdateListener(){
@@ -748,6 +718,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	}
 
 	public void refreshItemAll(){
+		ListPreference lp = null;
+		CheckBoxPreference cp = null;
+		Preference p = null;
+		
 		this.setTitle(this.getTitle()+(haveRoot?ml.t(R.string.msg_tip_root, null):ml.t(R.string.msg_tip_noRoot, null)));
 		Preference pTitle = this.findPreference(Pref.pTitle.toString());
 		String versionName = "null";
@@ -762,7 +736,7 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		PropFile prop = new PropFile();
 		prop.load("/system/build.prop");
 		
-		ListPreference lp = ((ListPreference)findPreference(Pref.pModel.toString()));
+		lp = ((ListPreference)findPreference(Pref.pModel.toString()));
 		String strModel = prop.getValue("ro.product.model");
 		if (strModel.equalsIgnoreCase("MotoA953")){
 			lp.setValue("MotoA953");
@@ -804,10 +778,6 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			.setChecked(bVoiceZh2EnEnable);
 		
 		//设置
-		((CheckBoxPreference)findPreference(Pref.pDebounce.toString()))
-			.setChecked(this.getPrefFlagFile(Pref.pDebounce).exists());
-		
-		//设置
 		((CheckBoxPreference)findPreference(Pref.pDefyMore.toString()))
 			.setChecked(getPrefFlagFile(Pref.pDefyMore).exists());
 		
@@ -830,7 +800,6 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			.setChecked(Module.getVideoRecordDisable());
 		
 		//
-		CheckBoxPreference cp = null ;
 		cp = ((CheckBoxPreference)findPreference(Pref.pFixBlurHomeIconOrder.toString()));
 		if (android.os.Build.VERSION.RELEASE.contains("2.3")){
 			//2.3系统不需要
@@ -871,8 +840,39 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		((CheckBoxPreference)findPreference(Pref.pWifiAutoClose.toString()))
 			.setChecked(getPrefFlagFile(Pref.pWifiAutoClose).exists());
 		
+		//设置键盘防抖动
+		setDebouncePreference();
+		
+		//根据当前系统环境，关闭不兼容功能
+		if (Module.isCMSeriesROM()){
+			cp = ((CheckBoxPreference)findPreference(Pref.pDefyMore.toString()));
+			cp.setEnabled(false);
+			cp.setSummaryOff(R.string.text_basedCmNotSupported);
+			cp.setSummaryOn(R.string.text_basedCmNotSupported);
+			lp = ((ListPreference)findPreference(Pref.pDefyMoreNum.toString()));
+			lp.setEnabled(false);
+			lp.setSummary(R.string.text_basedCmNotSupported);
+		}
 	}
 	
+	public void setDebouncePreference(){
+		//设置键盘防抖动
+		Preference p = ((Preference)findPreference(Pref.pDebounce.toString()));
+		Intent intent = null;
+		try{
+			intent = this.getPackageManager().getLaunchIntentForPackage("de.rmdir.ms2debounce");
+			if (intent!=null) p.setSummary("Powered by 'Milestone 2 Debounce', from XDA");
+		}catch(Exception exx){
+			
+		}
+		if (intent==null){
+			File file = Module.getDebounceApkFile(this);
+			Uri uri = Uri.fromFile(file);
+			intent = new Intent(Intent.ACTION_VIEW);
+			intent.setDataAndType(uri,"application/vnd.android.package-archive");
+		}
+		p.setIntent(intent);
+	}
 	
 	public void myToast(String tipInfo) {
 		if (myToast == null)
@@ -889,4 +889,5 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public File getPrefFlagFile(Pref p){
 		return new File(this.getFilesDir(),p.toString()+".flag");
 	}
+	
 }

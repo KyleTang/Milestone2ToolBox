@@ -19,6 +19,7 @@ public class OCM {
 	public static final int FV_1100 = 1;
 	public static final int FV_1200 = 2;
 	public static final int FV_1300 = 3;
+	public static final int FV_800 = 4;
 	public static final int Freq = 0;
 	public static final int Vsel = 1;
 	private static String OverClockKO_FILE = "overclock_droidx_22.ko";
@@ -54,6 +55,12 @@ public class OCM {
 				{800,40},
 				{1000,48},
 				{1300,66}
+			},
+			{//800
+				{300,22},
+				{600,33},
+				{800,40},
+				{800,40}
 			}
 	};
 	

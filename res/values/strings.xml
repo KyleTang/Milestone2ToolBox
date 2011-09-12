@@ -46,6 +46,8 @@
 	<string name="text_noSetting_2_3_x">2.3.x no set </string>
 	<string name="text_noNeedSetting_2_3_x">2.3.x without setting</string>
 	
+	<string name="text_basedCmNotSupported">Based CM, not supported </string>
+	
 	<string name="text_noInstall">Not installed {0}</string>
 		
 	<string name="power_btn_powerOff">Quick shutdown</string>
@@ -64,9 +66,9 @@
 	<string name="oc_tip_noOverClock"> no over clock</string>
 	<string name="oc_tip_overClock"> Max clock:{0} vsel:{1}</string>
 	<string name="oc_tv_freqVsel">Clock and Vsel</string>
-	<string name="oc_tv_onekeyset">Quick settings</string>
+	<string name="oc_tv_onekeyset">Boost: </string>
+	<string name="oc_tv_onekeysaveenergy">Save Energy: </string>
 	<string name="oc_chb_ocAutoApply">Auto Apply (need a SD Card)</string>
-	<string name="oc_btn_current">Current</string>
 	<string name="oc_tv_custom">Custom</string>
 	<string name="oc_tv_custom_tip">You can set four clocks (MHz) and voltages (Vsel)</string>
 	<string name="oc_tv_freq1">Clock 1</string>
@@ -75,8 +77,10 @@
  	<string name="oc_tv_freq4">Clock 4</string>
  	<string name="oc_btn_ocTest">Test(Reboot restore) </string>
  	<string name="oc_btn_ocApply">Apply(Forever) </string>
+ 	<string name="oc_btn_current">Current</string>
  	<string name="oc_btn_ocRestoreDefault">Restore(Forever) </string>
  	<string name="oc_btn_ocHelp">Help </string>
+ 	<string name="oc_msg_ocOneKeyTip">Please click \'Apply\' or \'Test\' </string>
 
 	<string name="mfm_tv_mem1">Foreground Application(MB)</string>
 	<string name="mfm_tv_mem2">Visible Application(MB)</string>

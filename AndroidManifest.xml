@@ -6,32 +6,31 @@
         <activity android:name=".SettingsPreferenceActivity" android:label="@string/app_name" android:screenOrientation="portrait" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".FlashLight" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/flashlight" android:icon="@drawable/flashlight" android:taskAffinity=".FlashLight" android:launchMode="singleTask">
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".LockScreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/lockscreen" android:icon="@drawable/lockscreen" android:taskAffinity=".LockScreen" >
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".Power" android:theme="@android:style/Theme.Dialog" android:label="@string/power" android:icon="@drawable/power" android:taskAffinity=".Power">
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".LcdBackLight" android:theme="@android:style/Theme.Dialog" android:label="@string/lcdbacklight" android:icon="@drawable/lcdbacklight" android:launchMode="singleTask">
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:theme="@android:style/Theme.Dialog" android:label="@string/app_name" android:icon="@drawable/icon" android:name=".ShortCutCreater" android:taskAffinity=".ShortCutCreater"/>

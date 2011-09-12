@@ -34,9 +34,8 @@
 				<CheckBoxPreference android:key="pVoiceKey" android:title="Voice key/IME switch key(*) "
 					android:summaryOn="(MotoIME only)currently as IME switch key " android:summaryOff="(MotoIME only)currently as voice key"
 					android:defaultValue="false" />
-				<CheckBoxPreference android:key="pDebounce" android:title="Debounce Kernel Module"
-					android:summaryOn="by stargo from XDA" android:summaryOff="by stargo from XDA"
-					android:defaultValue="false" />
+				<Preference android:key="pDebounce" android:title="Milestone 2 keypad debounce"
+					android:summary="Click to install 'Milestone 2 Debounce'(HwDebounce.apk)" />
 				<!-- 
 				<CheckBoxPreference android:key="pVolUpKey" android:title="use vol-up key to turn on screen"
 					android:summaryOn="Enable vol-up key to turn on screen" android:summaryOff="Disable vol-up key to turn on screen"
@@ -146,19 +145,10 @@
 				android:summary="please set first，then open torch"  android:dialogTitle="please select longest on time"
 				android:entries="@array/pFlashLightTime" android:entryValues="@array/pFlashLightTimeValue"/>
 		</PreferenceScreen>
-		<PreferenceScreen android:title="power manager">
-			<Preference android:key="pReboot" android:title="hot reboot"
-				android:summary="" android:defaultValue="" />
-			<Preference android:key="pRebootToRecovery" android:title="reboot to recovery"
-				android:summary="" android:defaultValue="" />
-			
-			<!--
-			<Preference android:key="pRebootToBootloader" android:title="reboot to bootloader"
-				android:summary="" android:defaultValue="" />
-			<Preference android:key="pBusyBox" android:title="Install busybox"
-				android:summary="" android:defaultValue="" />
-			-->
-		</PreferenceScreen>
+		<Preference android:key="pPower" android:title="power manager" 
+			android:summary="Reboot/Recovery" />
+		<Preference android:key="pLcdBacklight" android:title="Lcd Backlight" 
+			android:summary="Break lowest light (2~255)" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Advance tools">
 		<Preference android:key="pOverClock" android:title="Overclock toolbox"

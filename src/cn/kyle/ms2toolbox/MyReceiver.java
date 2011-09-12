@@ -40,7 +40,6 @@ public class MyReceiver extends BroadcastReceiver{
 		}else if (Intent.ACTION_BOOT_COMPLETED.equals(action)){
 			setBacklight(context,intent);
 			setMinFreeMem(context,intent);
-			setDebounce(context, intent);
 			setDefyMore(context, intent);
 			setOverClock(context,intent);
 		//}else if ("android.intent.action.NEW_OUTGOING_CALL".equals(action)){
@@ -334,17 +333,15 @@ public class MyReceiver extends BroadcastReceiver{
 		}
 	}
 	
-	private void setDebounce(Context context, Intent intent){
-		Module.setDebounce(getPrefFlagFile(context,Pref.pDebounce).exists(), context);
-	}
-	
 	private void setDefyMore(Context context, Intent intent) {
-		if (C.isExternalStorageWritable() && getPrefFlagFile(context,Pref.pDefyMore).exists()){
-			int defyMoreNum = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pDefyMoreNum), "4"));
-			Module.setDefyMore(true, context, defyMoreNum);
-		}else{
-			//防止其它方式造成触摸无法使用
-			Module.setDefyMore(false, null, 0);
+		if (!Module.isCMSeriesROM()){
+			if (C.isExternalStorageWritable() && getPrefFlagFile(context,Pref.pDefyMore).exists()){
+				int defyMoreNum = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pDefyMoreNum), "4"));
+				Module.setDefyMore(true, context, defyMoreNum);
+			}else{
+				//防止其它方式造成触摸无法使用
+				Module.setDefyMore(false, null, 0);
+			}
 		}
 	}
 	

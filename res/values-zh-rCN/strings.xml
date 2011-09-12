@@ -46,6 +46,8 @@
 	<string name="text_noSetting_2_3_x">2.3.x无此设置</string>
 	<string name="text_noNeedSetting_2_3_x">2.3.x无需此设置</string>
 	
+	<string name="text_basedCmNotSupported">基于CM的ROM不被支持</string>
+	
 	<string name="text_noInstall">没有安装{0}</string>
 		
 	<string name="power_btn_powerOff">快速关机</string>
@@ -64,9 +66,9 @@
 	<string name="oc_tip_noOverClock"> 未超频</string>
 	<string name="oc_tip_overClock"> 最大频率:{0}, 最大电压:{1}</string>
 	<string name="oc_tv_freqVsel">频率电压</string>
-	<string name="oc_tv_onekeyset">一键设置</string>
+	<string name="oc_tv_onekeyset">一键超频: </string>
+	<string name="oc_tv_onekeysaveenergy">一键节能: </string>
 	<string name="oc_chb_ocAutoApply">开机自动超频 （拔掉SD卡后不超频）</string>
-	<string name="oc_btn_current">当前</string>
 	<string name="oc_tv_custom">自定义设置</string>
 	<string name="oc_tv_custom_tip">您可以设置4个频率(MHz)和电压(Vsel)组合</string>
 	<string name="oc_tv_freq1">1 频率</string>
@@ -75,8 +77,10 @@
  	<string name="oc_tv_freq4">4 频率</string>
  	<string name="oc_btn_ocTest">测试（重启后恢复）</string>
  	<string name="oc_btn_ocApply">应用（永久生效）</string>
+ 	<string name="oc_btn_current">当前</string>
  	<string name="oc_btn_ocRestoreDefault">恢复默认（永久生效） </string>
  	<string name="oc_btn_ocHelp">帮助 </string>
+ 	<string name="oc_msg_ocOneKeyTip">点击“应用”或“测试”</string>
 
 	<string name="mfm_tv_mem1">前台程序(MB)</string>
 	<string name="mfm_tv_mem2">可见程序(MB)</string>

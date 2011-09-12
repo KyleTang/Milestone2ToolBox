@@ -49,9 +49,8 @@ public enum Pref {
 	pOverClock,
 	
 	pBusyBox,
-	pReboot,
-	pRebootToRecovery,
-	pRebootToBootloader,
+	pPower,
+	pLcdBacklight,
 	
 	pMinFreeMem,
 	

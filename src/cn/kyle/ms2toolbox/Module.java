@@ -41,21 +41,46 @@ public class Module {
 	public static String zh2en_voice = "key 167   VOICE             WAKE_DROPPED";
 	public static String zh2en_zh2en = "key 167   EXPLORER          WAKE_DROPPED";
 	
-	public static String DebounceKO_FILE = "debounce.ko";
+	public static String DebounceApk_FILE = "HwDebounce.apk";
+	public static String BpswApk_FILE = "BPSW-Switcher1.5.3.apk";
+	public static String Sd2romApk_FILE = "sd2rom-hack2.3.9.apk";
 	public static String DefyMoreKO_FILE = "defy_more.ko";
 	
-	public static boolean getVoiceZh2EnEnable(){
-		return C.runSuCommandReturnBoolean("busybox grep '"+zh2en_zh2en+"' /system/usr/keylayout/umts_milestone2-keypad.kl");
+	public static File CmRomFlagFile = new File("/system/etc/profile");
+	
+	/**
+	 * 是否为CM系列的ROM，基于CM的ROM返回true
+	 * @return
+	 */
+	public static boolean isCMSeriesROM(){
+		return CmRomFlagFile.exists();
 	}
 	
+	/**
+	 * 获得“中英文切换”生效状态
+	 * @return
+	 */
+	public static boolean getVoiceZh2EnEnable(){
+		return C.runSuCommandReturnBoolean("busybox grep '"+zh2en_zh2en+"' "
+				+(isCMSeriesROM()?qwerty:ms2keypad));
+	}
+	
+	/**
+	 * 设置“中英文切换”
+	 * @return
+	 */
 	public static boolean setVoiceZh2En(boolean set){
+		String keyPadFile = ms2keypad;
+		if (isCMSeriesROM()){
+			keyPadFile = qwerty;
+		}
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
-				"chmod 666 "+ms2keypad+" ; ")){
+				"chmod 666 "+keyPadFile+" ; ")){
 			return false;
 		}
 		if ( PropFile.replacePropLine(
-				ms2keypad,
+				keyPadFile,
 				null,
 				zh2en_key,
 				set?zh2en_zh2en:zh2en_voice, 
@@ -66,6 +91,11 @@ public class Module {
 		}
 	}
 	
+	/**
+	 * @deprecated 无效功能
+	 * @param set
+	 * @return
+	 */
 	public static boolean setVolupWakeup(boolean set){
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
@@ -84,6 +114,11 @@ public class Module {
 		}
 	}
 	
+	/**
+	 * @deprecated 无效功能
+	 * @param set
+	 * @return
+	 */
 	public static boolean setVoldownWakeup(boolean set){
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
@@ -102,20 +137,35 @@ public class Module {
 		}
 	}
 	
+	/**
+	 * 获取相机键点亮屏幕键生效状态
+	 * @param set
+	 * @return
+	 */
 	public static boolean getCameraKeyWakeupEnable(){
-		return C.runSuCommandReturnBoolean("busybox grep '"+cameraWakeupSet_Focus+"' /system/usr/keylayout/umts_milestone2-keypad.kl");
+		return C.runSuCommandReturnBoolean("busybox grep '"+cameraWakeupSet_Camera+"' "+qwerty);
 	}
 	
+	/**
+	 * 设置相机键点亮屏幕
+	 * @param set
+	 * @return
+	 */
 	public static boolean setCameraKeyWakeup(boolean set){
+		File f1 = new File(ms2keypad);
+		File f2 = new File(qwerty);
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
-				"chmod 666 "+qwerty+" ; "+
-				"chmod 666 "+ms2keypad+" ; ")){
+				(f1.exists()?"chmod 666 "+ms2keypad+" ; " :"")+
+				(f2.exists()?"chmod 666 "+qwerty+" ; " :"")
+				)){
 			return false;
 		}
-		PropFile pf = new PropFile();
-		if (pf.load(ms2keypad)
-				&& pf.replaceLine(
+		
+		boolean bMs2keypad = true;
+		if (f1.exists()){
+			PropFile pf = new PropFile();
+			bMs2keypad = pf.load(ms2keypad) && pf.replaceLine(
 					cameraWakeupUnset_Focus, 
 					set?cameraWakeupSet_Focus:cameraWakeupUnset_Focus, 
 					FindMode.StartsWith, ReplaceMode.Line, false, false)
@@ -123,14 +173,22 @@ public class Module {
 					cameraWakeupUnset_Camera, 
 					set?cameraWakeupSet_Camera:cameraWakeupUnset_Camera, 
 					FindMode.StartsWith, ReplaceMode.Line, false, false)
-				&& pf.save() 
-				&& PropFile.replacePropLine(
-						qwerty,
-						qwerty,
-						cameraWakeupUnset_Camera, 
-						set?cameraWakeupSet_Camera:cameraWakeupUnset_Camera, 
-						FindMode.StartsWith, ReplaceMode.Line, false, false)
-			)
+				&& pf.save();
+		}
+		boolean bQwerty = true;
+		if (f2.exists()){
+			PropFile pf2 = new PropFile();
+			bQwerty = pf2.load(qwerty) && pf2.replaceLine(
+					cameraWakeupUnset_Focus, 
+					set?cameraWakeupSet_Focus:cameraWakeupUnset_Focus, 
+					FindMode.StartsWith, ReplaceMode.Line, false, false)
+				&& pf2.replaceLine(
+					cameraWakeupUnset_Camera, 
+					set?cameraWakeupSet_Camera:cameraWakeupUnset_Camera, 
+					FindMode.StartsWith, ReplaceMode.Line, false, false)
+				&& pf2.save();
+		}
+		if (bMs2keypad&&bQwerty&&(f1.exists()||f2.exists()))
 		{
 			//OK
 			return true;
@@ -140,6 +198,11 @@ public class Module {
 		}
 	}
 	
+	/**
+	 * 设置多媒体引擎的状态
+	 * @param set
+	 * @return
+	 */
 	public static boolean setStagefright(boolean set){
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
@@ -160,6 +223,11 @@ public class Module {
 		return false;
 	}
 	
+	/**
+	 * 设置DalvikVMHeap的最大值
+	 * @param value
+	 * @return
+	 */
 	public static boolean setDalvikVMHeapMax(int value){
 		if (value<30) value = 30;
 		if (value>100) value = 30;
@@ -213,6 +281,11 @@ public class Module {
 		return false;
 	}
 	
+	/**
+	 * @deprecated 暂未使用
+	 * @param set
+	 * @return
+	 */
 	public static boolean setBootupTone(String set){
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
@@ -293,6 +366,11 @@ public class Module {
 						new File("/sys/class/leds/lcd-backlight/brightness"),"2"));
 	}
 	
+	/**
+	 * 屏蔽相机声音
+	 * @param set
+	 * @return
+	 */
 	public static boolean setCameraClickDisable(boolean set){
 //		if (set){
 //			setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
@@ -310,6 +388,10 @@ public class Module {
 		return setFileDisable(new File("/system/media/audio/ui/camera_click.ogg"),set);
 	}
 	
+	/**
+	 * 获取“屏蔽相机声音”
+	 * @return
+	 */
 	public static boolean getCameraClickDisable(){
 //		return getFileDisable(new File("/system/media/audio/ui/camera_click.ogg"))
 //			&& getFileDisable(new File("/system/media/audio/notifications/camera_click.ogg"));
@@ -339,6 +421,12 @@ public class Module {
 		return getFileDisable(new File("/system/media/audio/ui/VideoRecord.ogg"));
 	}
 	
+	/**
+	 * 工具方法，设置文件状态
+	 * @param f
+	 * @param disable
+	 * @return
+	 */
 	public static boolean setFileDisable(File f ,boolean disable) {
 		File fdisable = new File(f.getAbsoluteFile()+".disable");
 		if ((!f.exists())&&(!fdisable.exists())) return false;
@@ -361,6 +449,13 @@ public class Module {
 		return !f.exists();
 	}
 	
+	/**
+	 * 工具方法，设置标志状态
+	 * 使用一个文件作为标记的状态，文件存在则为true，不存在则为false
+	 * @param checked
+	 * @param flag
+	 * @return
+	 */
 	public static boolean setPrefFlag(boolean checked, File flag) {
 		if (checked) {
 			try {
@@ -377,6 +472,12 @@ public class Module {
 		return false;
 	}
 	
+	/**
+	 * 工具方法，在标记文件中存在设置值
+	 * @param flag
+	 * @param value
+	 * @return
+	 */
 	public static boolean setPrefFlagValue(File flag, String value) {
 		if (flag.exists()){
 			FileWriter fw;
@@ -429,10 +530,10 @@ public class Module {
 		 * sendevent /dev/input/event2 1 107 0 
 		 * 
 		 * sendevent [device] [type] [code] [value]
-		 * device: /dev/input/event2 maybe physical button
-		 * type: 1 maybe physical button
-		 * code: key code 
-		 * value: 1 press down ,0 press up 
+		 *  - device: /dev/input/event2 maybe physical button
+		 *  - type: 1 maybe physical button
+		 *  - code: key code 
+		 *  - value: 1 press down ,0 press up 
 		 */
 		C.runSuCommandReturnBoolean("sendevent /dev/input/event2 1 107 1 ; sendevent /dev/input/event2 1 107 0 ;");
 	}
@@ -514,26 +615,28 @@ public class Module {
 		return C.runSuCommandReturnBoolean(sb.toString());
 	}
 	
-	public static File getDebounceKOFile(Context context){
-		return new File(context.getFilesDir().getAbsolutePath(),DebounceKO_FILE);
-	}
-	
-	public static String getDebounceKO(Context context){
-		File f = getDebounceKOFile(context);
+	public static File getDebounceApkFile(Context context){
+		File f = new File(context.getFilesDir().getAbsolutePath(),DebounceApk_FILE);
 		if (!f.exists() ){
-			C.unpackFile(context, DebounceKO_FILE, "555");
+			C.unpackFile(context, DebounceApk_FILE, "555");
 		}
-		return f.getAbsolutePath();
+		return f;
 	}
 	
-	public static boolean setDebounce(boolean isChecked,Context context){
-		StringBuilder sb = new StringBuilder();
-		if (isChecked){
-			sb.append("rmmod debounce ; \n insmod "+getDebounceKO(context)+" debounce_delay=10 ; \n");
-		}else{
-			sb.append("rmmod debounce ; \n");
+	public static File getBpswApkFile(Context context){
+		File f = new File(context.getFilesDir().getAbsolutePath(),BpswApk_FILE);
+		if (!f.exists() ){
+			C.unpackFile(context, BpswApk_FILE, "555");
 		}
-		return C.runSuCommandReturnBoolean(sb.toString());
+		return f;
+	}
+	
+	public static File getSd2romApkFile(Context context){
+		File f = new File(context.getFilesDir().getAbsolutePath(),Sd2romApk_FILE);
+		if (!f.exists() ){
+			C.unpackFile(context, Sd2romApk_FILE, "555");
+		}
+		return f;
 	}
 	
 	public static File getDefyMoreKOFile(Context context){

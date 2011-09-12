@@ -34,9 +34,8 @@
 				<CheckBoxPreference android:key="pVoiceKey" android:title="语音键/中英切换键(*) "
 					android:summaryOn="(仅摩托输入法)当前为中英文切换键 " android:summaryOff="(仅摩托输入法)当前为语音键"
 					android:defaultValue="false" />
-				<CheckBoxPreference android:key="pDebounce" android:title="防止按键抖动(解决连击)"
-					android:summaryOn="来自XDA的解决方案" android:summaryOff="来自XDA的解决方案"
-					android:defaultValue="false" />
+				<Preference android:key="pDebounce" android:title="按键防抖动(解决连击)"
+					android:summary="点击安装Milestone 2 Debounce(HwDebounce.apk)" />
 				<!-- 
 				<CheckBoxPreference android:key="pVolUpKey" android:title="音量增大键点亮屏幕"
 					android:summaryOn="允许音量增大键点亮屏幕" android:summaryOff="禁用音量增大键点亮屏幕"
@@ -146,19 +145,10 @@
 				android:summary="请先设置，然后再打开手电筒"  android:dialogTitle="请选择最长点亮时间"
 				android:entries="@array/pFlashLightTime" android:entryValues="@array/pFlashLightTimeValue"/>
 		</PreferenceScreen>
-		<PreferenceScreen android:title="电源功能">
-			<Preference android:key="pReboot" android:title="快速重启手机"
-				android:summary="" android:defaultValue="" />
-			<Preference android:key="pRebootToRecovery" android:title="重启到恢复模式"
-				android:summary="" android:defaultValue="" />
-			
-			<!--
-			<Preference android:key="pRebootToBootloader" android:title="重启到bootloader模式"
-				android:summary="" android:defaultValue="" />
-			<Preference android:key="pBusyBox" android:title="安装busybox"
-				android:summary="" android:defaultValue="" />
-			-->
-		</PreferenceScreen>
+		<Preference android:key="pPower" android:title="电源功能" 
+			android:summary="重启/恢复模式" />
+		<Preference android:key="pLcdBacklight" android:title="屏幕背光调节" 
+			android:summary="突破屏幕超低亮度，夜间读书必备" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="高级工具">
 		<Preference android:key="pOverClock" android:title="超频工具箱"

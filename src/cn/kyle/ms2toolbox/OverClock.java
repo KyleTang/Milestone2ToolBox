@@ -94,6 +94,12 @@ public class OverClock extends Activity {
 				fillFreqVselIntoEditText(OCM.FV_1300);
 			}
 		});
+		Button btnOc800 = (Button)findViewById(R.id.btnOc800);
+		btnOc800.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				fillFreqVselIntoEditText(OCM.FV_800);
+			}
+		});
 		
 		Button btnOcCurrentSystem = (Button)findViewById(R.id.btnOcCurrentSystem);
 		btnOcCurrentSystem.setOnClickListener(new OnClickListener(){
@@ -173,6 +179,7 @@ public class OverClock extends Activity {
 			this.edFreqVsel[i][0].setText(getFreq(profile,i));
 			this.edFreqVsel[i][1].setText(getVsel(profile,i)); 
 		}
+		myToast(R.string.oc_msg_ocOneKeyTip);
 	}
 	
 	public String getFreq(int profile, int level){
