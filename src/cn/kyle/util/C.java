@@ -172,4 +172,9 @@ public class C {
 		String str = Environment.getExternalStorageState();
 		return "mounted".equals(str);
 	}
+	
+	public static boolean hasSdCard(){
+		String cmd = "busybox ls -l /dev/block/mmcblk0 | busybox grep block";
+		return runSuCommandReturnBoolean(cmd);
+	}
 }

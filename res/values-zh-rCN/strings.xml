@@ -6,7 +6,7 @@
     <string name="power">电源</string>
     <string name="lcdbacklight">屏幕背光调节</string>
     
-	<string name="title_QuickNavPanel">快捷设置\n(请设置本项为默认设置)</string>
+	<string name="title_QuickNavPanel">M2T快捷设置\n(请设置本项为默认设置)</string>
 	<string name="shortcut_title_ShortCutCreater">里程碑2工具箱</string>
 	
 	<string name="text_version">版本：{0}</string>

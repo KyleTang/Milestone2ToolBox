@@ -94,6 +94,12 @@ public class OverClock extends Activity {
 				fillFreqVselIntoEditText(OCM.FV_1300);
 			}
 		});
+		Button btnOc600 = (Button)findViewById(R.id.btnOc600);
+		btnOc600.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				fillFreqVselIntoEditText(OCM.FV_600);
+			}
+		});
 		Button btnOc800 = (Button)findViewById(R.id.btnOc800);
 		btnOc800.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {

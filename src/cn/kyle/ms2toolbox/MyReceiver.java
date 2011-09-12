@@ -90,7 +90,7 @@ public class MyReceiver extends BroadcastReceiver{
 	}
 	
 	private void setOverClock(Context context, Intent intent) {
-		if (C.isExternalStorageWritable() && getPrefFlagFile(context,Pref.pOverClock).exists()){
+		if (C.hasSdCard() && getPrefFlagFile(context,Pref.pOverClock).exists()){
 			OCM.ocLoadFreqVsel(context);
 			OCM.ocApplyToSystem(context);
 		}
@@ -335,7 +335,7 @@ public class MyReceiver extends BroadcastReceiver{
 	
 	private void setDefyMore(Context context, Intent intent) {
 		if (!Module.isCMSeriesROM()){
-			if (C.isExternalStorageWritable() && getPrefFlagFile(context,Pref.pDefyMore).exists()){
+			if (C.hasSdCard() && getPrefFlagFile(context,Pref.pDefyMore).exists()){
 				int defyMoreNum = Integer.parseInt(Module.getPrefFlagValue(getPrefFlagFile(context,Pref.pDefyMoreNum), "4"));
 				Module.setDefyMore(true, context, defyMoreNum);
 			}else{
