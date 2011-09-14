@@ -75,10 +75,15 @@
 	<string name="oc_tv_freq2">Clock 2</string>
  	<string name="oc_tv_freq3">Clock 3</string>
  	<string name="oc_tv_freq4">Clock 4</string>
+ 	<string name="oc_btn_ocProfile1">Profile1 </string>
+ 	<string name="oc_btn_ocProfile2">Profile2 </string>
+ 	<string name="oc_btn_ocProfile3">Profile3 </string>
+ 	<string name="oc_btn_ocProfile4">Profile4 </string>
  	<string name="oc_btn_ocTest">Test(Reboot restore) </string>
  	<string name="oc_btn_ocApply">Apply(Forever) </string>
  	<string name="oc_btn_current">Current</string>
- 	<string name="oc_btn_ocRestoreDefault">Restore(Forever) </string>
+ 	<string name="oc_btn_ocRestoreDefault">Restore </string>
+ 	<string name="oc_btn_ocSaveProfile">Profile </string>
  	<string name="oc_btn_ocHelp">Help </string>
  	<string name="oc_msg_ocOneKeyTip">Please click \'Apply\' or \'Test\' </string>
 

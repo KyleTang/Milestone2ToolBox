@@ -88,7 +88,7 @@ public class OCM {
 	 */
 	public static void ocSaveFreqVsel(Context context){
 		StringBuffer sb = new StringBuffer();
-		for(int i=0;i<4;i++){
+		for(int i=0;i<FreqVselCurrent.length;i++){
 			sb.append(FreqVselCurrent[i][Freq]).append(",");
 			sb.append(FreqVselCurrent[i][Vsel]).append(";");
 		}
@@ -110,14 +110,14 @@ public class OCM {
 		String value = Module.getPrefFlagValue(getConfigFile(context),"");
 		if (!value.equals("")){
 			String a[] = value.split(";");
-			for(int i=0;i<4;i++){
+			for(int i=0;i<FreqVselCurrent.length;i++){
 				String fv[] = a[i].split(",");
 				FreqVselCurrent[i][Freq] = parseInt(fv[Freq],FreqVsel[FV_default][i][Freq]);
 				FreqVselCurrent[i][Vsel] = parseInt(fv[Vsel],FreqVsel[FV_default][i][Vsel]);
 			}
 		}else{
 			//没有配置文件，读取默认设置
-			for(int i=0;i<4;i++){
+			for(int i=0;i<FreqVselCurrent.length;i++){
 				FreqVselCurrent[i][Freq] = FreqVsel[FV_default][i][Freq];
 				FreqVselCurrent[i][Vsel] = FreqVsel[FV_default][i][Vsel];
 			}
@@ -136,7 +136,7 @@ public class OCM {
 	 */
 	public static void ocApplyToSystem(Context context){
 		// 安全保护，防止由于电压和频率设置过高，造成损害
-		for (int i=0;i<4;i++){
+		for (int i=0;i<OCM.FreqVselCurrent.length;i++){
 			if (OCM.FreqVselCurrent[i][OCM.Freq] > 2000 || OCM.FreqVselCurrent[i][OCM.Freq] < 1)
 				OCM.FreqVselCurrent[i][OCM.Freq] = 1000;
 			if (OCM.FreqVselCurrent[i][OCM.Vsel] > 100 || OCM.FreqVselCurrent[i][OCM.Vsel] < 1)

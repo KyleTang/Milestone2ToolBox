@@ -1,10 +1,13 @@
-package cn.kyle.ms2toolbox;
+package cn.kyle.ms2toolbox.ui;
 
 import java.io.File;
 import java.io.IOException;
 
 import com.mobclick.android.MobclickAgent;
 
+import cn.kyle.ms2toolbox.R;
+import cn.kyle.ms2toolbox.R.id;
+import cn.kyle.ms2toolbox.R.layout;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 

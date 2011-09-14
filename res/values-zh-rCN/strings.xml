@@ -75,10 +75,15 @@
 	<string name="oc_tv_freq2">2 频率</string>
  	<string name="oc_tv_freq3">3 频率</string>
  	<string name="oc_tv_freq4">4 频率</string>
+ 	<string name="oc_btn_ocProfile1">配置1 </string>
+ 	<string name="oc_btn_ocProfile2">配置2 </string>
+ 	<string name="oc_btn_ocProfile3">配置3 </string>
+ 	<string name="oc_btn_ocProfile4">配置4 </string>
  	<string name="oc_btn_ocTest">测试（重启后恢复）</string>
  	<string name="oc_btn_ocApply">应用（永久生效）</string>
  	<string name="oc_btn_current">当前</string>
- 	<string name="oc_btn_ocRestoreDefault">恢复默认（永久生效） </string>
+ 	<string name="oc_btn_ocRestoreDefault">恢复默认 </string>
+ 	<string name="oc_btn_ocSaveProfile">保存配置 </string>
  	<string name="oc_btn_ocHelp">帮助 </string>
  	<string name="oc_msg_ocOneKeyTip">点击“应用”或“测试”</string>
 

@@ -44,52 +44,71 @@
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<TextView android:text="@string/oc_tv_freq1" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etF1" android:text="" 
-			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
-		<TextView android:text="Vsel" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etV1" android:layout_width="40dip" android:text="" 
-			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:orientation="vertical" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="horizontal" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:text="@string/oc_tv_freq1" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etF1" android:text="" 
+					android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+				<TextView android:text="Vsel" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etV1" android:layout_width="40dip" android:text="" 
+					android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+			</LinearLayout>
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="horizontal" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:text="@string/oc_tv_freq2" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etF2" android:text="" 
+					android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+				<TextView android:text="Vsel" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etV2" android:layout_width="40dip" android:text="" 
+					android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+			</LinearLayout>
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="horizontal" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:text="@string/oc_tv_freq3" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etF3" android:text="" 
+					android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+				<TextView android:text="Vsel" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etV3" android:layout_width="40dip" android:text="" 
+					android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+			</LinearLayout>
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="horizontal" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:text="@string/oc_tv_freq4" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etF4" android:text="" 
+					android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
+				<TextView android:text="Vsel" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+				<EditText android:id="@+id/etV4" android:layout_width="40dip" android:text="" 
+					android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
+			</LinearLayout>
+		</LinearLayout>
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:orientation="vertical" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<Button android:id="@+id/btnOcProfile1" android:text="@string/oc_btn_ocProfile1"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<Button android:id="@+id/btnOcProfile2" android:text="@string/oc_btn_ocProfile2"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<Button android:id="@+id/btnOcProfile3" android:text="@string/oc_btn_ocProfile3"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<Button android:id="@+id/btnOcProfile4" android:text="@string/oc_btn_ocProfile4"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		</LinearLayout>
 	</LinearLayout>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<TextView android:text="@string/oc_tv_freq2" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etF2" android:text="" 
-			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
-		<TextView android:text="Vsel" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etV2" android:layout_width="40dip" android:text="" 
-			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
-	</LinearLayout>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<TextView android:text="@string/oc_tv_freq3" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etF3" android:text="" 
-			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
-		<TextView android:text="Vsel" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etV3" android:layout_width="40dip" android:text="" 
-			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
-	</LinearLayout>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal" android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<TextView android:text="@string/oc_tv_freq4" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etF4" android:text="" 
-			android:layout_height="wrap_content" android:layout_width="60dip" android:numeric="integer" android:singleLine="true" android:maxLength="4"/>
-		<TextView android:text="Vsel" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<EditText android:id="@+id/etV4" android:layout_width="40dip" android:text="" 
-			android:layout_height="wrap_content" android:numeric="integer" android:singleLine="true" android:maxLength="2"/>
-	</LinearLayout>
-	
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
@@ -104,6 +123,8 @@
 		<Button android:id="@+id/btnOcCurrentSystem" android:text="@string/oc_btn_current"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<Button android:id="@+id/btnOcUnLoad" android:text="@string/oc_btn_ocRestoreDefault"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<Button android:id="@+id/btnOcSaveProfile" android:text="@string/oc_btn_ocSaveProfile"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<Button android:id="@+id/btnOcHelp" android:text="@string/oc_btn_ocHelp"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />

@@ -16,6 +16,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import cn.kyle.ms2toolbox.ui.LcdBackLight;
+import cn.kyle.ms2toolbox.ui.ListView;
+import cn.kyle.ms2toolbox.ui.MinFreeMem;
+import cn.kyle.ms2toolbox.ui.OverClock;
+import cn.kyle.ms2toolbox.ui.Power;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 import cn.kyle.util.MultiLang;

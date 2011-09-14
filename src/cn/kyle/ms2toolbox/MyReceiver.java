@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
 
+import cn.kyle.ms2toolbox.ui.MinFreeMem;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 import android.content.BroadcastReceiver;

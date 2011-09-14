@@ -1,8 +1,10 @@
-package cn.kyle.ms2toolbox;
+package cn.kyle.ms2toolbox.ui;
 
 import java.io.File;
 import java.io.IOException;
 
+import cn.kyle.ms2toolbox.Event;
+import cn.kyle.ms2toolbox.Module;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 

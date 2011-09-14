@@ -1,4 +1,4 @@
-package cn.kyle.ms2toolbox;
+package cn.kyle.ms2toolbox.ui;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,6 +7,15 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import com.mobclick.android.MobclickAgent;
+
+import cn.kyle.ms2toolbox.Event;
+import cn.kyle.ms2toolbox.Module;
+import cn.kyle.ms2toolbox.OCM;
+import cn.kyle.ms2toolbox.Pref;
+import cn.kyle.ms2toolbox.R;
+import cn.kyle.ms2toolbox.R.id;
+import cn.kyle.ms2toolbox.R.layout;
+import cn.kyle.ms2toolbox.R.string;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 import cn.kyle.util.MultiLang;
@@ -133,6 +142,7 @@ public class OverClock extends Activity {
 			public void onClick(View v) {
 				//Oc
 				ocSettingToFreqVselCurrent();
+				cbOcAutoApply.setChecked(false);
 				OCM.ocApplyToSystem(OverClock.this);
 				OverClock.this.refreshStatus();
 			}
@@ -143,12 +153,14 @@ public class OverClock extends Activity {
 			public void onClick(View v) {
 				//Oc and save setting
 				ocSettingToFreqVselCurrent();
+				cbOcAutoApply.setChecked(true);
 				OCM.ocApplyToSystem(OverClock.this);
 				OCM.ocSaveFreqVsel(OverClock.this);
 				OverClock.this.refreshStatus();
 			}
 		});
 		
+		//oc_btn_ocRestoreDefault
 		Button btnOcUnLoad = (Button)findViewById(R.id.btnOcUnLoad);
 		btnOcUnLoad.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
@@ -169,6 +181,41 @@ public class OverClock extends Activity {
 				d.show();
 			}
 		});
+		
+		Button btnOcSaveProfile = (Button)findViewById(R.id.btnOcSaveProfile);
+		btnOcSaveProfile.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				
+			}
+		});
+		
+		Button btnOcProfile1 = (Button)findViewById(R.id.btnOcProfile1);
+		btnOcProfile1.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				
+			}
+		});
+		
+		Button btnOcProfile2 = (Button)findViewById(R.id.btnOcProfile2);
+		btnOcProfile2.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				
+			}
+		});
+		
+		Button btnOcProfile3 = (Button)findViewById(R.id.btnOcProfile3);
+		btnOcProfile3.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				
+			}
+		});
+		
+		Button btnOcProfile4 = (Button)findViewById(R.id.btnOcProfile4);
+		btnOcProfile4.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				
+			}
+		});
 	}
 	
 	public void refreshStatus(){
@@ -181,7 +228,7 @@ public class OverClock extends Activity {
 	}
 	
 	public void fillFreqVselIntoEditText(int profile){
-		for(int i=0;i<4;i++){
+		for(int i=0;i<this.edFreqVsel.length;i++){
 			this.edFreqVsel[i][0].setText(getFreq(profile,i));
 			this.edFreqVsel[i][1].setText(getVsel(profile,i)); 
 		}
@@ -200,7 +247,7 @@ public class OverClock extends Activity {
 	 * 将文本框中的设置值保存到FreqVselCurrent
 	 */
 	public void ocSettingToFreqVselCurrent(){
-		for(int i=0;i<4;i++){
+		for(int i=0;i<OCM.FreqVselCurrent.length;i++){
 			OCM.FreqVselCurrent[i][OCM.Freq] = parseEditTextToInt(this.edFreqVsel[i][OCM.Freq],OCM.FreqVsel[OCM.FV_default][i][OCM.Freq]);
 			OCM.FreqVselCurrent[i][OCM.Vsel] = parseEditTextToInt(this.edFreqVsel[i][OCM.Vsel],OCM.FreqVsel[OCM.FV_default][i][OCM.Vsel]);
 		}
@@ -230,7 +277,7 @@ public class OverClock extends Activity {
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			for(int i=0;i<4;i++){
+			for(int i=0;i<OCM.FreqVselCurrent.length;i++){
 				OCM.FreqVselCurrent[i][OCM.Freq]=0;
 				OCM.FreqVselCurrent[i][OCM.Vsel]=0;
 			}
@@ -252,7 +299,7 @@ public class OverClock extends Activity {
 	 * 将FreqVselCurrent填写到EditText
 	 */
 	public void fillCurrentFreqVselIntoEditText(){
-		for(int i=0;i<4;i++){
+		for(int i=0;i<this.edFreqVsel.length;i++){
 			this.edFreqVsel[i][0].setText(""+OCM.FreqVselCurrent[i][OCM.Freq]);
 			this.edFreqVsel[i][1].setText(""+OCM.FreqVselCurrent[i][OCM.Vsel]); 
 		}
