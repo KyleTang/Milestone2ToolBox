@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.http.HttpEntity;
@@ -31,6 +34,8 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
@@ -47,6 +52,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobclick.android.MobclickAgent;
@@ -72,6 +78,11 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 	public String sd2rom_apk = "/mnt/sdcard/tmp_sd2rom-hack.apk";
 	
 	private MultiLang ml = null;
+	private AlertDialog appListDialog = null;
+	private List<IntentInfo> appList = null;
+	private long lastGetAppListDialogTime = 0;
+	private Preference currentPreference = null;
+	private Pref currentPref = null;
 	
 	public Handler handler = new Handler();
 	
@@ -532,6 +543,20 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 		}
 		
+		//pProxyPerfManager
+		if (key.equals(Pref.pProxyPerfManager.toString())){
+			currentPreference = preference;
+			currentPref = Pref.pProxyPerfManager;
+			this.showAppListDialog();
+		}
+		
+		//pProxyAppStore
+		if (key.equals(Pref.pProxyAppStore.toString())){
+			currentPreference = preference;
+			currentPref = Pref.pProxyAppStore;
+			this.showAppListDialog();
+		}
+		
 		if (key.equals(Pref.pCallOnVibrate.toString())){
 			if (((CheckBoxPreference)preference).isChecked()){
 				Event.count(this, Event.CallOnVibrate);
@@ -828,6 +853,33 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			cp.setSummaryOff(ml.t(R.string.text_noInstall,new String[]{"imoseyon"}));
 			cp.setSummaryOn(ml.t(R.string.text_noInstall,new String[]{"imoseyon"}));
 		}
+		//
+		p = ((Preference)findPreference(Pref.pProxyPerfManager.toString()));
+		String perfManagerName = "";
+		String line1 = Module.getPrefFlagValue(Module.FilePerformanceManagerProxy, "");
+		if (line1!=null && line1.startsWith("pkg=")){
+			perfManagerName = line1.substring(4);
+			try {
+				perfManagerName = (String) this.getPackageManager().getApplicationLabel(this.getPackageManager().getApplicationInfo(perfManagerName, PackageManager.GET_META_DATA ));
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		p.setSummary(ml.t(R.string.text_currentApp, new String[]{perfManagerName,"KTPerformanceManagerProxy.apk"}));
+		
+		//
+		p = ((Preference)findPreference(Pref.pProxyAppStore.toString()));
+		String appStoreName = "";
+		String line2 = Module.getPrefFlagValue(Module.FileAppstoreProxy, "");
+		if (line2!=null && line2.startsWith("pkg=")){
+			appStoreName = line2.substring(4);
+			try {
+				appStoreName = (String) this.getPackageManager().getApplicationLabel(this.getPackageManager().getApplicationInfo(appStoreName, PackageManager.GET_META_DATA ));
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		p.setSummary(ml.t(R.string.text_currentApp, new String[]{appStoreName,"KTAppStoreProxy.apk"}));	
 		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pCallOnVibrate.toString()))
@@ -877,6 +929,76 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			intent.setDataAndType(uri,"application/vnd.android.package-archive");
 		}
 		p.setIntent(intent);
+	}
+	
+	private static class IntentInfo {
+		String name=null;
+		String pkg=null;
+		String cls=null;
+		public IntentInfo(String name, String pkg, String cls){
+			this.name=name;
+			this.pkg=pkg;
+			this.cls=cls;
+		}
+		
+		public static String[] getNameArray(List<IntentInfo> ii){
+			ArrayList<String> al = new ArrayList<String>(ii.size());
+			Iterator<IntentInfo> itr = ii.iterator();
+			while(itr.hasNext()){
+				al.add(itr.next().name);
+			}
+			return al.toArray(new String[0]);
+		}
+		
+		public String toString(){
+			return "pkg="+pkg+"\n"+"cls="+cls;
+		}
+	}
+	
+	
+	
+	public void showAppListDialog(){
+		if (System.currentTimeMillis()-lastGetAppListDialogTime>2*60*1000 || appListDialog == null){
+			PackageManager pm = this.getPackageManager();
+			List<PackageInfo> pis = pm.getInstalledPackages(PackageManager.GET_ACTIVITIES);
+	        Iterator<PackageInfo> itr = pis.iterator();
+	        PackageInfo pi = null;
+	        ActivityInfo ai = null;
+	        appList = new ArrayList<IntentInfo>(pis.size());
+	        while(itr.hasNext()){
+	        	pi = itr.next();
+	        	Intent intent = this.getPackageManager().getLaunchIntentForPackage(pi.packageName);
+	        	if (intent!=null){
+	        		ComponentName cn = intent.getComponent();
+	        		appList.add(new IntentInfo((String)pi.applicationInfo.loadLabel(pm),pi.packageName,cn.getClassName()));
+	        	}
+	        }
+			appListDialog = new AlertDialog.Builder(SettingsPreferenceActivity.this)
+				.setTitle(R.string.dlg_title_selectApp)
+				.setItems(IntentInfo.getNameArray(appList), new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface arg0, int which){
+						IntentInfo ii = appList.get(which);
+						String apkName = null;
+						if (Pref.pProxyPerfManager.equals(currentPref)){
+							C.runSuCommandReturnBoolean("echo \""+ii.toString()+"\" > "+Module.FilePerformanceManagerProxy.getAbsolutePath());
+							apkName = "KTPerformanceManagerProxy.apk";
+						}
+						if (Pref.pProxyAppStore.equals(currentPref)){
+							C.runSuCommandReturnBoolean("echo \""+ii.toString()+"\" > "+Module.FileAppstoreProxy.getAbsolutePath());
+							apkName = "KTAppStoreProxy.apk";
+						}
+						currentPreference.setSummary(ml.t(R.string.text_currentApp, new String[]{ii.name,apkName}));
+						arg0.dismiss();
+					}
+				})
+				.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener(){
+	                 public void onClick(DialogInterface arg0, int arg1) {
+	                     arg0.dismiss();
+	                 }
+	            }).create();
+			lastGetAppListDialogTime = System.currentTimeMillis();
+		}
+		appListDialog.show();
 	}
 	
 	public void myToast(String tipInfo) {

@@ -28,6 +28,8 @@ public enum Pref {
 	pFixBlurHomeIconOrder,
 	pFixGms,
 	pFixImoseyonLog,
+	pProxyPerfManager,
+	pProxyAppStore,
 	
 	pCallOnVibrate,
 	pCallOnVibrateTime,

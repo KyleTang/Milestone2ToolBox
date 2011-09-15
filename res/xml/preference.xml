@@ -85,6 +85,10 @@
 		<CheckBoxPreference android:key="pFixImoseyonLog" android:title="Enable system log(*)"
 			android:summaryOn="Fixed（system log has been restored，recommend to keep tick）" android:summaryOff="Unfixed（recommend to tick.If you have already flashed imoseyon，which disable system log and cause debug failure,please tick it）"
 			android:defaultValue="false" />
+		<Preference android:key="pProxyPerfManager" android:title="Config Blur App 'ShortCut1'"
+			android:summary="current: " />
+		<Preference android:key="pProxyAppStore" android:title="Config Blur App 'ShortCut2'"
+			android:summary="current: "/>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Enhance function">
 		<PreferenceScreen android:title="Call vibration notification"

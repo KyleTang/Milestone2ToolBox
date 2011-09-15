@@ -30,8 +30,8 @@
 	<string name="msg_successfullyApplied">Successfully Applied</string>
 	<string name="msg_failedToApply">Failed to Apply</string>
 	
-	<string name="msg_tip_root">ROOT</string>
-	<string name="msg_tip_noRoot">No ROOT</string>
+	<string name="msg_tip_root">(ROOT)</string>
+	<string name="msg_tip_noRoot">(No ROOT)</string>
 	
 	<string name="msg_soundDisable_fail">Failed to Apply, sound file does not exist!</string>
 	
@@ -49,6 +49,9 @@
 	<string name="text_basedCmNotSupported">Based CM, not supported </string>
 	
 	<string name="text_noInstall">Not installed {0}</string>
+	
+	<string name="dlg_title_selectApp">Please select app</string>
+	<string name="text_currentApp">Current: {0} \n Must installed \'{1}\' </string>
 		
 	<string name="power_btn_powerOff">Quick shutdown</string>
 	<string name="power_btn_reboot">Quick reboot</string>

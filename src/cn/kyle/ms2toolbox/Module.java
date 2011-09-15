@@ -48,6 +48,8 @@ public class Module {
 	
 	public static File CmRomFlagFile = new File("/system/etc/profile");
 	public static File LcdBrightnessValueFile = new File("/tmp/m2t_brightness_value");
+	public static File FileAppstoreProxy = new File("/data/local/m2t_appstore_proxy");
+	public static File FilePerformanceManagerProxy = new File("/data/local/m2t_PerformanceManager_proxy");
 	
 	/**
 	 * 是否为CM系列的ROM，基于CM的ROM返回true

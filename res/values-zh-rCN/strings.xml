@@ -30,8 +30,8 @@
 	<string name="msg_successfullyApplied">设置成功</string>
 	<string name="msg_failedToApply">设置失败</string>
 	
-	<string name="msg_tip_root">已ROOT</string>
-	<string name="msg_tip_noRoot">没有ROOT</string>
+	<string name="msg_tip_root">(已ROOT)</string>
+	<string name="msg_tip_noRoot">(没有ROOT)</string>
 	
 	<string name="msg_soundDisable_fail">设置失败, 声音文件已经不存在！</string>
 	
@@ -49,6 +49,9 @@
 	<string name="text_basedCmNotSupported">基于CM的ROM不被支持</string>
 	
 	<string name="text_noInstall">没有安装{0}</string>
+	
+	<string name="dlg_title_selectApp">请选择应用程序</string>
+	<string name="text_currentApp">当前为：{0}\n请确保{1}已经安装</string>
 		
 	<string name="power_btn_powerOff">快速关机</string>
 	<string name="power_btn_reboot">快速重启</string>

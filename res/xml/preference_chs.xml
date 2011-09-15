@@ -85,6 +85,10 @@
 		<CheckBoxPreference android:key="pFixImoseyonLog" android:title="修复imoseyon禁用的日志(*)"
 			android:summaryOn="已修复（已经恢复系统日志，建议保持勾选状态）" android:summaryOff="未修复（建议勾选，如果刷过imoseyon包，会禁用系统日志，造成程序无法调试，请勾选本项）"
 			android:defaultValue="false" />
+		<Preference android:key="pProxyPerfManager" android:title="配置Blur程序菜单“快捷方式1”"
+			android:summary="当前为：" />
+		<Preference android:key="pProxyAppStore" android:title="配置Blur程序菜单“快捷方式2”"
+			android:summary="当前为："/>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="增强功能">
 		<PreferenceScreen android:title="通话震动提醒"
