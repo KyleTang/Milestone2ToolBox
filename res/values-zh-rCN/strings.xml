@@ -81,9 +81,9 @@
  	<string name="oc_btn_ocProfile4">配置4 </string>
  	<string name="oc_btn_ocTest">测试（重启后恢复）</string>
  	<string name="oc_btn_ocApply">应用（永久生效）</string>
- 	<string name="oc_btn_current">当前</string>
- 	<string name="oc_btn_ocRestoreDefault">恢复默认 </string>
- 	<string name="oc_btn_ocSaveProfile">保存配置 </string>
+ 	<string name="oc_btn_current">读取当前设置</string>
+ 	<string name="oc_btn_ocRestoreDefault">恢复默认频率 </string>
+ 	<string name="oc_btn_ocSaveProfile">保存自定义配置 </string>
  	<string name="oc_btn_ocHelp">帮助 </string>
  	<string name="oc_msg_ocOneKeyTip">点击“应用”或“测试”</string>
 
@@ -108,6 +108,9 @@
 	
 	<string name="lcd_title">屏幕背光调节(突破超低亮度)</string>
 	<string name="lcd_text_currentLcdLightValue">请选择或输入(2~255)\n当前背光亮度值: {0}</string>
+	<string name="lcd_text_currentMode_tip">当前背光调节模式：{0}</string>
+	<string name="lcd_text_currentMode_auto">自动</string>
+	<string name="lcd_text_currentMode_manual">手动</string>
 	<string name="lcd_text_tip">输入值：</string>
 	<string name="lcd_msg_needRoot">突破超低亮度，需要root权限</string>
 	

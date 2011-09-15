@@ -79,11 +79,11 @@
  	<string name="oc_btn_ocProfile2">Profile2 </string>
  	<string name="oc_btn_ocProfile3">Profile3 </string>
  	<string name="oc_btn_ocProfile4">Profile4 </string>
- 	<string name="oc_btn_ocTest">Test(Reboot restore) </string>
- 	<string name="oc_btn_ocApply">Apply(Forever) </string>
- 	<string name="oc_btn_current">Current</string>
- 	<string name="oc_btn_ocRestoreDefault">Restore </string>
- 	<string name="oc_btn_ocSaveProfile">Profile </string>
+ 	<string name="oc_btn_ocTest"> Test</string>
+ 	<string name="oc_btn_ocApply"> Apply</string>
+ 	<string name="oc_btn_current"> Current</string>
+ 	<string name="oc_btn_ocRestoreDefault"> Restore</string>
+ 	<string name="oc_btn_ocSaveProfile"> Save Profile </string>
  	<string name="oc_btn_ocHelp">Help </string>
  	<string name="oc_msg_ocOneKeyTip">Please click \'Apply\' or \'Test\' </string>
 
@@ -109,6 +109,9 @@
 	<string name="lcd_title">Lcd BackLight(lowest)</string>
 	<string name="lcd_text_currentLcdLightValue">Current light value: {0}</string>
 	<string name="lcd_text_tip">Input: </string>
+	<string name="lcd_text_currentMode_tip">Current light mode: {0}</string>
+	<string name="lcd_text_currentMode_auto">Auto</string>
+	<string name="lcd_text_currentMode_manual">Manual</string>
 	<string name="lcd_msg_needRoot">Break lowest brightness need root</string>
 	
 	<string name="feedback_umeng_title">Suggestion and Feedback</string>

@@ -47,6 +47,7 @@ public class Module {
 	public static String DefyMoreKO_FILE = "defy_more.ko";
 	
 	public static File CmRomFlagFile = new File("/system/etc/profile");
+	public static File LcdBrightnessValueFile = new File("/tmp/m2t_brightness_value");
 	
 	/**
 	 * 是否为CM系列的ROM，基于CM的ROM返回true
@@ -338,14 +339,15 @@ public class Module {
 						new File("/sys/class/leds/torch-flash/flash_light"),"0"));
 	}
 	
-	public static boolean setLcdBackLight(int value){
+	public static boolean setLcdBackLight(int value,boolean setReadOnly){
 		if (value>255) value = 255;
 		if (value<2) value = 2;
 		L.debug("set lcd-backlight value="+value);
 		return C.runSuCommandReturnBoolean(
+				"echo "+value+" > "+LcdBrightnessValueFile.getAbsolutePath()+" ; "+
 				"chmod 777 /sys/class/leds/lcd-backlight/brightness; "+
-				"echo "+value+" > /sys/class/leds/lcd-backlight/brightness ;" 
-				+"chmod 444 /sys/class/leds/lcd-backlight/brightness; "
+				"echo "+value+" > /sys/class/leds/lcd-backlight/brightness ;"+
+				(setReadOnly?"chmod 444 /sys/class/leds/lcd-backlight/brightness; ":"")
 				);
 	}
 	
@@ -354,15 +356,15 @@ public class Module {
 		if (value<2) value = 2;
 		L.debug("set lcd-backlight value="+value);
 		return C.runSuCommandReturnBoolean(
+				"rm -f "+LcdBrightnessValueFile.getAbsolutePath()+"; "+
 				"chmod 777 /sys/class/leds/lcd-backlight/brightness; "+
-				"echo "+value+" > /sys/class/leds/lcd-backlight/brightness ;" 
-				+"chmod 777 /sys/class/leds/lcd-backlight/brightness; "
+				"echo "+value+" > /sys/class/leds/lcd-backlight/brightness ;"
 				);
 	}
 	
 	public static int getLcdBackLightCurrentValue(){
 		return Integer.parseInt(
-				getPrefFlagValue(
+				readFileContentForce(
 						new File("/sys/class/leds/lcd-backlight/brightness"),"2"));
 	}
 	
@@ -506,6 +508,22 @@ public class Module {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		return defaultValue;
+	}
+	
+	/**
+	 * 强制读取文件内容
+	 * @param file
+	 * @param defaultValue
+	 * @return
+	 */
+	public static String readFileContentForce(File file, String defaultValue){
+		if (file.exists()){
+			String cmd = "cat "+file.getAbsolutePath()+" /tmp/tmpFileContent ; "+
+			"chmod 777 /tmp/tmpFileContent ; ";
+			C.runSuCommandReturnBoolean(cmd);	
+			return getPrefFlagValue(new File("/tmp/tmpFileContent"),defaultValue);
 		}
 		return defaultValue;
 	}

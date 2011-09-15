@@ -15,6 +15,7 @@ import cn.kyle.util.L;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiManager;
 import android.os.Vibrator;
@@ -55,9 +56,22 @@ public class MyReceiver extends BroadcastReceiver{
 			//
 		}else if ("android.intent.action.HEADSET_PLUG".equals(action)){
 			lowBatteryOff(context,intent);
+		}else if ("android.intent.action.SCREEN_OFF".equals(action)){
+			
+		}else if ("android.intent.action.SCREEN_ON".equals(action)){
+			L.debug("android.intent.action.SCREEN_ON");
+			if (Module.LcdBrightnessValueFile.exists()){
+				int value = 40;
+				try{
+					value = Integer.parseInt(Module.getPrefFlagValue(Module.LcdBrightnessValueFile, "40"));
+				}catch(Exception e){
+					
+				}
+				Module.setLcdBackLight(value, false);
+			}
 		}
 	}
-	
+
 	private void lowBatteryOff(Context context, Intent intent) {
 		//仅当设置为头戴耳机插入时生效，才有此标志位
 		if (getPrefFlagFile(context,Pref.pLowBatteryOff).exists()){

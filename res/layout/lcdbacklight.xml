@@ -9,6 +9,9 @@
 	<TextView android:id="@+id/lbl_tvCurrentLcdLightValue"
 		android:text="@string/lcd_text_currentLcdLightValue"
 		android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="24dp"/>
+	<TextView android:id="@+id/lbl_tvCurrentMode"
+		android:text="@string/lcd_text_currentMode_tip"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:textSize="24dp"/>
 	<SeekBar android:id="@+id/lbl_sbSelectValue" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<LinearLayout android:orientation="horizontal"
