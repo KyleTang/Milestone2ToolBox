@@ -79,9 +79,9 @@
  	<string name="oc_btn_ocProfile2">配置2 </string>
  	<string name="oc_btn_ocProfile3">配置3 </string>
  	<string name="oc_btn_ocProfile4">配置4 </string>
- 	<string name="oc_btn_ocTest">测试（重启后恢复）</string>
- 	<string name="oc_btn_ocApply">应用（永久生效）</string>
- 	<string name="oc_btn_current">读取当前设置</string>
+ 	<string name="oc_btn_ocTest">测试自定义</string>
+ 	<string name="oc_btn_ocApply">应用自定义</string>
+ 	<string name="oc_btn_current">读取当前值</string>
  	<string name="oc_btn_ocRestoreDefault">恢复默认频率 </string>
  	<string name="oc_btn_ocSaveProfile">保存自定义配置 </string>
  	<string name="oc_btn_ocHelp">帮助 </string>

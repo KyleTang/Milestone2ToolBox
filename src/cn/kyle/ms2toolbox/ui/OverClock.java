@@ -22,6 +22,7 @@ import cn.kyle.util.MultiLang;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -185,35 +186,53 @@ public class OverClock extends Activity {
 		Button btnOcSaveProfile = (Button)findViewById(R.id.btnOcSaveProfile);
 		btnOcSaveProfile.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				
+				new AlertDialog.Builder(OverClock.this)
+					.setTitle(R.string.oc_btn_ocSaveProfile)
+					.setItems(getResources().getStringArray(R.array.oc_profile), new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface arg0, int which){
+							ocSettingToFreqVselCurrent();
+							OCM.ocSaveProfile(which+1);
+							myToast(R.string.btn_ok);
+							arg0.dismiss();
+						}
+					})
+					.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener(){
+	                     public void onClick(DialogInterface arg0, int arg1) {
+	                         arg0.dismiss();
+	                     }
+	                }).show();
 			}
 		});
 		
 		Button btnOcProfile1 = (Button)findViewById(R.id.btnOcProfile1);
 		btnOcProfile1.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				
+				OCM.ocLoadFromProfile(1);
+				fillCurrentFreqVselIntoEditText();
 			}
 		});
 		
 		Button btnOcProfile2 = (Button)findViewById(R.id.btnOcProfile2);
 		btnOcProfile2.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				
+				OCM.ocLoadFromProfile(2);
+				fillCurrentFreqVselIntoEditText();
 			}
 		});
 		
 		Button btnOcProfile3 = (Button)findViewById(R.id.btnOcProfile3);
 		btnOcProfile3.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				
+				OCM.ocLoadFromProfile(3);
+				fillCurrentFreqVselIntoEditText();
 			}
 		});
 		
 		Button btnOcProfile4 = (Button)findViewById(R.id.btnOcProfile4);
 		btnOcProfile4.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				
+				OCM.ocLoadFromProfile(4);
+				fillCurrentFreqVselIntoEditText();
 			}
 		});
 	}

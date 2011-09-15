@@ -125,6 +125,49 @@ public class OCM {
 	}
 	
 	/**
+	 * 保存FreqVselCurrent设置到Profile文件
+	 */
+	public static void ocSaveProfile(int index){
+		StringBuffer sb = new StringBuffer();
+		for(int i=0;i<FreqVselCurrent.length;i++){
+			sb.append(FreqVselCurrent[i][Freq]).append(",");
+			sb.append(FreqVselCurrent[i][Vsel]).append(";");
+		}
+		File f = new File("/sdcard/ms2toolbox/overclock/profile"+index);
+		if (!f.exists()){
+			try {
+				f.getParentFile().mkdirs();
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		Module.setPrefFlagValue(f, sb.toString());
+	}
+	
+	/**
+	 * 从Profile文件中读取到FreqVselCurrent
+	 */
+	public static void ocLoadFromProfile(int index){
+		File f = new File("/sdcard/ms2toolbox/overclock/profile"+index);
+		String value = Module.getPrefFlagValue(f,"");
+		if (!value.equals("")){
+			String a[] = value.split(";");
+			for(int i=0;i<FreqVselCurrent.length;i++){
+				String fv[] = a[i].split(",");
+				FreqVselCurrent[i][Freq] = parseInt(fv[Freq],FreqVsel[FV_default][i][Freq]);
+				FreqVselCurrent[i][Vsel] = parseInt(fv[Vsel],FreqVsel[FV_default][i][Vsel]);
+			}
+		}else{
+			//没有配置文件，读取默认设置
+			for(int i=0;i<FreqVselCurrent.length;i++){
+				FreqVselCurrent[i][Freq] = FreqVsel[FV_default][i][Freq];
+				FreqVselCurrent[i][Vsel] = FreqVsel[FV_default][i][Vsel];
+			}
+		}
+	}
+	
+	/**
 	 * 禁用超频
 	 */
 	public static void ocUnLoad(){

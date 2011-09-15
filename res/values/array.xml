@@ -179,4 +179,11 @@
     <item>9</item>
     <item>10</item>
 </string-array>
+
+<string-array name="oc_profile">
+	<item>profile 1</item>
+    <item>profile 2</item>
+    <item>profile 3</item>
+    <item>profile 4</item>
+</string-array>
 </resources>
