@@ -8,6 +8,12 @@
     
 	<string name="title_QuickNavPanel">QuickNav\n(Set as default)</string>
 	<string name="shortcut_title_ShortCutCreater">QuickNavPanel(M2T)</string>
+	
+	<string name="text_about_debounce">Read More：
+	http://forum.xda-developers.com/showthread.php?t=1058544 ;
+	http://forum.xda-developers.com/showpost.php?p=15378789 ;
+	https://git.zerfleddert.de/cgi-bin/gitweb.cgi/ms2-fixes ;
+	</string>
 	    
 	<string name="text_version">Version: {0}</string>
 	<string name="text_author">Author: {0} \n Translation: dangpzanco,Endless7</string>

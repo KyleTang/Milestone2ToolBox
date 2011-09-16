@@ -35,7 +35,9 @@
 					android:summaryOn="(仅摩托输入法)当前为中英文切换键 " android:summaryOff="(仅摩托输入法)当前为语音键"
 					android:defaultValue="false" />
 				<Preference android:key="pDebounce" android:title="按键防抖动(解决连击)"
-					android:summary="点击安装Milestone 2 Debounce(HwDebounce.apk)" />
+					android:summary="点击安装Milestone 2 Debounce(MS2Debounce.apk)" />
+				<Preference android:key="pDebounceAbout" android:title="关于按键防抖动"
+					android:summary="来自XDA的解决方案，点击查看相关链接" />
 				<!-- 
 				<CheckBoxPreference android:key="pVolUpKey" android:title="音量增大键点亮屏幕"
 					android:summaryOn="允许音量增大键点亮屏幕" android:summaryOff="禁用音量增大键点亮屏幕"

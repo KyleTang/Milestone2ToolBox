@@ -41,7 +41,7 @@ public class Module {
 	public static String zh2en_voice = "key 167   VOICE             WAKE_DROPPED";
 	public static String zh2en_zh2en = "key 167   EXPLORER          WAKE_DROPPED";
 	
-	public static String DebounceApk_FILE = "HwDebounce.apk";
+	public static String DebounceApk_FILE = "MS2Debounce.apk";
 	public static String BpswApk_FILE = "BPSW-Switcher1.5.3.apk";
 	public static String Sd2romApk_FILE = "sd2rom-hack2.3.9.apk";
 	public static String DefyMoreKO_FILE = "defy_more.ko";

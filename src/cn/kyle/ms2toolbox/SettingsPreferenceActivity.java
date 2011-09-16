@@ -456,6 +456,10 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 			}
 		}
 		
+		if (key.equals(Pref.pDebounceAbout.toString())){
+			new AlertDialog.Builder(this).setMessage(R.string.text_about_debounce).show();
+		}
+		
 		if (key.equals(Pref.pDefyMore.toString())){
 			if (((CheckBoxPreference)preference).isChecked()){
 				Event.count(this, Event.DefyMore);

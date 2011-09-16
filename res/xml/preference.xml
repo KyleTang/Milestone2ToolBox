@@ -35,7 +35,9 @@
 					android:summaryOn="(MotoIME only)currently as IME switch key " android:summaryOff="(MotoIME only)currently as voice key"
 					android:defaultValue="false" />
 				<Preference android:key="pDebounce" android:title="Milestone 2 keypad debounce"
-					android:summary="Click to install 'Milestone 2 Debounce'(HwDebounce.apk)" />
+					android:summary="Click to install 'Milestone 2 Debounce'(MS2Debounce.apk)" />
+				<Preference android:key="pDebounceAbout" android:title="About MS2 keypad debounce"
+					android:summary="From XDA, click me and read more ..." />
 				<!-- 
 				<CheckBoxPreference android:key="pVolUpKey" android:title="use vol-up key to turn on screen"
 					android:summaryOn="Enable vol-up key to turn on screen" android:summaryOff="Disable vol-up key to turn on screen"
