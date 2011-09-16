@@ -9,6 +9,7 @@ import cn.kyle.ms2toolbox.Event;
 import cn.kyle.ms2toolbox.Pref;
 import cn.kyle.ms2toolbox.R;
 import cn.kyle.ms2toolbox.R.layout;
+import cn.kyle.util.BitMapUtil;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
 
@@ -73,11 +74,10 @@ public class QuickNavPanel extends Activity {
     			}
     			L.debug("activity: "+ri.activityInfo.packageName+", "+ri.activityInfo.toString());
     			Button btn = new Button(this);
-    	    	btn.setWidth(32);
-    	    	btn.setHeight(32);
+    	    	btn.setWidth(72);
+    	    	btn.setHeight(72);
     	    	final ActivityInfo ai = ri.activityInfo;
-    	    	Drawable d = ai.loadIcon(pm);
-    	    	btn.setBackgroundDrawable(ai.loadIcon(pm));
+    	    	btn.setBackgroundDrawable(BitMapUtil.getResizeDrawable(this,ai.loadIcon(pm),72,72));
     	    	btn.setOnClickListener(new OnClickListener(){
     				public void onClick(View v) {
     					Intent i = new Intent();
@@ -96,6 +96,15 @@ public class QuickNavPanel extends Activity {
     	    	llTmp.addView(btn);
     	    	llTmp.setBackgroundColor(android.R.color.background_dark);
     	    	TextView tvBtnTip = new TextView(this);
+    	    	tvBtnTip.setOnClickListener(new OnClickListener(){
+    				public void onClick(View v) {
+    					Intent i = new Intent();
+    					i.setAction(Intent.ACTION_MAIN);
+    					i.setComponent(new ComponentName(ai.packageName, ai.name));
+    					startActivity(i);
+    					QuickNavPanel.this.finish();
+    				}
+    	    	});
     	    	//tvBtnTip.setTextColor(android.R.color.white);
     	    	try {
 					tvBtnTip.setText(pm.getApplicationLabel(pm.getApplicationInfo(ai.packageName, PackageManager.GET_META_DATA)));
@@ -119,7 +128,7 @@ public class QuickNavPanel extends Activity {
     	
     	//锁屏
 		Button btn1 = new Button(this);
-     	btn1.setBackgroundResource(R.drawable.lockscreen);
+     	btn1.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.lockscreen, 72, 72));
     	btn1.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
     	btn1.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
@@ -131,7 +140,7 @@ public class QuickNavPanel extends Activity {
     	
     	//手电
     	Button btn2 = new Button(this);
-     	btn2.setBackgroundResource(R.drawable.flashlight);
+     	btn2.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.flashlight, 72, 72));
     	btn2.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
     	btn2.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
@@ -143,8 +152,7 @@ public class QuickNavPanel extends Activity {
     	
     	//亮度调节
     	Button btn3 = new Button(this);
-    	//btn3.setBackgroundDrawable(getDrawableByResid(R.drawable.lcdbacklight));
-    	btn3.setBackgroundResource(R.drawable.lcdbacklight);
+    	btn3.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.lcdbacklight, 72, 72));
     	btn3.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
     	btn3.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
@@ -157,7 +165,7 @@ public class QuickNavPanel extends Activity {
     	//电源
     	Button btn4 = new Button(this);
     	//btn4.setBackgroundDrawable(getDrawableByResid(R.drawable.power));
-    	btn4.setBackgroundResource(R.drawable.power);
+    	btn4.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.power, 72, 72));
     	btn4.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
     	btn4.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
@@ -172,15 +180,6 @@ public class QuickNavPanel extends Activity {
     	llTmp.addView(btn4);
     	
     	quickNavPanelList.addView(llTmp);
-	}
-	
-	public Drawable getDrawableByResid(int id){
-    	Matrix matrix = new Matrix();
-        matrix.postScale(72, 72);
-    	Bitmap bitmap = Bitmap.createBitmap(
-    			BitmapFactory.decodeResource(this.getResources(), id)
-    			,0,0,128,128,matrix,true);
-    	return new BitmapDrawable(this.getResources(), bitmap);
 	}
 	
 	public void myToast(String tipInfo) {
