@@ -59,7 +59,8 @@ public class LcdBackLight extends Activity {
 	private MultiLang ml = null;
 	private static int BRIGHTNESS_MODE_AUTO=1;
 	private static int BRIGHTNESS_MODE_MANUAL=0;
-	private int mode = 0;
+	private int brightnessMode = 0;
+	private int brightnessValue = 2;
 	private String modeStringAuto = null;
 	private String modeStringManual = null;
 	
@@ -78,7 +79,8 @@ public class LcdBackLight extends Activity {
 		ml = new MultiLang(this);
 		this.setTitle(R.string.lcd_title);
 		try {
-			mode = Settings.System.getInt(getContentResolver(), "screen_brightness_mode");
+			brightnessMode = Settings.System.getInt(getContentResolver(), "screen_brightness_mode");
+			brightnessValue = Settings.System.getInt(getContentResolver(), "screen_brightness");
 		} catch (SettingNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -110,6 +112,8 @@ public class LcdBackLight extends Activity {
 		btnAuto.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Settings.System.putInt(getContentResolver(), "screen_brightness_mode", BRIGHTNESS_MODE_AUTO);
+				tvMode.setText(ml.t(R.string.lcd_text_currentMode_tip, new String[]{modeStringAuto}));
+				sbValue.setProgress(40);
 				Module.setLcdBackLightAuto(40);
 			}
 		});
@@ -118,16 +122,17 @@ public class LcdBackLight extends Activity {
 		sbValue.setMax(255);
 		
 		int value = Module.getLcdBackLightCurrentValue();
+		//sbValue.setProgress(brightnessValue);
 		sbValue.setProgress(value);
+		//tvTip.setText(ml.t(R.string.lcd_text_currentLcdLightValue, new String[]{""+brightnessValue}));
 		tvTip.setText(ml.t(R.string.lcd_text_currentLcdLightValue, new String[]{""+value}));
-		tvMode.setText(ml.t(R.string.lcd_text_currentMode_tip, new String[]{(mode==1?modeStringAuto:modeStringManual)}));
+		tvMode.setText(ml.t(R.string.lcd_text_currentMode_tip, new String[]{(brightnessMode==1?modeStringAuto:modeStringManual)}));
 		
 		sbValue.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				if (progress<2) progress = 2;
 				tvTip.setText(ml.t(R.string.lcd_text_currentLcdLightValue, new String[]{""+progress}));
-				tvMode.setText(ml.t(R.string.lcd_text_currentMode_tip, new String[]{(mode==1?modeStringAuto:modeStringManual)}));
 			}
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				
@@ -137,6 +142,7 @@ public class LcdBackLight extends Activity {
 				if (value<2) value=2;
 				if (value>255) value=255;
 				Settings.System.putInt(getContentResolver(), "screen_brightness_mode", BRIGHTNESS_MODE_MANUAL);
+				tvMode.setText(ml.t(R.string.lcd_text_currentMode_tip, new String[]{(modeStringManual)}));
 				Module.setLcdBackLight(value,false);
 				
 			}

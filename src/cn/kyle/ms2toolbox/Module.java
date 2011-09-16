@@ -522,7 +522,7 @@ public class Module {
 	 */
 	public static String readFileContentForce(File file, String defaultValue){
 		if (file.exists()){
-			String cmd = "cat "+file.getAbsolutePath()+" /tmp/tmpFileContent ; "+
+			String cmd = "cat "+file.getAbsolutePath()+" > /tmp/tmpFileContent ; "+
 			"chmod 777 /tmp/tmpFileContent ; ";
 			C.runSuCommandReturnBoolean(cmd);	
 			return getPrefFlagValue(new File("/tmp/tmpFileContent"),defaultValue);
