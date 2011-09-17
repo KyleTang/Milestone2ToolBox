@@ -52,6 +52,8 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -457,7 +459,11 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		}
 		
 		if (key.equals(Pref.pDebounceAbout.toString())){
-			new AlertDialog.Builder(this).setMessage(R.string.text_about_debounce).show();
+			TextView tvAbout = new TextView(this);
+			tvAbout.setText(R.string.text_about_debounce);
+			tvAbout.setMovementMethod(LinkMovementMethod.getInstance());
+			tvAbout.setAutoLinkMask(Linkify.WEB_URLS);
+			new AlertDialog.Builder(this).setView(tvAbout).show();
 		}
 		
 		if (key.equals(Pref.pDefyMore.toString())){
