@@ -38,6 +38,10 @@
 					android:summary="Click to install 'Milestone 2 Debounce'(MS2Debounce.apk)" />
 				<Preference android:key="pDebounceAbout" android:title="About MS2 keypad debounce"
 					android:summary="From XDA, click me and read more ..." />
+				<CheckBoxPreference android:key="pVolumeKey" android:title="use volume(+/-) button to turn on screen(*) "
+					android:summaryOn="Only for 2.3.4/4.5.3-77 ROM\nThanks MoGu-huoxingrenlaile" 
+					android:summaryOff="Only for 2.3.4/4.5.3-77 ROM\nThanks MoGu-huoxingrenlaile"
+					android:defaultValue="false" />
 				<!-- 
 				<CheckBoxPreference android:key="pVolUpKey" android:title="use vol-up key to turn on screen"
 					android:summaryOn="Enable vol-up key to turn on screen" android:summaryOff="Disable vol-up key to turn on screen"

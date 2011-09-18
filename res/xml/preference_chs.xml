@@ -38,6 +38,9 @@
 					android:summary="点击安装Milestone 2 Debounce(MS2Debounce.apk)" />
 				<Preference android:key="pDebounceAbout" android:title="关于按键防抖动"
 					android:summary="来自XDA的解决方案，点击查看相关链接" />
+				<CheckBoxPreference android:key="pVolumeKey" android:title="音量键点亮屏幕(*) "
+					android:summaryOn="仅支持官方2.3.4/4.5.3-77的系统包\n感谢MoGu-huoxingrenlaile" android:summaryOff="仅支持官方2.3.4/4.5.3-77的系统包\n感谢MoGu-huoxingrenlaile"
+					android:defaultValue="false" />
 				<!-- 
 				<CheckBoxPreference android:key="pVolUpKey" android:title="音量增大键点亮屏幕"
 					android:summaryOn="允许音量增大键点亮屏幕" android:summaryOff="禁用音量增大键点亮屏幕"

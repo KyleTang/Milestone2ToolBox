@@ -9,6 +9,7 @@ import cn.kyle.ms2toolbox.Event;
 import cn.kyle.ms2toolbox.Pref;
 import cn.kyle.ms2toolbox.R;
 import cn.kyle.ms2toolbox.R.layout;
+import cn.kyle.ms2toolbox.SettingsPreferenceActivity;
 import cn.kyle.util.BitMapUtil;
 import cn.kyle.util.C;
 import cn.kyle.util.L;
@@ -130,6 +131,7 @@ public class QuickNavPanel extends Activity {
 		Button btn1 = new Button(this);
      	btn1.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.lockscreen, 72, 72));
     	btn1.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
+    	//btn1.setPadding(50, 50, 50, 50);
     	btn1.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent i = new Intent(QuickNavPanel.this,LockScreen.class);
@@ -142,6 +144,7 @@ public class QuickNavPanel extends Activity {
     	Button btn2 = new Button(this);
      	btn2.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.flashlight, 72, 72));
     	btn2.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
+    	//btn2.setPadding(50, 50, 50, 50);
     	btn2.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent i = new Intent(QuickNavPanel.this,FlashLight.class);
@@ -154,6 +157,7 @@ public class QuickNavPanel extends Activity {
     	Button btn3 = new Button(this);
     	btn3.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.lcdbacklight, 72, 72));
     	btn3.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
+    	//btn3.setPadding(20, 20, 20, 20);
     	btn3.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent i = new Intent(QuickNavPanel.this,LcdBackLight.class);
@@ -167,6 +171,7 @@ public class QuickNavPanel extends Activity {
     	//btn4.setBackgroundDrawable(getDrawableByResid(R.drawable.power));
     	btn4.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.power, 72, 72));
     	btn4.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
+    	//btn4.setPadding(20, 20, 20, 20);
     	btn4.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				Intent i = new Intent(QuickNavPanel.this,Power.class);
@@ -174,11 +179,38 @@ public class QuickNavPanel extends Activity {
 				QuickNavPanel.this.finish();
 			}
     	});
-    	llTmp.addView(btn1);
-    	llTmp.addView(btn2);
-    	llTmp.addView(btn3);
-    	llTmp.addView(btn4);
     	
+    	//工具箱
+    	Button btn5 = new Button(this);
+    	//btn4.setBackgroundDrawable(getDrawableByResid(R.drawable.power));
+    	btn5.setBackgroundDrawable(BitMapUtil.getDrawableByResid(this, R.drawable.icon, 72, 72));
+    	btn5.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT , LayoutParams.WRAP_CONTENT));
+    	//btn4.setPadding(20, 20, 20, 20);
+    	btn5.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				Intent i = new Intent(QuickNavPanel.this,SettingsPreferenceActivity.class);
+				startActivity(i);
+				QuickNavPanel.this.finish();
+			}
+    	});
+    	
+    	TextView tvSpace1 = new TextView(this);
+    	tvSpace1.setText("  ");
+    	TextView tvSpace2 = new TextView(this);
+    	tvSpace2.setText("  ");
+    	TextView tvSpace3 = new TextView(this);
+    	tvSpace3.setText("  ");
+    	TextView tvSpace4 = new TextView(this);
+    	tvSpace4.setText("  ");
+    	llTmp.addView(btn1);
+    	llTmp.addView(tvSpace1);
+    	llTmp.addView(btn2);
+    	llTmp.addView(tvSpace2);
+    	llTmp.addView(btn3);
+    	llTmp.addView(tvSpace3);
+    	llTmp.addView(btn4);
+    	llTmp.addView(tvSpace4);
+    	llTmp.addView(btn5);
     	quickNavPanelList.addView(llTmp);
 	}
 	

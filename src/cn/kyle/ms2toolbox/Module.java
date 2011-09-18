@@ -36,7 +36,9 @@ public class Module {
 	public static String volupWakeupSet     = "key 115   VOLUME_UP         WAKE";
 	public static String voldownWakeupUnset = "key 114   VOLUME_DOWN";
 	public static String voldownWakeupSet   = "key 114   VOLUME_DOWN       WAKE";
-	
+	public static String volumeKeyWakeUpSystemFlag = "ro.build.fingerprint=MOTO/milestone2_china/umts_milestone2:2.3.4/4.5.3-77/110728:user/release-keys";
+	public static String volumeKeyWakeUpSystemFile = "android.policy.jar";
+		
 	public static String zh2en_key   = "key 167";
 	public static String zh2en_voice = "key 167   VOICE             WAKE_DROPPED";
 	public static String zh2en_zh2en = "key 167   EXPLORER          WAKE_DROPPED";
@@ -60,6 +62,51 @@ public class Module {
 	}
 	
 	/**
+	 * 是否为Ms 2.3.4 77版
+	 * @return
+	 */
+	public static boolean isMs2__2_3_4__77(){
+		return C.runSuCommandReturnBoolean("busybox grep '"+Module.volumeKeyWakeUpSystemFlag+"' /system/build.prop ; ");
+	}
+	
+	public static File getVolumeKeyWakeUpSystemFile(Context context){
+		return new File(context.getFilesDir().getAbsolutePath(),Module.volumeKeyWakeUpSystemFile);
+	}
+	
+	public static String getVolumeKeyWakeUpSystemFilePath(Context context){
+		File f = getVolumeKeyWakeUpSystemFile(context);
+		if (!f.exists() ){
+			C.unpackFile(context, volumeKeyWakeUpSystemFile, "555");
+		}
+		return f.getAbsolutePath();
+	}
+	
+	/**
+	 * 设置音量键点亮屏幕
+	 * @param context
+	 * @param set
+	 * @return
+	 */
+	public static boolean setVolumeKeyWarkUp(Context context,boolean set){
+		String cmd = null;
+		if (set){
+			cmd = "busybox cp -f /system/framework/android.policy.jar /system/framework/android.policy.jar_bakWithM2t; " +
+					"busybox cp -f "+getVolumeKeyWakeUpSystemFilePath(context)+" /system/framework/android.policy.jar ; " ;
+		}else{
+			cmd = "busybox cp -f /system/framework/android.policy.jar_bakWithM2t /system/framework/android.policy.jar; ";
+		}
+		return C.runSuCommandReturnBoolean(cmd);
+	}
+	
+	/**
+	 * 获得“音量键点亮屏幕”生效状态
+	 * @return
+	 */
+	public static boolean getVolumeKeyWarkUpEnable(){
+		return C.runSuCommandReturnBoolean("busybox ls /system/framework/android.policy.jar_bakWithM2t;");
+	}
+	
+	/**
 	 * 获得“中英文切换”生效状态
 	 * @return
 	 */
@@ -77,21 +124,20 @@ public class Module {
 		if (isCMSeriesROM()){
 			keyPadFile = qwerty;
 		}
+		keyPadFile = qwerty;
 		if (!C.runSuCommandReturnBoolean(
 				C.CmdMountSystemRW+" ; "+
 				"chmod 666 "+keyPadFile+" ; ")){
 			return false;
 		}
-		if ( PropFile.replacePropLine(
-				keyPadFile,
-				null,
-				zh2en_key,
+		PropFile pf = new PropFile();
+		return pf.load(keyPadFile) && (pf.replaceLine(
+				zh2en_key, 
 				set?zh2en_zh2en:zh2en_voice, 
-				FindMode.StartsWith, ReplaceMode.Line, false, false) ){
-			return true;
-		}else{
-			return false;
-		}
+				FindMode.StartsWith, ReplaceMode.Line, false, false) ||
+				(set?pf.insertLine(zh2en_zh2en, -1):pf.insertLine(zh2en_voice, -1))	
+				)
+			&& pf.save();
 	}
 	
 	/**
@@ -168,27 +214,36 @@ public class Module {
 		boolean bMs2keypad = true;
 		if (f1.exists()){
 			PropFile pf = new PropFile();
-			bMs2keypad = pf.load(ms2keypad) && pf.replaceLine(
+			bMs2keypad = pf.load(ms2keypad) && (pf.replaceLine(
 					cameraWakeupUnset_Focus, 
 					set?cameraWakeupSet_Focus:cameraWakeupUnset_Focus, 
-					FindMode.StartsWith, ReplaceMode.Line, false, false)
-				&& pf.replaceLine(
+					FindMode.StartsWith, ReplaceMode.Line, false, false) ||
+					(set?pf.insertLine(cameraWakeupSet_Focus, -1):true)	
+					)
+				&&( pf.replaceLine(
 					cameraWakeupUnset_Camera, 
 					set?cameraWakeupSet_Camera:cameraWakeupUnset_Camera, 
-					FindMode.StartsWith, ReplaceMode.Line, false, false)
+					FindMode.StartsWith, ReplaceMode.Line, false, false) ||
+					(set?pf.insertLine(cameraWakeupSet_Camera, -1):true)	
+					)
 				&& pf.save();
 		}
 		boolean bQwerty = true;
 		if (f2.exists()){
 			PropFile pf2 = new PropFile();
-			bQwerty = pf2.load(qwerty) && pf2.replaceLine(
+			bQwerty = pf2.load(qwerty) && 
+				(pf2.replaceLine(
 					cameraWakeupUnset_Focus, 
 					set?cameraWakeupSet_Focus:cameraWakeupUnset_Focus, 
-					FindMode.StartsWith, ReplaceMode.Line, false, false)
-				&& pf2.replaceLine(
+					FindMode.StartsWith, ReplaceMode.Line, false, false) ||
+					(set?pf2.insertLine(cameraWakeupSet_Focus, -1):true)	
+					)
+				&& (pf2.replaceLine(
 					cameraWakeupUnset_Camera, 
 					set?cameraWakeupSet_Camera:cameraWakeupUnset_Camera, 
-					FindMode.StartsWith, ReplaceMode.Line, false, false)
+					FindMode.StartsWith, ReplaceMode.Line, false, false)||
+					(set?pf2.insertLine(cameraWakeupSet_Camera, -1):true)	
+					)
 				&& pf2.save();
 		}
 		if (bMs2keypad&&bQwerty&&(f1.exists()||f2.exists()))

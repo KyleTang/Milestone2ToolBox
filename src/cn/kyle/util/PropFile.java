@@ -119,7 +119,7 @@ public class PropFile {
 	 * @param findMode 查找模式
 	 * @param removeAll 全文移除
 	 */
-	public void removeLine(String pattern,FindMode findMode,boolean removeAll){
+	public boolean removeLine(String pattern,FindMode findMode,boolean removeAll){
 		Iterator<DataLine> itr = lines.iterator();
 		DataLine patternTemp = null ;
 		String patternStr = null ;
@@ -141,6 +141,11 @@ public class PropFile {
 			}
 		}
 		lines.removeAll(removeLines);
+		if (removeLines.size()>0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	/**

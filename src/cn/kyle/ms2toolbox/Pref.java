@@ -14,6 +14,7 @@ public enum Pref {
 	pCameraKey,
 	pVolUpKey,
 	pVolDownKey,
+	pVolumeKey,
 	pVoiceKey,
 	pDebounce,
 	pDebounceAbout,

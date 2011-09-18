@@ -372,9 +372,15 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		if (key==null) return false;
 		L.debug("key="+key);
 		if (key.equals(Pref.pTitle.toString())){
-//			L.debug("test-");
-//			Vibrator vibrator = (Vibrator)this.getSystemService("vibrator");
-//	        vibrator.vibrate(300);
+			AlertDialog d = new AlertDialog.Builder(this)
+				.setTitle("关于")
+				.setMessage("感谢MoGu ROM组全体成员的支持和帮助！\n" +
+						"欢迎加入MoGu ROM组！\n\n" +
+						"QQ群：32503002\n"+
+						"报道贴：http://bbs.gfan.com/android-2723463-1-1.html")
+				.setPositiveButton(R.string.btn_confirm, null)
+				.create();
+			d.show();
 		}
 		
 		//myToast("clickKey="+key);
@@ -451,6 +457,16 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		
 		if (key.equals(Pref.pVoiceKey.toString())){
 			if (Module.setVoiceZh2En(((CheckBoxPreference)preference).isChecked())){
+				myToast(R.string.msg_successfullyApplied);
+			}else{
+				((CheckBoxPreference)preference).setChecked(false);
+				myToast(R.string.msg_failedToApply);
+			}
+		}
+		
+		//音量键点亮屏幕
+		if (key.equals(Pref.pVolumeKey.toString())){
+			if (Module.setVolumeKeyWarkUp(this,((CheckBoxPreference)preference).isChecked())){
 				myToast(R.string.msg_successfullyApplied);
 			}else{
 				((CheckBoxPreference)preference).setChecked(false);
@@ -816,6 +832,15 @@ public class SettingsPreferenceActivity extends PreferenceActivity {
 		boolean bVoiceZh2EnEnable = Module.getVoiceZh2EnEnable();
 		((CheckBoxPreference)findPreference(Pref.pVoiceKey.toString()))
 			.setChecked(bVoiceZh2EnEnable);
+		
+		//设置
+		boolean bVolumeKeyWarkUpEnable = Module.getVolumeKeyWarkUpEnable();
+		cp = ((CheckBoxPreference)findPreference(Pref.pVolumeKey.toString()));			
+		if (Module.isMs2__2_3_4__77()){
+			cp.setChecked(bVolumeKeyWarkUpEnable);
+		}else{
+			cp.setEnabled(false);
+		}
 		
 		//设置
 		((CheckBoxPreference)findPreference(Pref.pDefyMore.toString()))
