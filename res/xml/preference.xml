@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<Preference android:key="pTitle" android:title="Mark star need reboot to apply"
+	<Preference android:key="pTitle" android:title="Mark star need reboot to apply(Touch me)"
 		android:summary="Version:1.0.1    Author:Kyle Tang    Translation:dangpzanco" android:defaultValue="" />
 	<PreferenceCategory android:title="System Ajustments (Reboot to Apply)">
 		<Preference android:key="pBpsw" android:title="Baseband Switching Tools(*)"

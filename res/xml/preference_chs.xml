@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<Preference android:key="pTitle" android:title="加星号的为重启后生效"
+	<Preference android:key="pTitle" android:title="加星号的为重启后生效(点我)"
 		android:summary="版本：1.0.0    作者：Kyle Tang" android:defaultValue="" />
 	<PreferenceCategory android:title="系统调整 (加星号的为重启后生效)">
 		<Preference android:key="pBpsw" android:title="基带切换工具(*)"
